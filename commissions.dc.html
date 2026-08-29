@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f6f1ea;font-family:'Jost',sans-serif;color:#241f1a}
+a{color:#b5622f;text-decoration:none}
+a:hover{color:#8a4a24}
+[data-lp-theme="dark"]{filter:invert(1) hue-rotate(180deg)}
+[data-lp-theme="dark"] img,[data-lp-theme="dark"] video,[data-lp-theme="dark"] iframe{filter:invert(1) hue-rotate(180deg)}
+@media (max-width:640px){#site-header-inner{padding:12px 16px}#site-logo-img{height:40px !important;width:40px !important}#site-logo-text span{font-size:14px !important}#site-logo-sub{font-size:6.5px !important;letter-spacing:2px !important}#site-header-controls{gap:6px !important}}
+</style>
+</helmet>
+<div style="background:#f6f1ea;min-height:100vh" data-lp-theme="{{ themeAttr }}">
+
+
+<header style="position:sticky;top:0;z-index:50;background:rgba(246,241,234,.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,253,248,.12)">
+  <div id="site-header-inner" style="max-width:1320px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.dc.html" style="display:flex;align-items:center;gap:10px">
+      <img id="site-logo-img" src="assets/logo-lily-pastel.jpeg" alt="Lily Pastel" style="height:58px;width:58px;object-fit:cover">
+      <div id="site-logo-text" style="display:flex;align-items:baseline;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div id="site-logo-sub" style="display:flex;gap:6px;width:100%;font-size:8.5px;letter-spacing:3.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </a>
+    <nav style="display:{{ navDisplay }};align-items:center;gap:{{ navGap }};font-size:{{ navFontSize }};letter-spacing:0.4px">
+      <a href="index.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navHome }}</a>
+      <a href="portfolio.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navCollections }}</a>
+      <a href="shop.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navShop }}</a>
+      <a href="commissions.dc.html" style="color:#b5622f;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navCommissions }}</a>
+      <a href="experience.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navExperience }}</a>
+      <a href="blog.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navBlog }}</a>
+      <a href="about.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navAbout }}</a>
+      <a href="contact.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navContact }}</a>
+    </nav>
+    <div id="site-header-controls" style="display:flex;align-items:center;gap:14px">
+      <div style="position:relative;width:26px;height:26px;border:1px solid rgba(36,31,26,.25);border-radius:50%;display:flex;align-items:center;justify-content:center">
+        <select onChange="{{ onLangChange }}" value="{{ lang }}" style="position:absolute;inset:0;opacity:0;cursor:pointer;appearance:none;-webkit-appearance:none">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+        </select>
+        <span style="font-size:9px;letter-spacing:.3px;color:#241f1a;pointer-events:none">{{ langLabel }}</span>
+      </div>
+      <button onClick="{{ toggleDark }}" aria-label="Toggle dark mode" style="display:flex;background:none;border:1px solid rgba(36,31,26,.25);border-radius:50%;width:26px;height:26px;color:#241f1a;cursor:pointer;align-items:center;justify-content:center;padding:0;transition:border-color .2s ease,transform .2s ease,opacity .2s ease" style-hover="border-color:#241f1a;transform:scale(1.05);opacity:.85">
+        <sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg></sc-if>
+        <sc-if value="{{ notDark }}" hint-placeholder-val="{{ true }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></sc-if>
+      </button>
+      <button onClick="{{ openBooking }}" style="display:{{ navDisplay }};background:#7c8560;color:#241f1a;border:none;padding:11px 20px;font-size:12px;letter-spacing:1.5px;cursor:pointer;transition:background .2s,transform .2s ease,opacity .2s ease" style-hover="background:#b9c19a;transform:scale(1.05);opacity:.85"="background:#6b7452;transform:scale(1.06);opacity:.9">{{ t.bookBtn }}</button>
+
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="display:{{ burgerDisplay }};flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;transition:opacity .3s ease,transform .2s ease" style-hover="opacity:.55;transform:scale(1.05)">
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+      </button>
+    </div>
+  </div>
+  <sc-if value="{{ isMenuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;padding:10px 40px 26px;gap:18px;font-size:14px;letter-spacing:1px;border-top:1px solid rgba(255,253,248,.15);color:#241f1a">
+      <a href="index.dc.html">{{ t.navHome }}</a>
+      <a href="portfolio.dc.html">{{ t.navCollections }}</a>
+      <a href="shop.dc.html">{{ t.navShop }}</a>
+      <a href="commissions.dc.html">{{ t.navCommissions }}</a>
+      <a href="experience.dc.html">{{ t.navExperience }}</a>
+      <a href="blog.dc.html">{{ t.navBlog }}</a>
+      <a href="about.dc.html">{{ t.navAbout }}</a>
+      <a href="faq.dc.html">{{ t.navFaq }}</a>
+      <a href="contact.dc.html">{{ t.navContact }}</a>
+      <button onClick="{{ openBooking }}" style="background:#7c8560;color:#241f1a;border:none;padding:13px;font-size:12px;letter-spacing:1.5px;cursor:pointer;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#b9c19a;opacity:.88;transform:scale(1.05)">{{ t.bookBtn }}</button>
+    </div>
+  </sc-if>
+</header>
+
+<section style="max-width:1100px;margin:0 auto;padding:70px 40px 20px;text-align:center">
+  <div style="font-size:12px;letter-spacing:3px;color:#b5622f;margin-bottom:14px">{{ t.chooseLabel }}</div>
+  <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,6vw,38px);margin:0">{{ t.chooseTitle }}</h1>
+</section>
+
+<section style="background:rgba(246,241,234,.85);backdrop-filter:blur(8px);padding:40px 40px 70px">
+  <div style="max-width:1320px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px">
+      <div style="background:#fffdf8;border:1px solid rgba(36,31,26,.1)">
+        <div style="position:relative;overflow:hidden;aspect-ratio:4/5;background:#ece4d5">
+          <sc-for list="{{ rootedSlides }}" as="slide" hint-placeholder-count="1">
+            <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+              <img src="{{ slide.src }}" alt="Rooted" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+            </sc-if>
+          </sc-for>
+        </div>
+        <div style="padding:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div style="font-family:'Playfair Display',serif;font-size:15px">Rooted</div>
+            <span style="background:rgba(36,31,26,.08);color:#241f1a;border:1px solid rgba(36,31,26,.15);padding:7px 16px;font-size:10.5px;letter-spacing:1.5px">{{ t.printBtn }}</span>
+          </div>
+        </div>
+      </div>
+      <div style="background:#fffdf8;border:1px solid rgba(36,31,26,.1)">
+        <div style="position:relative;overflow:hidden;aspect-ratio:4/5;background:#ece4d5">
+          <sc-for list="{{ eyeSlides }}" as="slide" hint-placeholder-count="1">
+            <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+              <img src="{{ slide.src }}" alt="Under Her Eye" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+            </sc-if>
+          </sc-for>
+        </div>
+        <div style="padding:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div style="font-family:'Playfair Display',serif;font-size:15px">Under Her Eye</div>
+            <span style="background:rgba(36,31,26,.08);color:#241f1a;border:1px solid rgba(36,31,26,.15);padding:7px 16px;font-size:10.5px;letter-spacing:1.5px">{{ t.printBtn }}</span>
+          </div>
+        </div>
+      </div>
+      <div style="background:#fffdf8;border:1px solid rgba(36,31,26,.1)">
+        <div style="position:relative;overflow:hidden;aspect-ratio:4/5;background:#ece4d5">
+          <sc-for list="{{ goldSlides }}" as="slide" hint-placeholder-count="1">
+            <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+              <img src="{{ slide.src }}" alt="Oh Gold" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+            </sc-if>
+          </sc-for>
+        </div>
+        <div style="padding:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div style="font-family:'Playfair Display',serif;font-size:15px">Oh Gold</div>
+            <span style="background:rgba(36,31,26,.08);color:#241f1a;border:1px solid rgba(36,31,26,.15);padding:7px 16px;font-size:10.5px;letter-spacing:1.5px">{{ t.printBtn }}</span>
+          </div>
+        </div>
+      </div>
+      <div style="background:#fffdf8;border:1px solid rgba(36,31,26,.1)">
+        <div style="position:relative;overflow:hidden;aspect-ratio:4/5;background:#ece4d5">
+          <sc-for list="{{ elementalSlides }}" as="slide" hint-placeholder-count="1">
+            <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+              <img src="{{ slide.src }}" alt="Elemental" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+            </sc-if>
+          </sc-for>
+        </div>
+        <div style="padding:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <div style="font-family:'Playfair Display',serif;font-size:15px">Elemental</div>
+            <span style="background:rgba(36,31,26,.08);color:#241f1a;border:1px solid rgba(36,31,26,.15);padding:7px 16px;font-size:10.5px;letter-spacing:1.5px">{{ t.printBtn }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:rgba(246,241,234,.85);backdrop-filter:blur(8px);padding:60px 40px">
+  <div style="max-width:800px;margin:0 auto;text-align:center">
+    <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;color:#241f1a;margin:0 0 16px">{{ t.notSureTitle }}</h2>
+    <p style="color:rgba(36,31,26,.7);font-size:14px;margin:0 0 26px">{{ t.notSureDesc }}</p>
+    <button onClick="{{ openBooking }}" style="background:#241f1a;color:#fffdf8;border:none;padding:16px 34px;font-size:13px;letter-spacing:1.5px;cursor:pointer;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#efe6d8;opacity:.85;transform:scale(1.05)">{{ t.bookBtn }}</button>
+  </div>
+</section>
+
+<footer style="background:rgba(246,241,234,.9);backdrop-filter:blur(8px);color:rgba(36,31,26,.7);padding:0 40px 26px">
+  <div style="max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11.5px;border-top:1px solid rgba(36,31,26,.15);padding-top:24px">
+    <span>{{ t.footerRights }}</span>
+    <div style="display:flex;gap:20px">
+      <a href="faq.dc.html" style="color:rgba(36,31,26,.7)">{{ t.navFaq }}</a>
+      <a href="contact.dc.html" style="color:rgba(36,31,26,.7)">{{ t.navContact }}</a>
+      <a href="legal.dc.html" style="color:rgba(36,31,26,.7)">{{ t.footerLegal }}</a>
+    </div>
+  </div>
+</footer>
+</div>
+
+<button data-lp-theme="{{ themeAttr }}" onClick="{{ scrollToTop }}" aria-label="Back to top" style="position:fixed;bottom:24px;right:24px;width:46px;height:46px;border-radius:50%;background:#241f1a;color:#fffdf8;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(36,31,26,.25);z-index:40;transition:transform .2s ease,background .2s ease,opacity .2s ease" style-hover="transform:scale(1.08);background:#7c8560;opacity:.85">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+</button>
+
+
+<sc-if value="{{ isBookingOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-lp-theme="{{ themeAttr }}" style="position:fixed;inset:0;background:rgba(36,31,26,.6);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px" onClick="{{ closeBooking }}">
+    <div style="background:#fffdf8;max-width:440px;width:100%;box-sizing:border-box;position:relative;max-height:92vh;overflow:auto;border-radius:16px;overflow:hidden;box-shadow:0 30px 60px rgba(36,31,26,.35)" onClick="{{ stopClick }}">
+      <div style="background:#7c8560;padding:26px 30px 22px">
+        <button onClick="{{ closeBooking }}" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#fffdf8;transition:opacity .3s ease,transform .2s ease" style-hover="opacity:.7;transform:scale(1.05)">×</button>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;color:#fffdf8">{{ t.bookTitle }}</div>
+      </div>
+      <div style="padding:28px 24px">
+      <sc-if value="{{ bookingSent }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:30px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:10px">{{ t.thanksTitle }}</div>
+          <p style="font-size:14px;color:rgba(36,31,26,.7)">{{ t.thanksDesc }}</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ notBookingSent }}" hint-placeholder-val="{{ true }}">
+        <p style="font-size:13px;color:rgba(36,31,26,.6);margin:0 0 22px">{{ t.bookDesc }}</p>
+        <form onSubmit="{{ submitBooking }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px">
+          <input name="name" required="" type="text" placeholder="{{ t.formName }}" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          <input name="email" required="" type="email" placeholder="{{ t.formEmail }}" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          <div style="grid-column:span 1;display:flex;gap:6px">
+            <select style="flex:none;width:84px;border:1px solid rgba(36,31,26,.2);padding:12px 4px;font-size:12px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+1ca">🇨🇦 +1</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+34">🇪🇸 +34</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+49">🇩🇪 +49</option>
+              <option value="+39">🇮🇹 +39</option>
+              <option value="+212">🇲🇦 +212</option>
+              <option value="+213">🇩🇿 +213</option>
+              <option value="+216">🇹🇳 +216</option>
+              <option value="+61">🇦🇺 +61</option>
+              <option value="+81">🇯🇵 +81</option>
+              <option value="+52">🇲🇽 +52</option>
+              <option value="+55">🇧🇷 +55</option>
+            </select>
+            <input name="phone" type="tel" placeholder="{{ t.formPhone }}" style="flex:1;min-width:0;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          </div>
+          <select name="painting" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+            <option value="">{{ t.formPaintingPlaceholder }}</option>
+            <option>Peace by Piece</option>
+            <option>Aurora</option>
+            <option>Kissed by the Sun</option>
+            <option>Eclectric</option>
+            <option>Rooted</option>
+            <option>Under Her Eye</option>
+            <option>Oh Gold</option>
+            <option>Elemental</option>
+          </select>
+          <select name="size" style="grid-column:1 / -1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+            <option value="">{{ t.formSizePlaceholder }}</option>
+            <option>16 × 20 in</option>
+            <option>24 × 30 in</option>
+            <option>36 × 48 in</option>
+            <option>40 × 60 in</option>
+            <option>48 × 72 in</option>
+          </select>
+          <textarea name="message" placeholder="{{ t.formMsg }}" rows="3" style="grid-column:1 / -1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;resize:vertical"></textarea>
+          <button type="submit" style="grid-column:1 / -1;background:#7c8560;color:#241f1a;border:none;padding:14px;font-size:13px;letter-spacing:1.5px;cursor:pointer;margin-top:6px;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#b9c19a;opacity:.88;transform:scale(1.05)">{{ t.formSend }}</button>
+        </form>
+      </sc-if>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TRANSLATIONS = {
+  en: {
+    navHome: 'HOME', navShop: 'SHOP', navCollections: 'COLLECTION', navCommissions: 'COMMISSIONS', navExperience: 'ART EXPERIENCE', navAbout: 'ABOUT', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    bookBtn: 'BOOK A CONSULTATION', printBtn: 'COMMISSIONED',
+    chooseLabel: 'PAST COMMISSIONS', chooseTitle: 'Original pieces created for our collectors',
+    notSureTitle: 'Not sure which option is right?', notSureDesc: "Book a free consultation and we'll help you choose the piece, size and surface.",
+    footerRights: '© 2020 Lily Pastel Studio Art. All rights reserved.', footerLegal: 'Legal',
+    thanksTitle: 'Thank you!', thanksDesc: "We'll be in touch within one business day to confirm your consultation.",
+    bookTitle: 'Book a Consultation', bookDesc: "Tell us about your space, we'll follow up to schedule a call.",
+    formName: 'Full name', formEmail: 'Email', formPhone: 'Phone (optional)', formMsg: 'Commission or printing, tell us more', formSend: 'SEND REQUEST', formPaintingPlaceholder: 'Which painting? (optional)', formSizePlaceholder: 'Preferred size (optional)',
+  },
+  fr: {
+    navHome: 'ACCUEIL', navShop: 'BOUTIQUE', navCollections: 'COLLECTION', navCommissions: 'COMMANDES', navExperience: 'EXPÉRIENCE', navAbout: 'À PROPOS', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    bookBtn: 'RÉSERVER', printBtn: 'COMMANDÉ',
+    chooseLabel: 'COMMANDES PASSÉES', chooseTitle: 'Œuvres originales créées pour nos collectionneurs',
+    notSureTitle: 'Vous hésitez encore ?', notSureDesc: 'Réservez une consultation gratuite et nous vous aiderons à choisir la pièce, la taille et la surface.',
+    footerRights: '© 2020 Lily Pastel Studio Art. Tous droits réservés.', footerLegal: 'Mentions légales',
+    thanksTitle: 'Merci !', thanksDesc: 'Nous vous contacterons sous un jour ouvré pour confirmer votre consultation.',
+    bookTitle: 'Réserver une consultation', bookDesc: 'Parlez-nous de votre espace, nous vous recontacterons pour planifier un appel.',
+    formName: 'Nom complet', formEmail: 'Email', formPhone: 'Téléphone (optionnel)', formMsg: 'Commande ou impression, dites-nous en plus', formSend: 'ENVOYER LA DEMANDE', formPaintingPlaceholder: 'Quel tableau ? (optionnel)', formSizePlaceholder: 'Dimension souhaitée (optionnel)',
+  },
+  es: {
+    navHome: 'INICIO', navShop: 'TIENDA', navCollections: 'COLECCIÓN', navCommissions: 'ENCARGOS', navExperience: 'ART EXPERIENCE', navAbout: 'SOBRE MÍ', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACTO',
+    bookBtn: 'RESERVAR', printBtn: 'ENCARGADO',
+    chooseLabel: 'ENCARGOS ANTERIORES', chooseTitle: 'Obras originales creadas para nuestros coleccionistas',
+    notSureTitle: '¿No sabes qué opción elegir?', notSureDesc: 'Reserva una consulta gratuita y te ayudaremos a elegir la obra, el tamaño y la superficie.',
+    footerRights: '© 2020 Lily Pastel Studio Art. Todos los derechos reservados.', footerLegal: 'Legal',
+    thanksTitle: '¡Gracias!', thanksDesc: 'Nos pondremos en contacto en un día hábil para confirmar tu consulta.',
+    bookTitle: 'Reservar una consulta', bookDesc: 'Cuéntanos sobre tu espacio, te contactaremos para agendar una llamada.',
+    formName: 'Nombre completo', formEmail: 'Email', formPhone: 'Teléfono (opcional)', formMsg: 'Encargo o impresión, cuéntanos más', formSend: 'ENVIAR SOLICITUD', formPaintingPlaceholder: '¿Qué pintura? (opcional)', formSizePlaceholder: 'Tamaño preferido (opcional)',
+  },
+};
+
+class Component extends DCLogic {
+  state = { isMenuOpen: false, isBookingOpen: false, isDesktop: true, bookingSent: false, dark: false, lang: 'fr', rootedIndex: 0, eyeIndex: 0, goldIndex: 0, elementalIndex: 0 };
+  rootedSlidesData = [
+    { src: 'assets/rooted-04.jpeg' }, { src: 'assets/rooted-01.jpeg' },
+  ];
+  eyeSlidesData = [
+    { src: 'assets/under-her-eye-01.jpeg' }, { src: 'assets/under-her-eye-02.png' },
+  ];
+  goldSlidesData = [
+    { src: 'assets/oh-gold-02.jpeg' }, { src: 'assets/oh-gold-01.jpeg' },
+  ];
+  elementalSlidesData = [
+    { src: 'assets/elemental-02.png' }, { src: 'assets/elemental-01.jpeg' },
+  ];
+  componentDidMount() {
+    this.rootedInterval = setInterval(() => this.setState(s => ({ rootedIndex: (s.rootedIndex + 1) % this.rootedSlidesData.length })), 5000);
+    this.eyeInterval = setInterval(() => this.setState(s => ({ eyeIndex: (s.eyeIndex + 1) % this.eyeSlidesData.length })), 5000);
+    this.goldInterval = setInterval(() => this.setState(s => ({ goldIndex: (s.goldIndex + 1) % this.goldSlidesData.length })), 5000);
+    this.elementalInterval = setInterval(() => this.setState(s => ({ elementalIndex: (s.elementalIndex + 1) % this.elementalSlidesData.length })), 5000);
+    this.mq = window.matchMedia('(min-width:1200px)');
+    this.setState({ isDesktop: this.mq.matches });
+    if (localStorage.getItem('lp-theme') === 'dark') this.setState({ dark: true });
+    const savedLang = localStorage.getItem('lp-lang');
+    if (savedLang && TRANSLATIONS[savedLang]) this.setState({ lang: savedLang });
+    this.onMq = e => this.setState({ isDesktop: e.matches, isMenuOpen: false });
+    this.mq.addEventListener('change', this.onMq);
+  }
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this.onMq);
+    clearInterval(this.rootedInterval);
+    clearInterval(this.eyeInterval);
+    clearInterval(this.goldInterval);
+    clearInterval(this.elementalInterval);
+  }
+  toggleMenu = () => this.setState(s => ({ isMenuOpen: !s.isMenuOpen }));
+  toggleDark = () => this.setState(s => { const v = !s.dark; localStorage.setItem('lp-theme', v ? 'dark' : 'light'); return { dark: v }; });
+  onLangChange = e => { const v = e.target.value; localStorage.setItem('lp-lang', v); this.setState({ lang: v }); };
+  scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  openBooking = () => this.setState({ isBookingOpen: true, isMenuOpen: false, bookingSent: false });
+  closeBooking = () => this.setState({ isBookingOpen: false });
+  stopClick = e => e.stopPropagation();
+  submitBooking = e => {
+    e.preventDefault();
+    const f = e.target;
+    const get = n => (f[n] && f[n].value) || '';
+    const body = `Name: ${get('name')}\nEmail: ${get('email')}\nPhone: ${get('phone') || 'N/A'}\nPainting: ${get('painting') || 'N/A'}\nSize: ${get('size') || 'N/A'}\n\n${get('message')}`;
+    window.location.href = `mailto:lilypasteldesign@gmail.com?subject=${encodeURIComponent('Booking Request')}&body=${encodeURIComponent(body)}`;
+    this.setState({ bookingSent: true });
+  };
+  renderVals() {
+    const navGap = '16px';
+    const navFontSize = '11.5px';
+    return {
+      t: TRANSLATIONS[this.state.lang],
+      navGap, navFontSize,
+      rootedSlides: this.rootedSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.rootedIndex ? 1 : 0 })),
+      eyeSlides: this.eyeSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.eyeIndex ? 1 : 0 })),
+      goldSlides: this.goldSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.goldIndex ? 1 : 0 })),
+      elementalSlides: this.elementalSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.elementalIndex ? 1 : 0 })),
+      lang: this.state.lang,
+      langLabel: this.state.lang.toUpperCase(),
+      scrollToTop: this.scrollToTop,
+      onLangChange: this.onLangChange,
+      dark: this.state.dark,
+      notDark: !this.state.dark,
+      toggleDark: this.toggleDark,
+      themeAttr: this.state.dark ? 'dark' : 'light',
+      isMenuOpen: this.state.isMenuOpen,
+      isBookingOpen: this.state.isBookingOpen,
+      bookingSent: this.state.bookingSent,
+      notBookingSent: !this.state.bookingSent,
+      toggleMenu: this.toggleMenu,
+      openBooking: this.openBooking,
+      closeBooking: this.closeBooking,
+      stopClick: this.stopClick,
+      submitBooking: this.submitBooking,
+      navDisplay: this.state.isDesktop ? 'flex' : 'none',
+      burgerDisplay: this.state.isDesktop ? 'none' : 'flex',
+    };
+  }
+}
+</script>
+</body>
+</html>

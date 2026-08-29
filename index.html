@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<script src="./image-slot.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&family=Petit+Formal+Script&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f6f1ea;font-family:'Jost',sans-serif;color:#241f1a}
+@media (max-width:680px){#hero-img{transform:scale(1.9) !important}}
+a{color:#b5622f;text-decoration:none}
+a:hover{color:#8a4a24}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes handwrite{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0% 0 0)}}
+@keyframes drawline{from{stroke-dashoffset:300}to{stroke-dashoffset:0}}
+[data-lp-theme="dark"]{filter:invert(1) hue-rotate(180deg)}
+[data-lp-theme="dark"] img,[data-lp-theme="dark"] video,[data-lp-theme="dark"] iframe,[data-lp-theme="dark"] image-slot{filter:invert(1) hue-rotate(180deg)}
+@media (max-width:640px){#site-header-inner{padding:12px 16px}#site-logo-img{height:40px !important;width:40px !important}#site-logo-link{gap:7px !important}#site-logo-text span{font-size:14px !important;letter-spacing:1.4px !important}#site-logo-sub{font-size:6px !important;letter-spacing:2.4px !important}#site-header-controls{gap:6px !important}#discover-grid{grid-template-columns:1fr !important}}
+</style>
+</helmet>
+<div style="background:#f6f1ea;min-height:100vh" data-lp-theme="{{ themeAttr }}">
+
+
+<header style="position:sticky;top:0;z-index:50;background:#f6f1eaee;backdrop-filter:blur(6px);border-bottom:1px solid rgba(36,31,26,.1)">
+  <div id="site-header-inner" style="max-width:1320px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;justify-content:space-between">
+    <a id="site-logo-link" href="index.dc.html" style="display:flex;align-items:center;gap:10px">
+      <img id="site-logo-img" src="assets/logo-lily-pastel.jpeg" alt="Lily Pastel" style="height:58px;width:58px;object-fit:cover">
+      <div id="site-logo-text" style="display:flex;align-items:baseline;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div id="site-logo-sub" style="display:flex;gap:6px;width:100%;font-size:8.5px;letter-spacing:3.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </a>
+    <nav style="display:{{ navDisplay }};align-items:center;gap:{{ navGap }};font-size:{{ navFontSize }};letter-spacing:0.4px">
+      <a href="index.dc.html" style="color:#b5622f;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navHome }}</a>
+      <a href="portfolio.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navCollections }}</a>
+      <a href="shop.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navShop }}</a>
+      <a href="commissions.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navCommissions }}</a>
+      <a href="experience.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navExperience }}</a>
+      <a href="blog.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navBlog }}</a>
+      <a href="about.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navAbout }}</a>
+      <a href="contact.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navContact }}</a>
+    </nav>
+    <div id="site-header-controls" style="display:flex;align-items:center;gap:14px">
+      <div style="position:relative;width:26px;height:26px;border:1px solid rgba(36,31,26,.25);border-radius:50%;display:flex;align-items:center;justify-content:center">
+        <select onChange="{{ onLangChange }}" value="{{ lang }}" style="position:absolute;inset:0;opacity:0;cursor:pointer;appearance:none;-webkit-appearance:none">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+        </select>
+        <span style="font-size:9px;letter-spacing:.3px;color:#241f1a;pointer-events:none">{{ langLabel }}</span>
+      </div>
+      <button onClick="{{ toggleDark }}" aria-label="Toggle dark mode" style="display:flex;background:none;border:1px solid rgba(36,31,26,.25);border-radius:50%;width:26px;height:26px;color:#241f1a;cursor:pointer;align-items:center;justify-content:center;padding:0;transition:border-color .2s ease,transform .2s ease,opacity .2s ease" style-hover="border-color:#241f1a;transform:scale(1.05);opacity:.85">
+        <sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg></sc-if>
+        <sc-if value="{{ notDark }}" hint-placeholder-val="{{ true }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></sc-if>
+      </button>
+      <button onClick="{{ openBooking }}" style="display:{{ navDisplay }};background:#7c8560;color:#fffdf8;border:none;padding:11px 20px;font-size:12px;letter-spacing:1.5px;cursor:pointer;transition:transform .2s,background .2s,opacity .2s ease" style-hover="background:#b9c19a;transform:scale(1.06);opacity:.9">{{ t.bookBtn }}</button>
+
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="display:{{ burgerDisplay }};flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;transition:opacity .3s ease,transform .2s ease" style-hover="opacity:.55;transform:scale(1.05)">
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+      </button>
+    </div>
+  </div>
+  <sc-if value="{{ isMenuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;padding:10px 40px 26px;gap:18px;font-size:14px;letter-spacing:1px;border-top:1px solid rgba(36,31,26,.1)">
+      <a href="index.dc.html">{{ t.navHome }}</a>
+      <a href="portfolio.dc.html">{{ t.navCollections }}</a>
+      <a href="shop.dc.html">{{ t.navShop }}</a>
+      <a href="commissions.dc.html">{{ t.navCommissions }}</a>
+      <a href="experience.dc.html">{{ t.navExperience }}</a>
+      <a href="blog.dc.html">{{ t.navBlog }}</a>
+      <a href="about.dc.html">{{ t.navAbout }}</a>
+      <a href="faq.dc.html">{{ t.navFaq }}</a>
+      <a href="contact.dc.html">{{ t.navContact }}</a>
+      <button onClick="{{ openBooking }}" style="background:#7c8560;color:#fffdf8;border:none;padding:13px;font-size:12px;letter-spacing:1.5px;cursor:pointer;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#b9c19a;opacity:.88;transform:scale(1.05)">{{ t.bookBtn }}</button>
+    </div>
+  </sc-if>
+</header>
+
+<section style="position:relative;height:92vh;min-height:640px;max-height:920px;overflow:hidden">
+  <img id="hero-img" src="assets/lifestyle-06-goldwhisper-console.jpg" alt="Gold and pink abstract painting above a media console" style="width:100%;height:{{ heroImgHeight }};display:block;object-fit:cover;object-position:{{ heroObjectPosition }};transform:translateY({{ heroParallax }});will-change:transform">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,31,26,.35) 0%,rgba(36,31,26,.15) 35%,rgba(36,31,26,.55) 100%)"></div>
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;animation:fadeUp .7s ease both">
+    <div style="position:relative;display:inline-block;margin:0 0 8px">
+      <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(34px,9vw,54px);letter-spacing:clamp(2px,.5vw,5px);color:#fffdf8;margin:0;display:inline-block;animation:handwrite 2.2s ease forwards;white-space:nowrap;overflow:hidden">LILY PASTEL</h1>
+      <svg viewBox="0 0 300 20" preserveAspectRatio="none" style="position:absolute;left:0;right:0;bottom:-6px;width:100%;height:16px">
+        <path d="M4,10 C60,18 110,2 150,9 C190,16 240,4 296,11" fill="none" stroke="#fffdf8" stroke-width="2.5" stroke-linecap="round" opacity="0.85" style="stroke-dasharray:300;stroke-dashoffset:300;animation:drawline 0.9s ease forwards;animation-delay:2.2s"></path>
+      </svg>
+    </div>
+    <div style="font-size:14px;letter-spacing:5px;color:rgba(255,253,248,.85);margin-bottom:26px">{{ t.heroTag }}</div>
+    <a href="portfolio.dc.html" style="background:#d9c4a3;color:#241f1a;padding:16px 34px;font-size:12.5px;letter-spacing:1.5px;transition:transform .2s,background .3s ease,color .3s ease" style-hover="transform:scale(1.03);background:#7c8560;color:#fffdf8">{{ t.heroCta }}</a>
+  </div>
+</section>
+
+<section style="background:#efe6d8;padding:80px 40px">
+  <div style="max-width:1320px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:48px">
+      <div style="font-size:12px;letter-spacing:3px;color:#b5622f;margin-bottom:10px">{{ t.collectionLabel }}</div>
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(26px,6vw,34px);margin:0 0 22px">{{ t.collectionTitle }}</h2>
+    </div>
+    <div id="discover-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1180px;margin:0 auto">
+      <a href="portfolio.dc.html" style="display:block;aspect-ratio:1;overflow:hidden;position:relative;border:1px solid rgba(36,31,26,.1)">
+        <img src="assets/peace-by-piece-01.jpeg" alt="The Painting Collection" style="width:100%;height:100%;object-fit:cover;transition:transform .5s" style-hover="transform:scale(1.06);opacity:.85">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.55));color:#fff">
+          <div style="font-size:13px;letter-spacing:1.5px;margin-bottom:4px">{{ t.cardCommissioned }}</div>
+          <p style="font-size:11.5px;line-height:1.5;color:rgba(255,255,255,.85);margin:0">{{ t.cardCommissionedDesc }}</p>
+        </div>
+      </a>
+      <a href="shop.dc.html" style="display:block;aspect-ratio:1;overflow:hidden;position:relative;border:1px solid rgba(36,31,26,.1)">
+        <div style="width:100%;height:100%;overflow:hidden;transition:transform .5s ease,opacity .5s ease" style-hover="transform:scale(1.06);opacity:.85">
+          <image-slot id="mural-art-explore" shape="rect" placeholder="Mural art photo" src="assets/lifestyle-02-triptych.jpg"></image-slot>
+        </div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.55));color:#fff;pointer-events:none">
+          <div style="font-size:13px;letter-spacing:1.5px;margin-bottom:4px">{{ t.cardMural }}</div>
+          <p style="font-size:11.5px;line-height:1.5;color:rgba(255,255,255,.85);margin:0">{{ t.cardMuralDesc }}</p>
+        </div>
+      </a>
+      <a href="experience.dc.html" style="display:block;aspect-ratio:1;overflow:hidden;position:relative;border:1px solid rgba(36,31,26,.1)">
+        <img src="assets/art-experience-hero.jpeg" alt="Art Experience" style="width:100%;height:100%;object-fit:cover;object-position:50% 45%;transition:transform .5s" style-hover="transform:scale(1.06)">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.55));color:#fff">
+          <div style="font-size:13px;letter-spacing:1.5px;margin-bottom:4px">{{ t.cardExperience }}</div>
+          <p style="font-size:11.5px;line-height:1.5;color:rgba(255,255,255,.85);margin:0">{{ t.cardExperienceDesc }}</p>
+        </div>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:36px">
+      <a href="shop.dc.html" style="border:1px solid #241f1a;color:#241f1a;padding:13px 28px;font-size:12px;letter-spacing:1.5px;display:inline-block;transition:background .3s ease,color .3s ease,transform .2s ease,opacity .2s ease" style-hover="background:#7c8560;color:#fffdf8;transform:scale(1.05);opacity:.85">{{ t.viewFull }}</a>
+    </div>
+  </div>
+</section>
+
+<section style="position:relative;height:82vh;min-height:560px;max-height:820px;overflow:hidden">
+  <sc-for list="{{ spaceSlides }}" as="slide" hint-placeholder-count="1">
+    <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+      <img src="{{ slide.src }}" alt="{{ slide.alt }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ slide.pos }};transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+    </sc-if>
+  </sc-for>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,31,26,.3) 0%,rgba(36,31,26,.15) 40%,rgba(36,31,26,.5) 100%)"></div>
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px">
+    <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(26px,6vw,34px);color:#fffdf8;margin:0 0 14px">{{ t.spaceTitle }}</h2>
+    <p style="font-size:14.5px;line-height:1.75;color:rgba(255,253,248,.88);max-width:460px;margin:0 0 30px">{{ t.spaceDesc }}</p>
+    <a href="portfolio.dc.html" style="background:#fffdf8;color:#241f1a;padding:16px 36px;font-size:12.5px;letter-spacing:2px;display:inline-block;transition:transform .2s,background .3s ease,color .3s ease,opacity .2s ease" style-hover="transform:scale(1.03);background:#7c8560;color:#fffdf8;opacity:.85">{{ t.exploreSpaces }}</a>
+  </div>
+</section>
+
+<section style="max-width:1320px;margin:0 auto;padding:80px 40px">
+  <div style="text-align:center;margin-bottom:40px">
+    <div style="font-size:12px;letter-spacing:3px;color:#b5622f;margin-bottom:10px">{{ t.whyLabel }}</div>
+    <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:30px;margin:0">{{ t.whyTitle }}</h2>
+  </div>
+  <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap">
+    <div style="width:190px;aspect-ratio:1;background:#fffdf8;border:1px solid rgba(36,31,26,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:10px;transition:background .35s ease" style-hover="background:#f3e2d8">
+      <img src="assets/icon-texture.png" alt="Hand-textured detail" style="width:72px;height:72px;border-radius:50%;object-fit:cover">
+      <div style="font-size:13px;letter-spacing:1px;font-weight:500">{{ t.feat1Title }}</div>
+      <div style="font-size:11.5px;color:rgba(36,31,26,.6);line-height:1.5">{{ t.feat1Desc }}</div>
+    </div>
+    <div style="width:190px;aspect-ratio:1;background:#fffdf8;border:1px solid rgba(36,31,26,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:10px;transition:background .35s ease" style-hover="background:#e5e8da">
+      <img src="assets/icon-cities.png" alt="LA, New York, Paris" style="width:72px;height:72px;border-radius:50%;object-fit:cover">
+      <div style="font-size:13px;letter-spacing:1px;font-weight:500">{{ t.feat2Title }}</div>
+      <div style="font-size:11.5px;color:rgba(36,31,26,.6);line-height:1.5">{{ t.feat2Desc }}</div>
+    </div>
+    <div style="width:190px;aspect-ratio:1;background:#fffdf8;border:1px solid rgba(36,31,26,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:10px;transition:background .35s ease" style-hover="background:#f0e4cc">
+      <img src="assets/icon-handpaint.png" alt="Hand painting detail" style="width:72px;height:72px;border-radius:50%;object-fit:cover">
+      <div style="font-size:13px;letter-spacing:1px;font-weight:500">{{ t.feat3Title }}</div>
+      <div style="font-size:11.5px;color:rgba(36,31,26,.6);line-height:1.5">{{ t.feat3Desc }}</div>
+    </div>
+    <div style="width:190px;aspect-ratio:1;background:#fffdf8;border:1px solid rgba(36,31,26,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:10px;transition:background .35s ease" style-hover="background:#f3e2d8">
+      <img src="assets/icon-worldwide.png" alt="Worldwide shipping" style="width:72px;height:72px;border-radius:50%;object-fit:cover">
+      <div style="font-size:13px;letter-spacing:1px;font-weight:500">{{ t.feat4Title }}</div>
+      <div style="font-size:11.5px;color:rgba(36,31,26,.6);line-height:1.5">{{ t.feat4Desc }}</div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#efe6d8;padding:90px 40px">
+  <div style="max-width:1320px;margin:0 auto 48px;text-align:center">
+    <div style="font-size:12px;letter-spacing:3px;color:#b5622f;margin-bottom:10px">{{ t.clientLabel }}</div>
+    <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:30px;margin:0">{{ t.clientTitle }}</h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;max-width:1320px;margin:0 auto">
+    <div style="display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center;padding:0 12px">
+      <div style="width:56px;height:56px;border-radius:50%;background:#b5622f;color:#fffdf8;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px">M R</div>
+      <p style="font-style:italic;font-family:'Playfair Display',serif;font-size:15px;line-height:1.6;color:rgba(36,31,26,.75);margin:0">{{ t.quote1 }}</p>
+      <div style="font-size:12px;letter-spacing:1px;color:rgba(36,31,26,.5)">MAYA R., SANTA MONICA</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center;padding:0 12px">
+      <div style="width:56px;height:56px;border-radius:50%;background:#7c8560;color:#fffdf8;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px">D K</div>
+      <p style="font-style:italic;font-family:'Playfair Display',serif;font-size:15px;line-height:1.6;color:rgba(36,31,26,.75);margin:0">{{ t.quote2 }}</p>
+      <div style="font-size:12px;letter-spacing:1px;color:rgba(36,31,26,.5)">DANIEL K., LOS ANGELES</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center;padding:0 12px">
+      <div style="width:56px;height:56px;border-radius:50%;background:#a67c3d;color:#fffdf8;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:18px">S T</div>
+      <p style="font-style:italic;font-family:'Playfair Display',serif;font-size:15px;line-height:1.6;color:rgba(36,31,26,.75);margin:0">{{ t.quote3 }}</p>
+      <div style="font-size:12px;letter-spacing:1px;color:rgba(36,31,26,.5)">SOFIA T., WEST HOLLYWOOD</div>
+    </div>
+  </div>
+</section>
+
+<section style="position:relative;height:70vh;min-height:480px;max-height:700px;overflow:hidden">
+  <img src="assets/lifestyle-07-floral-office.jpg" alt="Studio materials and a finished painting" style="width:100%;height:100%;object-fit:cover">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,31,26,.3) 0%,rgba(36,31,26,.15) 40%,rgba(36,31,26,.55) 100%)"></div>
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px">
+    <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:32px;color:#fffdf8;margin:0 0 16px">{{ t.createTitle }}</h2>
+    <p style="font-size:14.5px;line-height:1.7;color:rgba(255,253,248,.88);max-width:480px;margin:0 0 24px">{{ t.createDesc }}</p>
+    <div style="display:flex;gap:22px;flex-wrap:wrap;justify-content:center;font-size:12.5px;color:#fffdf8;margin-bottom:28px">
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#f0c68a;flex:none"></span>{{ t.bullet1 }}</div>
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#f0c68a;flex:none"></span>{{ t.bullet2 }}</div>
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#f0c68a;flex:none"></span>{{ t.bullet3 }}</div>
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#f0c68a;flex:none"></span>{{ t.bullet4 }}</div>
+    </div>
+    <button onClick="{{ openBooking }}" style="background:#fffdf8;color:#241f1a;border:none;padding:16px 32px;font-size:12.5px;letter-spacing:1.5px;cursor:pointer;transition:transform .2s,background .3s ease,color .3s ease,opacity .2s ease" style-hover="transform:scale(1.03);background:#7c8560;color:#fffdf8;opacity:.85">{{ t.inquireBtn }}</button>
+  </div>
+</section>
+
+<footer style="background:#f6f1eaee;backdrop-filter:blur(6px);color:rgba(36,31,26,.75);padding:64px 40px 28px">
+  <div style="max-width:1320px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:40px">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <img src="assets/logo-lily-pastel.jpeg" alt="Lily Pastel" style="height:34px;width:auto">
+        <div style="display:flex;align-items:baseline;line-height:1.05">
+          <span style="font-family:'Playfair Display',serif;font-size:16px;color:#241f1a;letter-spacing:1px;margin-right:0.3em">LILY</span>
+          <div style="display:flex;flex-direction:column">
+            <span style="font-family:'Playfair Display',serif;font-size:16px;color:#241f1a;letter-spacing:1px">PASTEL</span>
+            <div style="display:flex;justify-content:space-between;width:100%;font-size:7.2px;letter-spacing:2.95px;color:rgba(36,31,26,.5)"><span>STUDIO</span><span>ART</span></div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:13px;line-height:1.7;max-width:240px">{{ t.footerTagline }}</p>
+    </div>
+    <div>
+      <div style="color:#e8b4a0;font-size:12px;letter-spacing:1.5px;margin-bottom:16px">{{ t.footerShopLabel }}</div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:13px">
+        <a href="shop.dc.html" style="color:rgba(36,31,26,.7);display:inline-block;transition:color .3s ease,transform .3s ease,opacity .2s ease" style-hover="color:#b5622f;transform:scale(1.08);opacity:.85">{{ t.footerAllWorks }}</a>
+        <a href="portfolio.dc.html" style="color:rgba(36,31,26,.7);display:inline-block;transition:color .3s ease,transform .3s ease,opacity .2s ease" style-hover="color:#b5622f;transform:scale(1.08);opacity:.85">{{ t.footerCollections }}</a>
+        <a href="commissions.dc.html" style="color:rgba(36,31,26,.7);display:inline-block;transition:color .3s ease,transform .3s ease,opacity .2s ease" style-hover="color:#b5622f;transform:scale(1.08);opacity:.85">{{ t.footerCommissions }}</a>
+      </div>
+    </div>
+    <div>
+      <div style="color:#b9c19a;font-size:12px;letter-spacing:1.5px;margin-bottom:16px">{{ t.footerStudioLabel }}</div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:13px">
+        <a href="about.dc.html" style="color:rgba(36,31,26,.7);display:inline-block;transition:color .3s ease,transform .3s ease,opacity .2s ease" style-hover="color:#b5622f;transform:scale(1.08);opacity:.85">{{ t.footerAboutLily }}</a>
+        <a href="blog.dc.html" style="color:rgba(36,31,26,.7);display:inline-block;transition:color .3s ease,transform .3s ease,opacity .2s ease" style-hover="color:#b5622f;transform:scale(1.08);opacity:.85">{{ t.footerJournal }}</a>
+        <a href="faq.dc.html" style="color:rgba(36,31,26,.7);display:inline-block;transition:color .3s ease,transform .3s ease,opacity .2s ease" style-hover="color:#b5622f;transform:scale(1.08);opacity:.85">{{ t.navFaq }}</a>
+      </div>
+    </div>
+    <div>
+      <div style="color:#e8cf9a;font-size:12px;letter-spacing:1.5px;margin-bottom:16px">{{ t.footerSocialLabel }}</div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:13px">
+        <a href="https://www.instagram.com/lilypasteldesign/" style="color:rgba(36,31,26,.7);display:inline-block;transition:color .3s ease,transform .3s ease,opacity .2s ease" style-hover="color:#b5622f;transform:scale(1.08);opacity:.85" target="_blank">Instagram</a>
+        <a href="legal.dc.html" style="color:rgba(36,31,26,.7);display:inline-block;transition:color .3s ease,transform .3s ease,opacity .2s ease" style-hover="color:#b5622f;transform:scale(1.08);opacity:.85">{{ t.footerLegal }}</a>
+        <div style="display:flex;align-items:center;gap:8px">
+          <a href="mailto:lilypasteldesign@gmail.com" style="color:rgba(36,31,26,.7);transition:color .3s ease,transform .2s ease,opacity .2s ease" style-hover="color:#b5622f;transform:scale(1.05);opacity:.85">lilypasteldesign@gmail.com</a>
+          <button onClick="{{ copyEmail }}" aria-label="Copy email" style="background:none;border:none;padding:0;cursor:pointer;color:#b5622f;display:flex;transition:opacity .2s,transform .2s ease" style-hover="opacity:.6;transform:scale(1.05)">
+            <sc-if value="{{ emailCopied }}" hint-placeholder-val="{{ false }}">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </sc-if>
+            <sc-if value="{{ emailNotCopied }}" hint-placeholder-val="{{ true }}">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </sc-if>
+          </button>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <a href="tel:+16468126339" style="color:rgba(36,31,26,.7);transition:color .3s ease,transform .2s ease,opacity .2s ease" style-hover="color:#b5622f;transform:scale(1.05);opacity:.85">+1 (646) 812-6339</a>
+          <button onClick="{{ copyPhone }}" aria-label="Copy phone" style="background:none;border:none;padding:0;cursor:pointer;color:#b5622f;display:flex;transition:opacity .2s,transform .2s ease" style-hover="opacity:.6;transform:scale(1.05)">
+            <sc-if value="{{ phoneCopied }}" hint-placeholder-val="{{ false }}">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </sc-if>
+            <sc-if value="{{ phoneNotCopied }}" hint-placeholder-val="{{ true }}">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </sc-if>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="color:#241f1a;font-size:12px;letter-spacing:1.5px;margin-bottom:16px">{{ t.footerStayLabel }}</div>
+      <div style="display:flex;gap:0">
+        <input type="email" placeholder="{{ t.footerEmailPlaceholder }}" style="flex:1;background:none;border:1px solid rgba(36,31,26,.3);color:#241f1a;padding:10px 12px;font-size:12px">
+        <button style="background:#b5622f;color:#fffdf8;border:none;padding:10px 16px;font-size:12px;cursor:pointer;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#8a4a24;opacity:.88;transform:scale(1.05)">{{ t.footerJoin }}</button>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1320px;margin:40px auto 0;padding-top:24px;border-top:1px solid rgba(36,31,26,.15);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11.5px">
+    <span>© 2020 <span style="font-family:'Playfair Display',serif;letter-spacing:1px">LILY PASTEL</span> {{ t.footerRights }}</span>
+    <span>Paris, New York, Los Angeles</span>
+  </div>
+</footer>
+</div>
+
+<button data-lp-theme="{{ themeAttr }}" onClick="{{ scrollToTop }}" aria-label="Back to top" style="position:fixed;bottom:24px;right:24px;width:46px;height:46px;border-radius:50%;background:#241f1a;color:#fffdf8;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(36,31,26,.25);z-index:40;transition:transform .2s ease,background .2s ease,opacity .2s ease" style-hover="transform:scale(1.08);background:#7c8560;opacity:.85">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+</button>
+
+
+<sc-if value="{{ isBookingOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-lp-theme="{{ themeAttr }}" style="position:fixed;inset:0;background:rgba(36,31,26,.6);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px" onClick="{{ closeBooking }}">
+    <div style="background:#fffdf8;max-width:440px;width:100%;box-sizing:border-box;position:relative;max-height:92vh;overflow:auto;border-radius:16px;overflow:hidden;box-shadow:0 30px 60px rgba(36,31,26,.35)" onClick="{{ stopClick }}">
+      <div style="background:#7c8560;padding:26px 30px 22px">
+        <button onClick="{{ closeBooking }}" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#fffdf8;transition:opacity .3s ease,transform .2s ease" style-hover="opacity:.7;transform:scale(1.05)">×</button>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;color:#fffdf8">{{ t.bookTitle }}</div>
+      </div>
+      <div style="padding:28px 24px">
+      <sc-if value="{{ bookingSent }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:30px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:10px">{{ t.thanksTitle }}</div>
+          <p style="font-size:14px;color:rgba(36,31,26,.7)">{{ t.thanksDesc }}</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ notBookingSent }}" hint-placeholder-val="{{ true }}">
+        <p style="font-size:13px;color:rgba(36,31,26,.6);margin:0 0 22px">{{ t.bookDesc }}</p>
+        <form onSubmit="{{ submitBooking }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px">
+          <input name="name" required="" type="text" placeholder="{{ t.formName }}" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          <div style="grid-column:span 1;position:relative">
+            <input id="idx-booking-email" required="" type="email" placeholder="{{ t.formEmail }}" onInput="{{ onEmailInput }}" onFocus="{{ onEmailFocus }}" onBlur="{{ onEmailBlur }}" style="width:100%;box-sizing:border-box;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+            <sc-if value="{{ showEmailSuggestions }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute;top:100%;left:0;right:0;background:#fffdf8;border:1px solid rgba(36,31,26,.15);box-shadow:0 6px 16px rgba(36,31,26,.12);z-index:5">
+                <button type="button" onClick="{{ pickGmail }}" style="display:block;width:100%;text-align:left;background:none;border:none;padding:10px 12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;cursor:pointer;transition:background .15s ease" style-hover="background:#f3ede2">{{ emailBase }}@gmail.com</button>
+                <button type="button" onClick="{{ pickHotmail }}" style="display:block;width:100%;text-align:left;background:none;border:none;padding:10px 12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;cursor:pointer;transition:background .15s ease" style-hover="background:#f3ede2">{{ emailBase }}@hotmail.com</button>
+              </div>
+            </sc-if>
+          </div>
+          <div style="grid-column:span 1;display:flex;gap:6px">
+            <select style="flex:none;width:84px;border:1px solid rgba(36,31,26,.2);padding:12px 4px;font-size:12px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+1ca">🇨🇦 +1</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+34">🇪🇸 +34</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+49">🇩🇪 +49</option>
+              <option value="+39">🇮🇹 +39</option>
+              <option value="+212">🇲🇦 +212</option>
+              <option value="+213">🇩🇿 +213</option>
+              <option value="+216">🇹🇳 +216</option>
+              <option value="+61">🇦🇺 +61</option>
+              <option value="+81">🇯🇵 +81</option>
+              <option value="+52">🇲🇽 +52</option>
+              <option value="+55">🇧🇷 +55</option>
+            </select>
+            <input name="phone" type="tel" placeholder="{{ t.formPhone }}" style="flex:1;min-width:0;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          </div>
+          <select name="painting" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+            <option value="">{{ t.formPaintingPlaceholder }}</option>
+            <option>Peace by Piece</option>
+            <option>Aurora</option>
+            <option>Kissed by the Sun</option>
+            <option>Eclectric</option>
+            <option>Rooted</option>
+            <option>Under Her Eye</option>
+            <option>Oh Gold</option>
+            <option>Elemental</option>
+          </select>
+          <select name="size" style="grid-column:1 / -1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+            <option value="">{{ t.formSizePlaceholder }}</option>
+            <option>16 × 20 in</option>
+            <option>24 × 30 in</option>
+            <option>36 × 48 in</option>
+            <option>40 × 60 in</option>
+            <option>48 × 72 in</option>
+          </select>
+          <textarea name="message" placeholder="{{ t.formMsg }}" rows="3" style="grid-column:1 / -1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;resize:vertical"></textarea>
+          <button type="submit" style="grid-column:1 / -1;background:#7c8560;color:#fffdf8;border:none;padding:14px;font-size:13px;letter-spacing:1.5px;cursor:pointer;margin-top:6px;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#b9c19a;opacity:.88;transform:scale(1.05)">{{ t.formSend }}</button>
+        </form>
+      </sc-if>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;showBestsellers&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Home page&quot;},&quot;bookingMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;modal&quot;,&quot;options&quot;:[&quot;modal&quot;,&quot;mailto&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Booking behavior&quot;}}">
+const TRANSLATIONS = {
+  en: {
+    navHome: 'HOME', navShop: 'SHOP', navCollections: 'COLLECTION', navCommissions: 'COMMISSIONS', navExperience: 'ART EXPERIENCE', navAbout: 'ABOUT', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    bookBtn: 'BOOK A CONSULTATION',
+    thanksTitle: 'Thank you!', thanksDesc: "We'll be in touch within one business day to confirm your consultation.",
+    bookTitle: 'Book a Consultation', bookDesc: "Tell us about your space, we'll follow up to schedule a call.",
+    formName: 'Full name', formEmail: 'Email', formPhone: 'Phone (optional)', formPaintingPlaceholder: 'Which painting? (optional)', formSizePlaceholder: 'Preferred size (optional)', formMsg: 'Hello, I would like more information about the painting Kissed by the Sun. Thank you, have a great day', formSend: 'SEND REQUEST',
+    heroTag: 'STUDIO ART', heroCta: 'DISCOVER THE COLLECTION',
+    collectionLabel: 'DISCOVER', collectionTitle: 'Three Ways to Experience Lily Pastel',
+    cardOriginal: 'ORIGINAL PAINTINGS', cardPrints: 'FINE-ART PRINTS', cardCommissioned: 'THE PAINTING COLLECTION', cardCommissionedDesc: 'Browse original, one-of-one paintings ready to hang.', cardTextured: 'TEXTURED WORKS', cardExperience: 'ART EXPERIENCE', cardExperienceDesc: 'Join a guided painting evening led by Lily.', cardMural: 'MURAL ART', cardMuralDesc: 'Large-scale, wall-sized artwork for any room.', viewFull: 'VIEW FULL COLLECTION',
+    spaceTitle: 'Art for Your Space', spaceDesc: 'Each piece is created to bring emotion, balance and character to your interior, discover how my paintings transform spaces and tell stories.', exploreSpaces: 'EXPLORE SPACES',
+    whyLabel: 'WHY LILY PASTEL', whyTitle: 'Made with intention',
+    feat1Title: 'Hand-Textured', feat1Desc: 'Layered by hand with mixed media & gold leaf',
+    feat2Title: 'Made in L.A.', feat2Desc: 'Painted & finished in our Los Angeles studio',
+    feat3Title: 'Made to Order', feat3Desc: 'Sized & finished to fit your wall',
+    feat4Title: 'Ships Worldwide', feat4Desc: 'Carefully packed & insured, wherever you are',
+    waysLabel: 'THREE WAYS TO BRING IT HOME', waysTitle: 'Own the original, or bring it to life on your surface of choice.',
+    origTitle: 'The Painting Collection', origDesc: 'One-of-one canvases, signed, textured and ready to hang.', origLink: 'SHOP ORIGINALS →',
+    printTitle: 'Art Experience', printDesc: 'Join a guided, intimate painting evening led by Lily.', printLink: 'DISCOVER THE EXPERIENCE →',
+    muralTitle: 'Mural Art', muralDesc: 'Large-scale, wall-sized artwork designed to transform a room.', muralLink: 'SHOP MURALS →',
+    clientLabel: 'CLIENT WORDS', clientTitle: 'What collectors say',
+    quote1: '"The piece anchors our whole living room. It photographs beautifully but feels even richer in person."',
+    quote2: '"Lily walked us through the commission from sketch to install. It fits our space like it was made for it."',
+    quote3: '"We ordered a canvas print for our office lobby, the quality and color rivaled the original."',
+    createTitle: "Let's Create Your Space", createDesc: 'Looking for a painting that perfectly fits your space? I create custom commissions tailored to your colors, mood and vision.',
+    bullet1: 'Bespoke artwork', bullet2: 'Personalized service', bullet3: 'Worldwide shipping', bullet4: 'Certificate of authenticity', inquireBtn: 'INQUIRE ABOUT A COMMISSION',
+    footerTagline: 'Original abstract paintings & fine-art printing, hand-finished in Los Angeles.',
+    footerShopLabel: 'SHOP', footerAllWorks: 'All Works', footerCollections: 'Collection', footerCommissions: 'Commissions', footerStudioLabel: 'STUDIO', footerAboutLily: 'About Lily', footerJournal: 'Journal',
+    footerSocialLabel: 'SOCIAL', footerLegal: 'Legal & Privacy', footerStayLabel: 'STAY IN TOUCH', footerEmailPlaceholder: 'Your email', footerJoin: 'JOIN',
+    footerRights: 'ART STUDIO. All rights reserved.',
+  },
+  fr: {
+    navHome: 'ACCUEIL', navShop: 'BOUTIQUE', navCollections: 'COLLECTION', navCommissions: 'COMMANDES', navExperience: 'EXPÉRIENCE', navAbout: 'À PROPOS', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    bookBtn: 'RÉSERVER',
+    thanksTitle: 'Merci !', thanksDesc: 'Nous vous contacterons sous un jour ouvré pour confirmer votre consultation.',
+    bookTitle: 'Réserver une consultation', bookDesc: 'Parlez-nous de votre espace, nous vous recontacterons pour planifier un appel.',
+    formName: 'Nom complet', formEmail: 'Email', formPhone: 'Téléphone (optionnel)', formPaintingPlaceholder: 'Quel tableau ? (optionnel)', formSizePlaceholder: 'Dimension souhaitée (optionnel)', formMsg: 'Bonjour, je souhaite avoir des informations sur le tableau Kissed by the Sun. Merci, bonne journée', formSend: 'ENVOYER LA DEMANDE',
+    heroTag: 'STUDIO D\u2019ART', heroCta: 'DÉCOUVRIR LA COLLECTION',
+    collectionLabel: 'DÉCOUVRIR', collectionTitle: 'Trois façons de vivre Lily Pastel',
+    cardOriginal: 'PEINTURES ORIGINALES', cardPrints: 'IMPRESSIONS D\u2019ART', cardCommissioned: 'LA COLLECTION DE PEINTURES', cardCommissionedDesc: 'Découvrez des peintures originales, uniques et prêtes à accrocher.', cardTextured: 'ŒUVRES TEXTURÉES', cardExperience: 'EXPÉRIENCE ARTISTIQUE', cardExperienceDesc: 'Rejoignez une soirée peinture guidée par Lily.', cardMural: 'ART MURAL', cardMuralDesc: 'Œuvres murales grand format pour toutes les pièces.', viewFull: 'VOIR TOUTE LA COLLECTION',
+    spaceTitle: 'Un art pour votre espace', spaceDesc: 'Chaque œuvre est créée pour apporter émotion, équilibre et caractère à votre intérieur, découvrez comment mes peintures transforment les espaces et racontent des histoires.', exploreSpaces: 'EXPLORER LES ESPACES',
+    whyLabel: 'POURQUOI LILY PASTEL', whyTitle: 'Créé avec intention',
+    feat1Title: 'Texturé à la main', feat1Desc: 'Superposé à la main avec des matériaux mixtes et de la feuille d\u2019or',
+    feat2Title: 'Fabriqué à L.A.', feat2Desc: 'Peint et finalisé dans notre studio de Los Angeles',
+    feat3Title: 'Fait sur mesure', feat3Desc: 'Dimensionné et finalisé pour votre mur',
+    feat4Title: 'Livraison mondiale', feat4Desc: 'Emballé avec soin et assuré, où que vous soyez',
+    waysLabel: 'TROIS FAÇONS DE L\u2019ADOPTER', waysTitle: "Possédez l'original, ou donnez-lui vie sur la surface de votre choix.", muralTitle: 'Art mural', muralDesc: 'Œuvres murales grand format conçues pour transformer une pièce.', muralLink: 'ACHETER LES MURALES →',
+    origTitle: 'La Collection de Peintures', origDesc: 'Toiles uniques, signées, texturées et prêtes à accrocher.', origLink: 'ACHETER LES ORIGINAUX →',
+    printTitle: 'Expérience artistique', printDesc: 'Rejoignez une soirée peinture guidée et intime menée par Lily.', printLink: 'DÉCOUVRIR L\u2019EXPÉRIENCE →',
+    clientLabel: 'PAROLES DE CLIENTS', clientTitle: 'Ce que disent les collectionneurs',
+    quote1: '« L\u2019œuvre ancre tout notre salon. Elle est magnifique en photo mais encore plus riche en personne. »',
+    quote2: '« Lily nous a accompagnés de l\u2019esquisse à l\u2019installation. Elle s\u2019intègre à notre espace comme si elle avait été faite pour lui. »',
+    quote3: '« Nous avons commandé une impression toile pour notre hall de bureau, la qualité et la couleur rivalisaient avec l\u2019original. »',
+    createTitle: 'Créons votre espace', createDesc: "Vous cherchez une peinture qui s'intègre parfaitement à votre espace ? Je crée des commandes sur mesure adaptées à vos couleurs, votre ambiance et votre vision.",
+    bullet1: 'Œuvre sur mesure', bullet2: 'Service personnalisé', bullet3: 'Livraison mondiale', bullet4: "Certificat d'authenticité", inquireBtn: 'COMMANDER',
+    footerTagline: "Peintures abstraites originales et impressions d'art, finies à la main à Los Angeles.",
+    footerShopLabel: 'BOUTIQUE', footerAllWorks: 'Toutes les œuvres', footerCollections: 'Collection', footerCommissions: 'Commandes', footerStudioLabel: 'STUDIO', footerAboutLily: 'À propos de Lily', footerJournal: 'Journal',
+    footerSocialLabel: 'SOCIAL', footerLegal: 'Mentions légales', footerStayLabel: 'RESTEZ CONNECTÉ', footerEmailPlaceholder: 'Votre email', footerJoin: 'REJOINDRE',
+    footerRights: 'ART STUDIO. Tous droits réservés.',
+  },
+  es: {
+    navHome: 'INICIO', navShop: 'TIENDA', navCollections: 'COLECCIÓN', navCommissions: 'ENCARGOS', navExperience: 'ART EXPERIENCE', navAbout: 'SOBRE MÍ', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACTO',
+    bookBtn: 'RESERVAR',
+    thanksTitle: '¡Gracias!', thanksDesc: 'Nos pondremos en contacto en un día hábil para confirmar tu consulta.',
+    bookTitle: 'Reservar una consulta', bookDesc: 'Cuéntanos sobre tu espacio, te contactaremos para agendar una llamada.',
+    formName: 'Nombre completo', formEmail: 'Email', formPhone: 'Teléfono (opcional)', formPaintingPlaceholder: '¿Qué pintura? (opcional)', formSizePlaceholder: 'Tamaño preferido (opcional)', formMsg: 'Hola, me gustaría información sobre el cuadro Kissed by the Sun. Gracias, que tengas un buen día', formSend: 'ENVIAR SOLICITUD',
+    heroTag: 'ESTUDIO DE ARTE', heroCta: 'DESCUBRIR LA COLECCIÓN',
+    collectionLabel: 'DESCUBRIR', collectionTitle: 'Tres formas de vivir Lily Pastel',
+    cardOriginal: 'PINTURAS ORIGINALES', cardPrints: 'IMPRESIONES DE ARTE', cardCommissioned: 'LA COLECCIÓN DE PINTURAS', cardCommissionedDesc: 'Descubre pinturas originales, únicas y listas para colgar.', cardTextured: 'OBRAS TEXTURIZADAS', cardExperience: 'EXPERIENCIA ARTÍSTICA', cardExperienceDesc: 'Únete a una velada de pintura guiada por Lily.', cardMural: 'ARTE MURAL', cardMuralDesc: 'Obras murales a gran escala para cualquier espacio.', viewFull: 'VER COLECCIÓN COMPLETA',
+    spaceTitle: 'Arte para tu espacio', spaceDesc: 'Cada obra está creada para aportar emoción, equilibrio y carácter a tu interior, descubre cómo mis pinturas transforman espacios y cuentan historias.', exploreSpaces: 'EXPLORAR ESPACIOS',
+    whyLabel: 'POR QUÉ LILY PASTEL', whyTitle: 'Hecho con intención',
+    feat1Title: 'Texturizado a mano', feat1Desc: 'Superpuesto a mano con técnica mixta y pan de oro',
+    feat2Title: 'Hecho en L.A.', feat2Desc: 'Pintado y terminado en nuestro estudio de Los Ángeles',
+    feat3Title: 'Hecho a medida', feat3Desc: 'Dimensionado y terminado para tu pared',
+    feat4Title: 'Envíos a todo el mundo', feat4Desc: 'Embalado con cuidado y asegurado, estés donde estés',
+    waysLabel: 'TRES FORMAS DE LLEVÁRTELO', muralTitle: 'Arte mural', muralDesc: 'Obras murales a gran escala diseñadas para transformar un espacio.', muralLink: 'COMPRAR MURALES →', waysTitle: 'Ten el original, o dale vida en la superficie que prefieras.',
+    origTitle: 'La Colección de Pinturas', origDesc: 'Lienzos únicos, firmados, texturizados y listos para colgar.', origLink: 'COMPRAR ORIGINALES →',
+    printTitle: 'Experiencia artística', printDesc: 'Únete a una velada de pintura guiada e íntima con Lily.', printLink: 'DESCUBRIR LA EXPERIENCIA →',
+    clientLabel: 'PALABRAS DE CLIENTES', clientTitle: 'Lo que dicen los coleccionistas',
+    quote1: '"La obra ancla toda nuestra sala. Se ve hermosa en foto pero se siente aún más rica en persona."',
+    quote2: '"Lily nos acompañó desde el boceto hasta la instalación. Encaja en nuestro espacio como si hubiera sido hecha para él."',
+    quote3: '"Encargamos una impresión en lienzo para el lobby de nuestra oficina, la calidad y el color rivalizaban con el original."',
+    createTitle: 'Creemos tu espacio', createDesc: '¿Buscas una pintura que encaje perfectamente en tu espacio? Creo encargos personalizados adaptados a tus colores, ambiente y visión.',
+    bullet1: 'Obra a medida', bullet2: 'Servicio personalizado', bullet3: 'Envíos internacionales', bullet4: 'Certificado de autenticidad', inquireBtn: 'CONSULTAR SOBRE UN ENCARGO',
+    footerTagline: 'Pinturas abstractas originales e impresiones de arte, terminadas a mano en Los Ángeles.',
+    footerShopLabel: 'TIENDA', footerAllWorks: 'Todas las obras', footerCollections: 'Colección', footerCommissions: 'Encargos', footerStudioLabel: 'ESTUDIO', footerAboutLily: 'Sobre Lily', footerJournal: 'Diario',
+    footerSocialLabel: 'SOCIAL', footerLegal: 'Legal y privacidad', footerStayLabel: 'MANTENTE EN CONTACTO', footerEmailPlaceholder: 'Tu email', footerJoin: 'UNIRME',
+    footerRights: 'ART STUDIO. Todos los derechos reservados.',
+  },
+};
+
+class Component extends DCLogic {
+  state = { isMenuOpen: false, isBookingOpen: false, isDesktop: true, bookingSent: false, scrollY: 0, spaceSlideIndex: 0, emailCopied: false, phoneCopied: false, dark: false, lang: 'fr', emailValue: '', emailFocused: false };
+  copyEmail = () => {
+    navigator.clipboard.writeText('lilypasteldesign@gmail.com');
+    this.setState({ emailCopied: true });
+    setTimeout(() => this.setState({ emailCopied: false }), 1800);
+  };
+  copyPhone = () => {
+    navigator.clipboard.writeText('+1 (646) 812-6339');
+    this.setState({ phoneCopied: true });
+    setTimeout(() => this.setState({ phoneCopied: false }), 1800);
+  };
+  collectionSlidesData = [
+    { src: 'assets/peace-by-piece-01.jpeg' },
+    { src: 'assets/aurora-01.jpeg' },
+    { src: 'assets/kissed-by-sun-01.png' },
+    { src: 'assets/eclectric-01.png' },
+    { src: 'assets/rooted-01.jpeg' },
+    { src: 'assets/under-her-eye-01.jpeg' },
+    { src: 'assets/oh-gold-01.jpeg' },
+    { src: 'assets/elemental-01.jpeg' },
+  ];
+  spaceSlidesData = [
+    { src: 'assets/lifestyle-02-triptych.jpg', alt: 'Living room with framed paintings', pos: '50% 30%' },
+    { src: 'assets/lifestyle-01-woven.jpg', alt: 'Woven wall hanging in a hallway', pos: '50% 25%' },
+    { src: 'assets/lifestyle-08-sand-livingroom.jpg', alt: 'Framed painting in a living room', pos: '50% 30%' },
+    { src: 'assets/lifestyle-04-emerald-entry.jpg', alt: 'Painting styled in an entryway', pos: '50% 45%' },
+    { src: 'assets/lifestyle-07-floral-office.jpg', alt: 'Painting installed in a home office', pos: '50% 25%' },
+  ];
+  componentDidMount() {
+    this.mq = window.matchMedia('(min-width:1200px)');
+    this.setState({ isDesktop: this.mq.matches });
+    if (localStorage.getItem('lp-theme') === 'dark') this.setState({ dark: true });
+    const savedLang = localStorage.getItem('lp-lang');
+    if (savedLang && TRANSLATIONS[savedLang]) this.setState({ lang: savedLang });
+    this.onMq = e => this.setState({ isDesktop: e.matches, isMenuOpen: false });
+    this.mq.addEventListener('change', this.onMq);
+    this.onScroll = () => { this.setState({ scrollY: window.scrollY }); sessionStorage.setItem('lp-home-scroll', String(window.scrollY)); };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    const savedScroll = sessionStorage.getItem('lp-home-scroll');
+    if (savedScroll) requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo(0, parseInt(savedScroll, 10) || 0)));
+    document.querySelectorAll('a[href]:not([href^="#"]):not([href^="mailto"])').forEach(a => {
+      a.addEventListener('click', () => sessionStorage.setItem('lp-home-scroll', String(window.scrollY)));
+    });
+    this.spaceInterval = setInterval(() => {
+      this.setState(s => ({ spaceSlideIndex: (s.spaceSlideIndex + 1) % this.spaceSlidesData.length }));
+    }, 3500);
+    this.collectionInterval = setInterval(() => {
+      if (this.state.collectionPaused) return;
+      this.setState(s => ({ collectionSlideIndex: (s.collectionSlideIndex + 1) % this.collectionSlidesData.length }));
+    }, 3000);
+  }
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this.onMq);
+    window.removeEventListener('scroll', this.onScroll);
+    clearInterval(this.spaceInterval);
+    clearInterval(this.collectionInterval);
+  }
+  toggleMenu = () => this.setState(s => ({ isMenuOpen: !s.isMenuOpen }));
+  toggleDark = () => this.setState(s => { const v = !s.dark; localStorage.setItem('lp-theme', v ? 'dark' : 'light'); return { dark: v }; });
+  onLangChange = e => { const v = e.target.value; localStorage.setItem('lp-lang', v); this.setState({ lang: v }); };
+  scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  openBooking = () => this.setState({ isBookingOpen: true, isMenuOpen: false, bookingSent: false });
+  closeBooking = () => this.setState({ isBookingOpen: false });
+  stopClick = e => e.stopPropagation();
+  submitBooking = e => {
+    e.preventDefault();
+    const f = e.target;
+    const get = n => (f[n] && f[n].value) || '';
+    const body = `Name: ${get('name')}\nEmail: ${get('email')}\nPhone: ${get('phone') || 'N/A'}\nPainting: ${get('painting') || 'N/A'}\nSize: ${get('size') || 'N/A'}\n\n${get('message')}`;
+    window.location.href = `mailto:lilypasteldesign@gmail.com?subject=${encodeURIComponent('Booking Request')}&body=${encodeURIComponent(body)}`;
+    this.setState({ bookingSent: true });
+  };
+  fillEmailDomain = domain => {
+    const el = document.getElementById('idx-booking-email');
+    if (!el) return;
+    const name = el.value.split('@')[0] || '';
+    el.value = name + domain;
+    el.focus();
+    this.setState({ emailValue: el.value, emailFocused: false });
+  };
+  pickGmail = () => this.fillEmailDomain('@gmail.com');
+  pickHotmail = () => this.fillEmailDomain('@hotmail.com');
+  onEmailInput = e => this.setState({ emailValue: e.target.value });
+  onEmailFocus = () => this.setState({ emailFocused: true });
+  onEmailBlur = () => setTimeout(() => this.setState({ emailFocused: false }), 150);
+  renderVals() {
+    const navGap = '16px';
+    const navFontSize = '11.5px';
+    return {
+      t: TRANSLATIONS[this.state.lang],
+      navGap, navFontSize,
+      lang: this.state.lang,
+      langLabel: this.state.lang.toUpperCase(),
+      scrollToTop: this.scrollToTop,
+      onLangChange: this.onLangChange,
+      dark: this.state.dark,
+      notDark: !this.state.dark,
+      toggleDark: this.toggleDark,
+      themeAttr: this.state.dark ? 'dark' : 'light',
+      copyEmail: this.copyEmail,
+      copyPhone: this.copyPhone,
+      emailCopied: this.state.emailCopied,
+      phoneCopied: this.state.phoneCopied,
+      emailNotCopied: !this.state.emailCopied,
+      phoneNotCopied: !this.state.phoneCopied,
+      isMenuOpen: this.state.isMenuOpen,
+      isBookingOpen: this.state.isBookingOpen,
+      bookingSent: this.state.bookingSent,
+      notBookingSent: !this.state.bookingSent,
+      toggleMenu: this.toggleMenu,
+      openBooking: this.openBooking,
+      closeBooking: this.closeBooking,
+      stopClick: this.stopClick,
+      submitBooking: this.submitBooking,
+      pickGmail: this.pickGmail,
+      pickHotmail: this.pickHotmail,
+      onEmailInput: this.onEmailInput,
+      onEmailFocus: this.onEmailFocus,
+      onEmailBlur: this.onEmailBlur,
+      emailBase: this.state.emailValue.split('@')[0] || '',
+      showEmailSuggestions: this.state.emailFocused && this.state.emailValue.trim().length > 0 && !/@(gmail|hotmail)\.com$/i.test(this.state.emailValue),
+      navDisplay: this.state.isDesktop ? 'flex' : 'none',
+      burgerDisplay: this.state.isDesktop ? 'none' : 'flex',
+      showBestsellers: this.props.showBestsellers ?? true,
+      heroImgHeight: this.state.isDesktop ? '165%' : '165%',
+      heroObjectPosition: this.state.isDesktop ? '50% 32%' : '50% 22%',
+      heroParallax: '-' + Math.min(this.state.scrollY * (this.state.isDesktop ? 0.6 : 0.55), this.state.isDesktop ? 180 : 160) + 'px',
+      spaceSlides: this.spaceSlidesData.map((s, i) => ({ ...s, opacity: i === this.state.spaceSlideIndex ? 1 : 0 })),
+      collectionCardSlides: this.collectionSlidesData.map((s, i) => ({ ...s, opacity: i === (this.state.collectionSlideIndex || 0) ? 1 : 0 })),
+      pauseCollectionCycle: () => this.setState({ collectionPaused: true }),
+      resumeCollectionCycle: () => this.setState({ collectionPaused: false }),
+    };
+  }
+}
+</script>
+</body>
+</html>

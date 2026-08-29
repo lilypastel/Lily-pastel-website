@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&family=Petit+Formal+Script&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f6f1ea;font-family:'Jost',sans-serif;color:#241f1a}
+a{color:#b5622f;text-decoration:none}
+a:hover{color:#8a4a24}
+[data-lp-theme="dark"]{filter:invert(1) hue-rotate(180deg)}
+[data-lp-theme="dark"] img,[data-lp-theme="dark"] video,[data-lp-theme="dark"] iframe{filter:invert(1) hue-rotate(180deg)}
+@media (max-width:640px){#site-header-inner{padding:12px 16px}#site-logo-img{height:40px !important;width:40px !important}#site-logo-text span{font-size:14px !important}#site-logo-sub{font-size:6.5px !important;letter-spacing:2px !important}#site-header-controls{gap:6px !important}}
+@media (max-width:780px){.pf-row{flex-direction:column !important}.pf-row-img{width:100% !important}}
+</style>
+</helmet>
+<div style="background:#f6f1ea;min-height:100vh" data-lp-theme="{{ themeAttr }}">
+
+
+<header style="position:sticky;top:0;z-index:50;background:#f6f1eaee;backdrop-filter:blur(6px);border-bottom:1px solid rgba(36,31,26,.1)">
+  <div id="site-header-inner" style="max-width:1320px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.dc.html" style="display:flex;align-items:center;gap:10px">
+      <img id="site-logo-img" src="assets/logo-lily-pastel.jpeg" alt="Lily Pastel" style="height:58px;width:58px;object-fit:cover">
+      <div id="site-logo-text" style="display:flex;align-items:baseline;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div id="site-logo-sub" style="display:flex;gap:6px;width:100%;font-size:8.5px;letter-spacing:3.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </a>
+    <nav style="display:{{ navDisplay }};align-items:center;gap:{{ navGap }};font-size:{{ navFontSize }};letter-spacing:0.4px">
+      <a href="index.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navHome }}</a>
+      <a href="portfolio.dc.html" style="color:#b5622f;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navCollections }}</a>
+      <a href="shop.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navShop }}</a>
+      <a href="commissions.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navCommissions }}</a>
+      <a href="experience.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navExperience }}</a>
+      <a href="blog.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navBlog }}</a>
+      <a href="about.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navAbout }}</a>
+      <a href="contact.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navContact }}</a>
+    </nav>
+    <div id="site-header-controls" style="display:flex;align-items:center;gap:14px">
+      <div style="position:relative;width:26px;height:26px;border:1px solid rgba(36,31,26,.25);border-radius:50%;display:flex;align-items:center;justify-content:center">
+        <select onChange="{{ onLangChange }}" value="{{ lang }}" style="position:absolute;inset:0;opacity:0;cursor:pointer;appearance:none;-webkit-appearance:none">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+        </select>
+        <span style="font-size:9px;letter-spacing:.3px;color:#241f1a;pointer-events:none">{{ langLabel }}</span>
+      </div>
+      <button onClick="{{ toggleDark }}" aria-label="Toggle dark mode" style="display:flex;background:none;border:1px solid rgba(36,31,26,.25);border-radius:50%;width:26px;height:26px;color:#241f1a;cursor:pointer;align-items:center;justify-content:center;padding:0;transition:border-color .2s ease,transform .2s ease,opacity .2s ease" style-hover="border-color:#241f1a;transform:scale(1.05);opacity:.85">
+        <sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg></sc-if>
+        <sc-if value="{{ notDark }}" hint-placeholder-val="{{ true }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></sc-if>
+      </button>
+      <button onClick="{{ openBooking }}" style="display:{{ navDisplay }};background:#7c8560;color:#fffdf8;border:none;padding:11px 20px;font-size:12px;letter-spacing:1.5px;cursor:pointer;transition:background .2s,transform .2s ease,opacity .2s ease" style-hover="background:#b9c19a;transform:scale(1.05);opacity:.85"="background:#6b7452;transform:scale(1.06);opacity:.9">{{ t.bookBtn }}</button>
+
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="display:{{ burgerDisplay }};flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;transition:opacity .3s ease,transform .2s ease" style-hover="opacity:.55;transform:scale(1.05)">
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+      </button>
+    </div>
+  </div>
+  <sc-if value="{{ isMenuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;padding:10px 40px 26px;gap:18px;font-size:14px;letter-spacing:1px;border-top:1px solid rgba(36,31,26,.1)">
+      <a href="index.dc.html">{{ t.navHome }}</a>
+      <a href="portfolio.dc.html">{{ t.navCollections }}</a>
+      <a href="shop.dc.html">{{ t.navShop }}</a>
+      <a href="commissions.dc.html">{{ t.navCommissions }}</a>
+      <a href="experience.dc.html">{{ t.navExperience }}</a>
+      <a href="blog.dc.html">{{ t.navBlog }}</a>
+      <a href="about.dc.html">{{ t.navAbout }}</a>
+      <a href="faq.dc.html">{{ t.navFaq }}</a>
+      <a href="contact.dc.html">{{ t.navContact }}</a>
+      <button onClick="{{ openBooking }}" style="background:#7c8560;color:#fffdf8;border:none;padding:13px;font-size:12px;letter-spacing:1.5px;cursor:pointer;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#b9c19a;opacity:.88;transform:scale(1.05)">{{ t.bookBtn }}</button>
+    </div>
+  </sc-if>
+</header>
+
+<section style="max-width:1100px;margin:0 auto;padding:70px 40px 20px;text-align:center">
+  <div style="font-size:12px;letter-spacing:3px;color:#b5622f;margin-bottom:14px">{{ t.pfLabel }}</div>
+  <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,6vw,38px);margin:0 0 16px">{{ t.pfTitle }}</h1>
+  <p style="font-size:15px;color:rgba(36,31,26,.65);max-width:600px;margin:0 auto">{{ t.pfDesc }}</p>
+</section>
+
+<section style="max-width:1200px;margin:0 auto;padding:40px 40px 90px">
+  <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
+    <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
+      <sc-for list="{{ peaceSlides }}" as="slide" hint-placeholder-count="0">
+        <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ slide.src }}" alt="Peace by Piece painting" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+        </sc-if>
+      </sc-for>
+    </div>
+    <div style="flex:1">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">Peace by Piece</h2>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Peace by Piece is an exploration of quiet restoration, the gradual process of finding harmony within fragments. Soft layers of ivory, blush, amber, and warm gold dissolve into one another, creating a luminous field that feels suspended between stillness and movement.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">The textured surface carries traces of gestures, marks, and delicate fragments, evoking the way peace is rarely found all at once, but assembled slowly through moments of acceptance, renewal, and presence.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px">Peace by Piece is a meditation on becoming whole, not through perfection, but through the beauty of every piece that remains.</p>
+      <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div style="display:flex;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-row" style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center;margin-bottom:70px">
+    <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
+      <sc-for list="{{ auroraSlides }}" as="slide" hint-placeholder-count="0">
+        <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ slide.src }}" alt="Aurora painting" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+        </sc-if>
+      </sc-for>
+    </div>
+    <div style="flex:1">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">Aurora</h2>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Aurora is an exploration of light in motion, a luminous convergence of color, texture, and transformation. Layers of rose, violet, coral, amber, and turquoise flow across the surface, creating an atmosphere that feels both dreamlike and alive.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Fragments of gold emerge through the shifting fields of color like distant light breaking through clouds, while gestural marks create a sense of movement and rhythm.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px">Aurora is a celebration of wonder and emergence, a reminder that beauty often reveals itself in the spaces between chaos and harmony.</p>
+      <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div style="display:flex;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
+    <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
+      <sc-for list="{{ sunSlides }}" as="slide" hint-placeholder-count="0">
+        <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ slide.src }}" alt="Kissed by the Sun painting" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+        </sc-if>
+      </sc-for>
+    </div>
+    <div style="flex:1">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">Kissed by the Sun</h2>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Kissed by the Sun is an abstract meditation on light, warmth, and the vitality of nature. Deep blues and luminous turquoise form an expansive atmosphere, while vivid coral, crimson, green, and violet rise through the composition.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Strands of gold move across the surface, catching and reflecting illumination like sunlight breaking through foliage.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px">Kissed by the Sun evokes the fleeting moment when light transforms everything it touches, a celebration of radiance, movement, and the quiet energy of being illuminated.</p>
+      <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div style="display:flex;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-row" style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center;margin-bottom:70px">
+    <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
+      <sc-for list="{{ eclecticSlides }}" as="slide" hint-placeholder-count="0">
+        <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ slide.src }}" alt="Eclectric painting" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+        </sc-if>
+      </sc-for>
+    </div>
+    <div style="flex:1">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">Eclectric</h2>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Eclectric exists at the intersection of eclecticism and electricity, a vibrant collision of color, texture, and energy. Bold fields of fluorescent pink, luminous yellow, fiery orange, deep indigo, and soft neutrals converge in a composition that feels both spontaneous and deliberate.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Layered gestures, raw edges, and textured passages create a visual rhythm that shifts between structure and freedom.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px">The title Eclectric captures the spirit of the work: eclectic in its language, electric in its energy.</p>
+      <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div style="display:flex;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
+    <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
+      <sc-for list="{{ rootedSlides }}" as="slide" hint-placeholder-count="0">
+        <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ slide.src }}" alt="Rooted painting" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+        </sc-if>
+      </sc-for>
+    </div>
+    <div style="flex:1">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 8px;color:#241f1a">Rooted</h2>
+      <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:#241f1a;margin:0 0 16px">An homage to Amazigh heritage, ancestry &amp; connection.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">A tribute to heritage, identity, and the invisible threads that connect us to where we come from.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">The intertwined threads represent generations connected through culture, memory, and tradition, carrying the strength of those who came before us.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px">The earthy tones and tactile textures evoke the land, while the roots extending beyond the canvas suggest that our heritage cannot be contained within a frame.</p>
+      <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div style="display:flex;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-row" style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center;margin-bottom:70px">
+    <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
+      <sc-for list="{{ eyeSlides }}" as="slide" hint-placeholder-count="0">
+        <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ slide.src }}" alt="Under Her Eye painting" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+        </sc-if>
+      </sc-for>
+    </div>
+    <div style="flex:1">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">Under Her Eye</h2>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">A quiet meditation on presence, perception, and the unseen forces that shape us.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Against a deep, almost nocturnal field of teal, a luminous burst of gold emerges, fragmented yet whole, delicate yet commanding.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px">Under Her Eye invites the viewer into that suspended moment between being seen and seeing: where vulnerability becomes strength.</p>
+      <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div style="display:flex;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
+    <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
+      <sc-for list="{{ goldSlides }}" as="slide" hint-placeholder-count="0">
+        <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ slide.src }}" alt="Oh Gold painting" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+        </sc-if>
+      </sc-for>
+    </div>
+    <div style="flex:1">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">Oh Gold</h2>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Gold does not simply shine here, it remembers. In Oh Gold, layers of luminous texture hold fragments of darkness, as if something precious has been buried beneath the surface, waiting to be seen.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Beside Under Her Eye, the two works become a quiet conversation: the eye observes, and gold reveals.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px">Together, they speak of power, femininity, mystery, and the things we carry unseen. Under Her Eye. Oh Gold. Two works, one gaze.</p>
+      <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div style="display:flex;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf-row" style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center">
+    <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
+      <sc-for list="{{ elementalSlides }}" as="slide" hint-placeholder-count="0">
+        <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ slide.src }}" alt="Elemental painting" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+        </sc-if>
+      </sc-for>
+    </div>
+    <div style="flex:1">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">Elemental</h2>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Elemental explores the quiet power of nature through form, contrast, and restraint. Organic shapes drift across the surface in earthy tones of sand, terracotta, charcoal, and warm umber.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">The interplay of soft curves and grounded forms evokes the fundamental forces of earth and fire, growth and stillness, warmth and shadow.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px">Elemental is an invitation to return to something instinctive: the beauty of what is raw, grounded, and essential.</p>
+      <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div style="display:flex;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#efe6d8;padding:70px 40px">
+  <div style="max-width:900px;margin:0 auto;text-align:center">
+    <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:28px;margin:0 0 16px">{{ t.pfCtaTitle }}</h2>
+    <p style="font-size:14px;color:rgba(36,31,26,.65);margin:0 0 26px">{{ t.pfCtaDesc }}</p>
+    <button onClick="{{ openBooking }}" style="background:#241f1a;color:#fffdf8;border:none;padding:15px 30px;font-size:12px;letter-spacing:1.5px;cursor:pointer;transition:background .3s ease,transform .3s ease,opacity .2s ease" style-hover="background:#7c8560;transform:scale(1.06);opacity:.85">{{ t.bookBtn }}</button>
+  </div>
+</section>
+
+<footer style="background:#f6f1eaee;backdrop-filter:blur(6px);color:rgba(36,31,26,.75);padding:40px 40px 26px">
+  <div style="max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11.5px;border-top:1px solid rgba(36,31,26,.15);padding-top:24px">
+    <span>{{ t.footerRights }}</span>
+    <div style="display:flex;gap:20px">
+      <a href="faq.dc.html" style="color:rgba(36,31,26,.75)">{{ t.navFaq }}</a>
+      <a href="contact.dc.html" style="color:rgba(36,31,26,.75)">{{ t.navContact }}</a>
+      <a href="legal.dc.html" style="color:rgba(36,31,26,.75)">{{ t.footerLegal }}</a>
+    </div>
+  </div>
+</footer>
+</div>
+
+<button data-lp-theme="{{ themeAttr }}" onClick="{{ scrollToTop }}" aria-label="Back to top" style="position:fixed;bottom:24px;right:24px;width:46px;height:46px;border-radius:50%;background:#241f1a;color:#fffdf8;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(36,31,26,.25);z-index:40;transition:transform .2s ease,background .2s ease,opacity .2s ease" style-hover="transform:scale(1.08);background:#7c8560;opacity:.85">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+</button>
+
+<sc-if value="{{ isBookingOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-lp-theme="{{ themeAttr }}" style="position:fixed;inset:0;background:rgba(36,31,26,.6);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px" onClick="{{ closeBooking }}">
+    <div style="background:#fffdf8;max-width:440px;width:100%;box-sizing:border-box;position:relative;max-height:92vh;overflow:auto;border-radius:16px;overflow:hidden;box-shadow:0 30px 60px rgba(36,31,26,.35)" onClick="{{ stopClick }}">
+      <div style="background:#7c8560;padding:26px 30px 22px">
+        <button onClick="{{ closeBooking }}" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#fffdf8;transition:opacity .3s ease,transform .2s ease" style-hover="opacity:.7;transform:scale(1.05)">×</button>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;color:#fffdf8">{{ t.bookTitle }}</div>
+      </div>
+      <div style="padding:28px 24px">
+      <sc-if value="{{ bookingSent }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:30px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:10px">{{ t.thanksTitle }}</div>
+          <p style="font-size:14px;color:rgba(36,31,26,.7)">{{ t.thanksDesc }}</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ notBookingSent }}" hint-placeholder-val="{{ true }}">
+        <p style="font-size:13px;color:rgba(36,31,26,.6);margin:0 0 22px">{{ t.bookDesc }}</p>
+        <form onSubmit="{{ submitBooking }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px">
+          <input name="name" required="" type="text" placeholder="{{ t.formName }}" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          <input name="email" required="" type="email" placeholder="{{ t.formEmail }}" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          <div style="grid-column:span 1;display:flex;gap:6px">
+            <select style="flex:none;width:84px;border:1px solid rgba(36,31,26,.2);padding:12px 4px;font-size:12px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+1ca">🇨🇦 +1</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+34">🇪🇸 +34</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+49">🇩🇪 +49</option>
+              <option value="+39">🇮🇹 +39</option>
+              <option value="+212">🇲🇦 +212</option>
+              <option value="+213">🇩🇿 +213</option>
+              <option value="+216">🇹🇳 +216</option>
+              <option value="+61">🇦🇺 +61</option>
+              <option value="+81">🇯🇵 +81</option>
+              <option value="+52">🇲🇽 +52</option>
+              <option value="+55">🇧🇷 +55</option>
+            </select>
+            <input name="phone" type="tel" placeholder="{{ t.formPhone }}" style="flex:1;min-width:0;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          </div>
+          <select name="painting" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+            <option value="">{{ t.formPaintingPlaceholder }}</option>
+            <option>Peace by Piece</option>
+            <option>Aurora</option>
+            <option>Kissed by the Sun</option>
+            <option>Eclectric</option>
+            <option>Rooted</option>
+            <option>Under Her Eye</option>
+            <option>Oh Gold</option>
+            <option>Elemental</option>
+          </select>
+          <select name="size" style="grid-column:1 / -1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+            <option value="">{{ t.formSizePlaceholder }}</option>
+            <option>16 × 20 in</option>
+            <option>24 × 30 in</option>
+            <option>36 × 48 in</option>
+            <option>40 × 60 in</option>
+            <option>48 × 72 in</option>
+          </select>
+          <textarea name="message" placeholder="{{ t.formMsg }}" rows="3" style="grid-column:1 / -1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;resize:vertical"></textarea>
+          <button type="submit" style="grid-column:1 / -1;background:#7c8560;color:#fffdf8;border:none;padding:14px;font-size:13px;letter-spacing:1.5px;cursor:pointer;margin-top:6px;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#b9c19a;opacity:.88;transform:scale(1.05)">{{ t.formSend }}</button>
+        </form>
+      </sc-if>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TRANSLATIONS = {
+  en: {
+    navHome: 'HOME', navShop: 'SHOP', navCollections: 'COLLECTION', navCommissions: 'COMMISSIONS', navExperience: 'ART EXPERIENCE', navAbout: 'ABOUT', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    bookBtn: 'BOOK A CONSULTATION',
+    thanksTitle: 'Thank you!', thanksDesc: "We'll be in touch within one business day to confirm your consultation.",
+    bookTitle: 'Book a Consultation', bookDesc: "Tell us about your space, we'll follow up to schedule a call.",
+    formName: 'Full name', formEmail: 'Email', formPhone: 'Phone (optional)', formMsg: 'Tell us about your space or project', formSend: 'SEND REQUEST', formPaintingPlaceholder: 'Which painting? (optional)', formSizePlaceholder: 'Preferred size (optional)',
+    pfLabel: 'REALIZATIONS', pfTitle: 'Art in Real Spaces', pfDesc: 'A look at how our paintings and prints live in homes, offices and hospitality spaces around Los Angeles.', viewStory: 'DISCOVER ITS STORY',
+    pfCtaTitle: 'See it on your wall before you commit', pfCtaDesc: "Book a consultation and we'll help you preview scale, palette and framing for your specific room.", pfCommissionsLabel: 'CUSTOM ART', pfCommissionsTitle: 'Want something made just for your space?', pfCommissionsDesc: 'Commission a custom piece, from concept to finished canvas, tailored to your colors and room.', pfCommissionsLink: 'EXPLORE COMMISSIONS',
+    footerRights: '© 2020 Lily Pastel Studio Art. All rights reserved.', footerLegal: 'Legal',
+  },
+  fr: {
+    navHome: 'ACCUEIL', navShop: 'BOUTIQUE', navCollections: 'COLLECTION', navCommissions: 'COMMANDES', navExperience: 'EXPÉRIENCE', navAbout: 'À PROPOS', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    bookBtn: 'RÉSERVER',
+    thanksTitle: 'Merci !', thanksDesc: 'Nous vous contacterons sous un jour ouvré pour confirmer votre consultation.',
+    bookTitle: 'Réserver une consultation', bookDesc: 'Parlez-nous de votre espace, nous vous recontacterons pour planifier un appel.',
+    formName: 'Nom complet', formEmail: 'Email', formPhone: 'Téléphone (optionnel)', formMsg: 'Parlez-nous de votre espace ou projet', formSend: 'ENVOYER LA DEMANDE', formPaintingPlaceholder: 'Quel tableau ? (optionnel)', formSizePlaceholder: 'Dimension souhaitée (optionnel)',
+    pfLabel: 'RÉALISATIONS', pfTitle: 'L\u2019art dans des espaces réels', pfDesc: 'Un aperçu de la façon dont nos peintures et impressions vivent dans les maisons, bureaux et espaces d\u2019accueil de Los Angeles.', viewStory: 'DÉCOUVRE SON HISTOIRE',
+    pfCtaTitle: 'Visualisez-le chez vous avant de vous engager', pfCtaDesc: 'Réservez une consultation et nous vous aiderons à prévisualiser l\u2019échelle, la palette et l\u2019encadrement pour votre pièce.',
+    footerRights: '© 2020 Lily Pastel Studio Art. Tous droits réservés.', footerLegal: 'Mentions légales',
+  },
+  es: {
+    navHome: 'INICIO', navShop: 'TIENDA', navCollections: 'COLECCIÓN', navCommissions: 'ENCARGOS', navExperience: 'ART EXPERIENCE', navAbout: 'SOBRE MÍ', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACTO',
+    bookBtn: 'RESERVAR',
+    thanksTitle: '¡Gracias!', thanksDesc: 'Nos pondremos en contacto en un día hábil para confirmar tu consulta.',
+    bookTitle: 'Reservar una consulta', bookDesc: 'Cuéntanos sobre tu espacio, te contactaremos para agendar una llamada.',
+    formName: 'Nombre completo', formEmail: 'Email', formPhone: 'Teléfono (opcional)', formMsg: 'Cuéntanos sobre tu espacio o proyecto', formSend: 'ENVIAR SOLICITUD', formPaintingPlaceholder: '¿Qué pintura? (opcional)', formSizePlaceholder: 'Tamaño preferido (opcional)',
+    pfLabel: 'REALIZACIONES', pfTitle: 'Arte en espacios reales', pfDesc: 'Un vistazo a cómo nuestras pinturas e impresiones viven en hogares, oficinas y espacios de hospitalidad en Los Ángeles.', viewStory: 'DESCUBRE SU HISTORIA',
+    pfCtaTitle: 'Vélo en tu pared antes de decidir', pfCtaDesc: 'Reserva una consulta y te ayudaremos a previsualizar la escala, la paleta y el enmarcado para tu habitación.', pfCommissionsLabel: 'ARTE PERSONALIZADO', pfCommissionsTitle: '¿Quieres algo creado solo para tu espacio?', pfCommissionsDesc: 'Encarga una obra personalizada, desde el concepto hasta el lienzo terminado, adaptada a tus colores y tu habitación.', pfCommissionsLink: 'VER ENCARGOS',
+    footerRights: '© 2020 Lily Pastel Studio Art. Todos los derechos reservados.', footerLegal: 'Legal',
+  },
+};
+
+class Component extends DCLogic {
+  state = { isMenuOpen: false, isBookingOpen: false, isDesktop: true, bookingSent: false, dark: false, lang: 'fr', peaceIndex: 0, auroraIndex: 0, sunIndex: 0, eclecticIndex: 0, rootedIndex: 0, eyeIndex: 0, goldIndex: 0, elementalIndex: 0 };
+  peaceSlidesData = [
+    { src: 'assets/peace-by-piece-01.jpeg' },
+    { src: 'assets/peace-by-piece-02.png' },
+    { src: 'assets/peace-by-piece-03.png' },
+    { src: 'assets/peace-by-piece-04.jpeg' },
+  ];
+  auroraSlidesData = [
+    { src: 'assets/aurora-01.jpeg' },
+    { src: 'assets/aurora-02.png' },
+    { src: 'assets/aurora-03.png' },
+  ];
+  sunSlidesData = [
+    { src: 'assets/kissed-by-sun-01.png' },
+    { src: 'assets/kissed-by-sun-02.png' },
+    { src: 'assets/kissed-by-sun-03.png' },
+    { src: 'assets/kissed-by-sun-04.png' },
+    { src: 'assets/kissed-by-sun-05.png' },
+    { src: 'assets/kissed-by-sun-06.png' },
+  ];
+  eclecticSlidesData = [
+    { src: 'assets/eclectric-01.png' },
+    { src: 'assets/eclectric-02.png' },
+    { src: 'assets/eclectric-03.png' },
+    { src: 'assets/eclectric-04.png' },
+    { src: 'assets/eclectric-05.png' },
+  ];
+  rootedSlidesData = [
+    { src: 'assets/rooted-01.jpeg' },
+    { src: 'assets/rooted-02.jpeg' },
+    { src: 'assets/rooted-03.jpeg' },
+    { src: 'assets/rooted-04.jpeg' },
+  ];
+  eyeSlidesData = [
+    { src: 'assets/under-her-eye-01.jpeg' },
+    { src: 'assets/under-her-eye-02.png' },
+  ];
+  goldSlidesData = [
+    { src: 'assets/oh-gold-01.jpeg' },
+    { src: 'assets/oh-gold-02.jpeg' },
+  ];
+  elementalSlidesData = [
+    { src: 'assets/elemental-01.jpeg' },
+    { src: 'assets/elemental-02.png' },
+  ];
+  componentDidMount() {
+    this.peaceInterval = setInterval(() => {
+      this.setState(s => ({ peaceIndex: (s.peaceIndex + 1) % this.peaceSlidesData.length }));
+    }, 2800);
+    this.auroraInterval = setInterval(() => {
+      this.setState(s => ({ auroraIndex: (s.auroraIndex + 1) % this.auroraSlidesData.length }));
+    }, 2800);
+    this.sunInterval = setInterval(() => {
+      this.setState(s => ({ sunIndex: (s.sunIndex + 1) % this.sunSlidesData.length }));
+    }, 2800);
+    this.eclecticInterval = setInterval(() => {
+      this.setState(s => ({ eclecticIndex: (s.eclecticIndex + 1) % this.eclecticSlidesData.length }));
+    }, 2800);
+    this.rootedInterval = setInterval(() => {
+      this.setState(s => ({ rootedIndex: (s.rootedIndex + 1) % this.rootedSlidesData.length }));
+    }, 2800);
+    this.eyeInterval = setInterval(() => {
+      this.setState(s => ({ eyeIndex: (s.eyeIndex + 1) % this.eyeSlidesData.length }));
+    }, 2800);
+    this.goldInterval = setInterval(() => {
+      this.setState(s => ({ goldIndex: (s.goldIndex + 1) % this.goldSlidesData.length }));
+    }, 2800);
+    this.elementalInterval = setInterval(() => {
+      this.setState(s => ({ elementalIndex: (s.elementalIndex + 1) % this.elementalSlidesData.length }));
+    }, 2800);
+    this.mq = window.matchMedia('(min-width:1200px)');
+    this.setState({ isDesktop: this.mq.matches });
+    if (localStorage.getItem('lp-theme') === 'dark') this.setState({ dark: true });
+    const savedLang = localStorage.getItem('lp-lang');
+    if (savedLang && TRANSLATIONS[savedLang]) this.setState({ lang: savedLang });
+    this.onMq = e => this.setState({ isDesktop: e.matches, isMenuOpen: false });
+    this.mq.addEventListener('change', this.onMq);
+  }
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this.onMq);
+    clearInterval(this.peaceInterval);
+    clearInterval(this.auroraInterval);
+    clearInterval(this.sunInterval);
+    clearInterval(this.eclecticInterval);
+    clearInterval(this.rootedInterval);
+    clearInterval(this.eyeInterval);
+    clearInterval(this.goldInterval);
+    clearInterval(this.elementalInterval);
+  }
+  toggleMenu = () => this.setState(s => ({ isMenuOpen: !s.isMenuOpen }));
+  toggleDark = () => this.setState(s => { const v = !s.dark; localStorage.setItem('lp-theme', v ? 'dark' : 'light'); return { dark: v }; });
+  onLangChange = e => { const v = e.target.value; localStorage.setItem('lp-lang', v); this.setState({ lang: v }); };
+  scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  openBooking = () => this.setState({ isBookingOpen: true, isMenuOpen: false, bookingSent: false });
+  closeBooking = () => this.setState({ isBookingOpen: false });
+  stopClick = e => e.stopPropagation();
+  submitBooking = e => {
+    e.preventDefault();
+    const f = e.target;
+    const get = n => (f[n] && f[n].value) || '';
+    const body = `Name: ${get('name')}\nEmail: ${get('email')}\nPhone: ${get('phone') || 'N/A'}\nPainting: ${get('painting') || 'N/A'}\nSize: ${get('size') || 'N/A'}\n\n${get('message')}`;
+    window.location.href = `mailto:lilypasteldesign@gmail.com?subject=${encodeURIComponent('Booking Request')}&body=${encodeURIComponent(body)}`;
+    this.setState({ bookingSent: true });
+  };
+  renderVals() {
+    const navGap = '16px';
+    const navFontSize = '11.5px';
+    return {
+      t: TRANSLATIONS[this.state.lang],
+      navGap, navFontSize,
+      lang: this.state.lang,
+      langLabel: this.state.lang.toUpperCase(),
+      scrollToTop: this.scrollToTop,
+      onLangChange: this.onLangChange,
+      dark: this.state.dark,
+      notDark: !this.state.dark,
+      toggleDark: this.toggleDark,
+      themeAttr: this.state.dark ? 'dark' : 'light',
+      isMenuOpen: this.state.isMenuOpen,
+      isBookingOpen: this.state.isBookingOpen,
+      bookingSent: this.state.bookingSent,
+      notBookingSent: !this.state.bookingSent,
+      toggleMenu: this.toggleMenu,
+      openBooking: this.openBooking,
+      closeBooking: this.closeBooking,
+      stopClick: this.stopClick,
+      submitBooking: this.submitBooking,
+      navDisplay: this.state.isDesktop ? 'flex' : 'none',
+      burgerDisplay: this.state.isDesktop ? 'none' : 'flex',
+      peaceSlides: this.peaceSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.peaceIndex ? 1 : 0 })),
+      auroraSlides: this.auroraSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.auroraIndex ? 1 : 0 })),
+      sunSlides: this.sunSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.sunIndex ? 1 : 0 })),
+      eclecticSlides: this.eclecticSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.eclecticIndex ? 1 : 0 })),
+      rootedSlides: this.rootedSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.rootedIndex ? 1 : 0 })),
+      eyeSlides: this.eyeSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.eyeIndex ? 1 : 0 })),
+      goldSlides: this.goldSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.goldIndex ? 1 : 0 })),
+      elementalSlides: this.elementalSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.elementalIndex ? 1 : 0 })),
+    };
+  }
+}
+</script>
+</body>
+</html>

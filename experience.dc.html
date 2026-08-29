@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f6f1ea;font-family:'Jost',sans-serif;color:#241f1a}
+a{color:#b5622f;text-decoration:none}
+a:hover{color:#8a4a24}
+[data-lp-theme="dark"]{filter:invert(1) hue-rotate(180deg)}
+[data-lp-theme="dark"] img,[data-lp-theme="dark"] video,[data-lp-theme="dark"] iframe{filter:invert(1) hue-rotate(180deg)}
+@media (max-width:640px){#site-header-inner{padding:12px 16px}#site-logo-img{height:40px !important;width:40px !important}#site-logo-text span{font-size:14px !important}#site-logo-sub{font-size:6.5px !important;letter-spacing:2px !important}#site-header-controls{gap:6px !important}#prompts-grid{grid-template-columns:1fr !important}#experience-grid{grid-template-columns:1fr !important}}
+@media (max-width:900px) and (min-width:641px){#experience-grid{grid-template-columns:repeat(2,1fr) !important}}
+@media (max-width:800px){#intro-grid,#color-night-grid,#prompts-intro-grid{grid-template-columns:1fr !important}}
+@media (max-width:640px){#private-booking-panel{grid-template-columns:1fr !important}}</style>
+</helmet>
+<div style="background:#f6f1ea;min-height:100vh" data-lp-theme="{{ themeAttr }}">
+
+<header style="position:sticky;top:0;z-index:50;background:rgba(246,241,234,.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,253,248,.12)">
+  <div id="site-header-inner" style="max-width:1320px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.dc.html" style="display:flex;align-items:center;gap:10px">
+      <img id="site-logo-img" src="assets/logo-lily-pastel.jpeg" alt="Lily Pastel" style="height:58px;width:58px;object-fit:cover">
+      <div id="site-logo-text" style="display:flex;align-items:baseline;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div id="site-logo-sub" style="display:flex;gap:6px;width:100%;font-size:8.5px;letter-spacing:3.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </a>
+    <nav style="display:{{ navDisplay }};align-items:center;gap:24px;font-size:13px;letter-spacing:1px">
+      <a href="index.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navHome }}</a>
+      <a href="portfolio.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navCollections }}</a>
+      <a href="shop.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navShop }}</a>
+      <a href="commissions.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navCommissions }}</a>
+      <a href="experience.dc.html" style="color:#b5622f;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navExperience }}</a>
+      <a href="blog.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navBlog }}</a>
+      <a href="about.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navAbout }}</a>
+      <a href="contact.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navContact }}</a>
+    </nav>
+    <div id="site-header-controls" style="display:flex;align-items:center;gap:14px">
+      <div style="position:relative;width:26px;height:26px;border:1px solid rgba(36,31,26,.25);border-radius:50%;display:flex;align-items:center;justify-content:center">
+        <select onChange="{{ onLangChange }}" value="{{ lang }}" style="position:absolute;inset:0;opacity:0;cursor:pointer;appearance:none;-webkit-appearance:none">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+        </select>
+        <span style="font-size:9px;letter-spacing:.3px;color:#241f1a;pointer-events:none">{{ langLabel }}</span>
+      </div>
+      <button onClick="{{ toggleDark }}" aria-label="Toggle dark mode" style="display:flex;background:none;border:1px solid rgba(36,31,26,.25);border-radius:50%;width:26px;height:26px;color:#241f1a;cursor:pointer;align-items:center;justify-content:center;padding:0;transition:border-color .2s ease,transform .2s ease,opacity .2s ease" style-hover="border-color:#241f1a;transform:scale(1.05);opacity:.85">
+        <sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg></sc-if>
+        <sc-if value="{{ notDark }}" hint-placeholder-val="{{ true }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></sc-if>
+      </button>
+      <button onClick="{{ openBooking }}" style="display:{{ navDisplay }};background:#7c8560;color:#241f1a;border:none;padding:11px 20px;font-size:12px;letter-spacing:1.5px;cursor:pointer;transition:background .2s,transform .2s ease,opacity .2s ease" style-hover="background:#b9c19a;transform:scale(1.05);opacity:.85">{{ t.bookBtn }}</button>
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="display:{{ burgerDisplay }};flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;transition:opacity .3s ease,transform .2s ease" style-hover="opacity:.55;transform:scale(1.05)">
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+      </button>
+    </div>
+  </div>
+  <sc-if value="{{ isMenuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;padding:10px 40px 26px;gap:18px;font-size:14px;letter-spacing:1px;border-top:1px solid rgba(255,253,248,.15);color:#241f1a">
+      <a href="index.dc.html">{{ t.navHome }}</a>
+      <a href="portfolio.dc.html">{{ t.navCollections }}</a>
+      <a href="shop.dc.html">{{ t.navShop }}</a>
+      <a href="commissions.dc.html">{{ t.navCommissions }}</a>
+      <a href="experience.dc.html">{{ t.navExperience }}</a>
+      <a href="blog.dc.html">{{ t.navBlog }}</a>
+      <a href="about.dc.html">{{ t.navAbout }}</a>
+      <a href="faq.dc.html">{{ t.navFaq }}</a>
+      <a href="contact.dc.html">{{ t.navContact }}</a>
+      <button onClick="{{ openBooking }}" style="background:#7c8560;color:#241f1a;border:none;padding:13px;font-size:12px;letter-spacing:1.5px;cursor:pointer;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#b9c19a;opacity:.88;transform:scale(1.05)">{{ t.bookBtn }}</button>
+    </div>
+  </sc-if>
+</header>
+
+<section style="max-width:1320px;margin:0 auto;padding:72px 40px 0">
+  <div style="text-align:center;max-width:680px;margin:0 auto 48px">
+    <div style="font-size:12px;letter-spacing:4px;color:#b5622f;margin-bottom:18px">{{ t.heroLabel }}</div>
+    <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(30px,5vw,42px);color:#241f1a;margin:0 0 18px;line-height:1.2">{{ t.heroTitle }}</h1>
+    <p style="font-size:15px;line-height:1.85;color:rgba(36,31,26,.68);margin:0 0 28px">{{ t.heroTagline }}</p>
+    <button onClick="{{ openPrivateBooking }}" style="display:inline-block;background:#b5622f;color:#fffdf8;border:none;padding:15px 32px;font-size:12.5px;letter-spacing:1.5px;cursor:pointer;transition:background .2s,transform .2s ease,opacity .2s ease" style-hover="background:#8a4a24;transform:scale(1.05);opacity:.85">{{ t.bookPrivateBtn }}</button>
+  </div>
+  <div style="max-width:900px;margin:0 auto;aspect-ratio:16/9;overflow:hidden">
+    <img src="assets/art-experience-hero.jpeg" alt="Lily Pastel Art Experience, guests painting at sunset" style="width:100%;height:100%;object-fit:cover;object-position:50% 45%">
+  </div>
+</section>
+
+<section style="background:#efe6d8;margin-top:80px;padding:80px 40px">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:minmax(0,0.75fr) minmax(0,1.25fr);gap:64px" id="intro-grid">
+    <div>
+      <div style="font-size:12px;letter-spacing:3px;color:#b5622f;margin-bottom:16px">{{ t.introLabel }}</div>
+      <p style="font-family:'Playfair Display',serif;font-weight:500;font-size:22px;color:#241f1a;line-height:1.5;margin:0">{{ t.introQuote }}</p>
+    </div>
+    <div>
+      <p style="font-size:15.5px;line-height:1.9;color:rgba(36,31,26,.72);margin:0 0 18px">{{ t.introP1a }} <strong style="font-weight:600">{{ t.introP1bold }}</strong>.</p>
+      <p style="font-size:15.5px;line-height:1.9;color:rgba(36,31,26,.72);margin:0 0 18px">{{ t.introP2a }} <strong style="font-weight:600">{{ t.introP2bold }}</strong> {{ t.introP2b }}</p>
+      <p style="font-size:15.5px;line-height:1.9;color:rgba(36,31,26,.72);margin:0">{{ t.introP3 }}</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:#f6f1ea;padding:80px 40px">
+  <div style="max-width:1320px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:44px">
+      <div style="font-size:12px;letter-spacing:3px;color:#b5622f">{{ t.experienceLabel }}</div>
+    </div>
+    <div style="max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:36px">
+      <div style="display:flex;gap:22px;align-items:baseline">
+        <span style="font-size:12px;letter-spacing:1px;color:#b5622f;font-weight:600;flex:none;width:22px">01</span>
+        <p style="margin:0;font-size:14.5px;line-height:1.8;color:rgba(36,31,26,.75)"><span style="font-family:'Playfair Display',serif;font-size:16px;letter-spacing:1.5px;color:#241f1a">{{ t.step1Title }}</span> — {{ t.step1DescA }} <strong style="font-weight:600">{{ t.step1DescBold }}</strong>{{ t.step1DescB }}</p>
+      </div>
+      <div style="display:flex;gap:22px;align-items:baseline">
+        <span style="font-size:12px;letter-spacing:1px;color:#7c8560;font-weight:600;flex:none;width:22px">02</span>
+        <p style="margin:0;font-size:14.5px;line-height:1.8;color:rgba(36,31,26,.75)"><span style="font-family:'Playfair Display',serif;font-size:16px;letter-spacing:1.5px;color:#241f1a">{{ t.step2Title }}</span> — {{ t.step2Desc }}</p>
+      </div>
+      <div style="display:flex;gap:22px;align-items:baseline">
+        <span style="font-size:12px;letter-spacing:1px;color:#a67c3d;font-weight:600;flex:none;width:22px">03</span>
+        <p style="margin:0;font-size:14.5px;line-height:1.8;color:rgba(36,31,26,.75)"><span style="font-family:'Playfair Display',serif;font-size:16px;letter-spacing:1.5px;color:#241f1a">{{ t.step3Title }}</span> — {{ t.step3Desc }}</p>
+      </div>
+      <div style="display:flex;gap:22px;align-items:baseline">
+        <span style="font-size:12px;letter-spacing:1px;color:#b5622f;font-weight:600;flex:none;width:22px">04</span>
+        <p style="margin:0;font-size:14.5px;line-height:1.8;color:rgba(36,31,26,.75)"><span style="font-family:'Playfair Display',serif;font-size:16px;letter-spacing:1.5px;color:#241f1a">{{ t.step4Title }}</span> — {{ t.step4Desc }}</p>
+      </div>
+      <div style="display:flex;gap:22px;align-items:baseline">
+        <span style="font-size:12px;letter-spacing:1px;color:#7c8560;font-weight:600;flex:none;width:22px">05</span>
+        <p style="margin:0;font-size:14.5px;line-height:1.8;color:rgba(36,31,26,.75)"><span style="font-family:'Playfair Display',serif;font-size:16px;letter-spacing:1.5px;color:#241f1a">{{ t.step5Title }}</span> — {{ t.step5Desc }}</p>
+      </div>
+      <div style="display:flex;gap:22px;align-items:baseline">
+        <span style="font-size:12px;letter-spacing:1px;color:#a67c3d;font-weight:600;flex:none;width:22px">06</span>
+        <p style="margin:0;font-size:14.5px;line-height:1.8;color:rgba(36,31,26,.75)"><span style="font-family:'Playfair Display',serif;font-size:16px;letter-spacing:1.5px;color:#241f1a">{{ t.step6Title }}</span> — {{ t.step6Desc }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#e9ddc8;padding:90px 40px">
+  <div style="max-width:1320px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:minmax(0,0.75fr) minmax(0,1.25fr);gap:64px;margin-bottom:50px" id="prompts-intro-grid">
+      <div>
+        <div style="font-size:12px;letter-spacing:3px;color:#b5622f;margin-bottom:16px">{{ t.promptsLabel }}</div>
+        <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(24px,4vw,30px);margin:0;color:#241f1a;line-height:1.3">{{ t.promptsTitle }}</h2>
+      </div>
+      <div>
+        <p style="font-size:15px;line-height:1.85;color:rgba(36,31,26,.72);margin:0 0 16px">{{ t.promptsP1a }} <strong style="font-weight:600">{{ t.promptsP1bold }}</strong>{{ t.promptsP1b }}</p>
+        <p style="font-family:'Playfair Display',serif;font-weight:500;font-size:15px;color:#241f1a;margin:0">{{ t.promptsP2 }}</p>
+      </div>
+    </div>
+    <div id="prompts-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(36,31,26,.15);border:1px solid rgba(36,31,26,.15)">
+      <div style="background:#fffdf8;padding:32px 26px;border-top:3px solid #b5622f">
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;font-size:18px;margin:0 0 12px;color:#b5622f">{{ t.prompt1Title }}</h3>
+        <p style="font-size:13.5px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 14px">{{ t.prompt1Desc }}</p>
+        <div style="font-size:11px;letter-spacing:1.5px;color:#b5622f">{{ t.prompt1Tags }}</div>
+      </div>
+      <div style="background:#fffdf8;padding:32px 26px;border-top:3px solid #7c8560">
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;font-size:18px;margin:0 0 12px;color:#7c8560">{{ t.prompt2Title }}</h3>
+        <p style="font-size:13.5px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 14px">{{ t.prompt2Desc }}</p>
+        <div style="font-size:11px;letter-spacing:1.5px;color:#7c8560">{{ t.prompt2Tags }}</div>
+      </div>
+      <div style="background:#fffdf8;padding:32px 26px;border-top:3px solid #a67c3d">
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;font-size:18px;margin:0 0 12px;color:#a67c3d">{{ t.prompt3Title }}</h3>
+        <p style="font-size:13.5px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 14px">{{ t.prompt3Desc }}</p>
+        <div style="font-size:11px;letter-spacing:1.5px;color:#a67c3d">{{ t.prompt3Tags }}</div>
+      </div>
+      <div style="background:#fffdf8;padding:32px 26px;border-top:3px solid #b5622f">
+        <h3 style="font-family:'Playfair Display',serif;font-weight:500;font-size:18px;margin:0 0 12px;color:#b5622f">{{ t.prompt4Title }}</h3>
+        <p style="font-size:13.5px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 14px">{{ t.prompt4Desc }}</p>
+        <div style="font-size:11px;letter-spacing:1.5px;color:#b5622f">{{ t.prompt4Tags }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#7c8560;padding:140px 40px;text-align:center">
+  <div style="max-width:820px;margin:0 auto">
+    <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(30px,6vw,42px);margin:0 0 26px;color:#fffdf8;line-height:1.3">{{ t.gatherTitle }}</h2>
+    <p style="font-size:17px;line-height:1.9;color:rgba(255,253,248,.85);margin:0 0 22px">{{ t.gatherP1a }} <strong style="font-weight:600">{{ t.gatherP1bold }}</strong>.</p>
+    <div style="font-size:13.5px;letter-spacing:.5px;line-height:2;color:rgba(255,253,248,.75);margin:0 0 28px">{{ t.gatherOccasions }}</div>
+    <p style="font-size:17px;line-height:1.9;color:rgba(255,253,248,.85);margin:0">{{ t.gatherP2a }} <strong style="font-weight:600">{{ t.gatherP2bold1 }}</strong> {{ t.gatherP2mid }} <strong style="font-weight:600">{{ t.gatherP2bold2 }}</strong>{{ t.gatherP2b }} <strong style="font-weight:600">{{ t.gatherP2bold3 }}</strong>.</p>
+  </div>
+</section>
+
+<section style="background:#efe6d8;padding:90px 40px">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:minmax(0,0.75fr) minmax(0,1.25fr);gap:64px;margin-bottom:44px" id="color-night-grid">
+    <div>
+      <div style="font-size:12px;letter-spacing:3px;color:#b5622f;margin-bottom:16px">{{ t.colorNightLabel }}</div>
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(26px,4vw,32px);margin:0;color:#241f1a;line-height:1.3">{{ t.colorNightTitle }}</h2>
+    </div>
+    <div>
+      <p style="font-size:15px;line-height:1.85;color:rgba(36,31,26,.72);margin:0 0 20px">{{ t.colorNightP1a }} <strong style="font-weight:600">{{ t.colorNightP1bold }}</strong>{{ t.colorNightP1b }}</p>
+      <p style="font-family:'Playfair Display',serif;font-weight:500;font-size:15px;color:#241f1a;line-height:1.7;margin:0">{{ t.colorNightSteps }}</p>
+    </div>
+  </div>
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:24px">
+      <div style="width:172px;height:172px;border-radius:50%;background:#b5622f;box-shadow:0 14px 30px rgba(181,98,47,.35);display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease" style-hover="transform:translateY(-8px) rotate(-2deg) scale(1.05);box-shadow:0 20px 36px rgba(181,98,47,.45)">
+        <span style="font-size:15px;font-weight:600;letter-spacing:.2px;color:#fffdf8;line-height:1.45">{{ t.colorNightItem1 }}</span>
+      </div>
+      <div style="width:172px;height:172px;border-radius:50%;background:#7c8560;box-shadow:0 14px 30px rgba(124,133,96,.35);display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease" style-hover="transform:translateY(-8px) rotate(2deg) scale(1.05);box-shadow:0 20px 36px rgba(124,133,96,.45)">
+        <span style="font-size:15px;font-weight:600;letter-spacing:.2px;color:#fffdf8;line-height:1.45">{{ t.colorNightItem2 }}</span>
+      </div>
+      <div style="width:172px;height:172px;border-radius:50%;background:#8a4a24;box-shadow:0 14px 30px rgba(138,74,36,.35);display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease" style-hover="transform:translateY(-8px) rotate(-2deg) scale(1.05);box-shadow:0 20px 36px rgba(138,74,36,.45)">
+        <span style="font-size:15px;font-weight:600;letter-spacing:.2px;color:#fffdf8;line-height:1.45">{{ t.colorNightItem3 }}</span>
+      </div>
+      <div style="width:172px;height:172px;border-radius:50%;background:#a67c3d;box-shadow:0 14px 30px rgba(166,124,61,.35);display:flex;align-items:center;justify-content:center;text-align:center;padding:22px;transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease" style-hover="transform:translateY(-8px) rotate(2deg) scale(1.05);box-shadow:0 20px 36px rgba(166,124,61,.45)">
+        <span style="font-size:15px;font-weight:600;letter-spacing:.2px;color:#fffdf8;line-height:1.45">{{ t.colorNightItem4 }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#241f1a;padding:90px 40px;text-align:center">
+  <div style="max-width:600px;margin:0 auto">
+    <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(24px,5vw,30px);margin:0 0 14px;color:#fffdf8">{{ t.finalCtaTitle }}</h2>
+    <p style="font-family:'Playfair Display',serif;font-weight:500;font-size:15px;color:#d9c4a3;margin:0 0 16px">{{ t.finalCtaSubtitle }}</p>
+    <p style="font-size:14.5px;line-height:1.8;color:rgba(255,253,248,.7);margin:0 0 28px">{{ t.finalCtaDescA }} <strong style="font-weight:600">{{ t.finalCtaDescBold }}</strong>.</p>
+    <button onClick="{{ openPrivateBooking }}" style="display:inline-block;background:#d9c4a3;color:#241f1a;border:none;padding:17px 34px;font-size:12.5px;letter-spacing:1.5px;cursor:pointer;transition:transform .2s,opacity .2s ease" style-hover="transform:scale(1.03);opacity:.85">{{ t.bookPrivateBtn }}</button>
+  </div>
+</section>
+
+<footer style="background:#241f1a;color:rgba(255,253,248,.7);padding:0 40px 26px">
+  <div style="max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11.5px;border-top:1px solid rgba(255,253,248,.15);padding-top:24px">
+    <span>{{ t.footerRights }}</span>
+    <div style="display:flex;gap:20px">
+      <a href="faq.dc.html" style="color:rgba(255,253,248,.7)">{{ t.navFaq }}</a>
+      <a href="contact.dc.html" style="color:rgba(255,253,248,.7)">{{ t.navContact }}</a>
+      <a href="legal.dc.html" style="color:rgba(255,253,248,.7)">{{ t.footerLegal }}</a>
+    </div>
+  </div>
+</footer>
+</div>
+
+<button data-lp-theme="{{ themeAttr }}" onClick="{{ scrollToTop }}" aria-label="Back to top" style="position:fixed;bottom:24px;right:24px;width:46px;height:46px;border-radius:50%;background:#241f1a;color:#fffdf8;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(36,31,26,.25);z-index:40;transition:transform .2s ease,background .2s ease,opacity .2s ease" style-hover="transform:scale(1.08);background:#7c8560;opacity:.85">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+</button>
+<button data-lp-theme="{{ themeAttr }}" onClick="{{ openPrivateBooking }}" style="display:{{ floatingCtaDisplay }};position:fixed;bottom:24px;left:24px;background:#b5622f;color:#fffdf8;border:none;padding:15px 28px;font-size:12px;letter-spacing:1.5px;cursor:pointer;box-shadow:0 4px 14px rgba(36,31,26,.25);z-index:40;transition:transform .2s ease,background .2s ease" style-hover="transform:scale(1.05);background:#8a4a24">{{ t.bookPrivateBtn }}</button>
+
+<sc-if value="{{ isBookingOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-lp-theme="{{ themeAttr }}" style="position:fixed;inset:0;background:rgba(36,31,26,.6);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px" onClick="{{ closeBooking }}">
+    <div style="background:#fffdf8;max-width:440px;width:100%;box-sizing:border-box;position:relative;max-height:92vh;overflow:auto;border-radius:16px;overflow:hidden;box-shadow:0 30px 60px rgba(36,31,26,.35)" onClick="{{ stopClick }}">
+      <div style="background:#7c8560;padding:26px 30px 22px">
+        <button onClick="{{ closeBooking }}" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#fffdf8;transition:opacity .3s ease,transform .2s ease" style-hover="opacity:.7;transform:scale(1.05)">×</button>
+        <div style="font-size:11px;letter-spacing:3px;color:rgba(255,253,248,.75);margin-bottom:10px">{{ t.heroLabel }}</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;color:#fffdf8">{{ t.bookTitle }}</div>
+      </div>
+      <div style="padding:28px 24px">
+      <sc-if value="{{ bookingSent }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:30px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:10px">{{ t.thanksTitle }}</div>
+          <p style="font-size:14px;color:rgba(36,31,26,.7)">{{ t.thanksDesc }}</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ notBookingSent }}" hint-placeholder-val="{{ true }}">
+        <p style="font-size:13px;color:rgba(36,31,26,.6);margin:0 0 22px">{{ t.bookDesc }}</p>
+        <form onSubmit="{{ submitBooking }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px">
+          <input name="name" required="" type="text" placeholder="{{ t.formName }}" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          <input name="email" required="" type="email" placeholder="{{ t.formEmail }}" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          <div style="grid-column:span 1;display:flex;gap:6px">
+            <select style="flex:none;width:84px;border:1px solid rgba(36,31,26,.2);padding:12px 4px;font-size:12px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+1ca">🇨🇦 +1</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+34">🇪🇸 +34</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+49">🇩🇪 +49</option>
+              <option value="+39">🇮🇹 +39</option>
+              <option value="+212">🇲🇦 +212</option>
+              <option value="+213">🇩🇿 +213</option>
+              <option value="+216">🇹🇳 +216</option>
+              <option value="+61">🇦🇺 +61</option>
+              <option value="+81">🇯🇵 +81</option>
+              <option value="+52">🇲🇽 +52</option>
+              <option value="+55">🇧🇷 +55</option>
+            </select>
+            <input name="phone" type="tel" placeholder="{{ t.formPhone }}" style="flex:1;min-width:0;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          </div>
+          <select name="painting" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+            <option value="">{{ t.formPaintingPlaceholder }}</option>
+            <option>Peace by Piece</option>
+            <option>Aurora</option>
+            <option>Kissed by the Sun</option>
+            <option>Eclectric</option>
+            <option>Rooted</option>
+            <option>Under Her Eye</option>
+            <option>Oh Gold</option>
+            <option>Elemental</option>
+          </select>
+          <select name="size" style="grid-column:1 / -1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+            <option value="">{{ t.formSizePlaceholder }}</option>
+            <option>16 × 20 in</option>
+            <option>24 × 30 in</option>
+            <option>36 × 48 in</option>
+            <option>40 × 60 in</option>
+            <option>48 × 72 in</option>
+          </select>
+          <textarea name="message" placeholder="{{ t.formMsg }}" rows="3" style="grid-column:1 / -1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;resize:vertical"></textarea>
+          <button type="submit" style="grid-column:1 / -1;background:#7c8560;color:#241f1a;border:none;padding:14px;font-size:13px;letter-spacing:1.5px;cursor:pointer;margin-top:6px;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#b9c19a;opacity:.88;transform:scale(1.05)">{{ t.formSend }}</button>
+        </form>
+      </sc-if>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isPrivateBookingOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-lp-theme="{{ themeAttr }}" style="position:fixed;inset:0;background:rgba(36,31,26,.6);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px" onClick="{{ closePrivateBooking }}">
+    <div id="private-booking-panel" style="background:#fffdf8;max-width:440px;width:100%;box-sizing:border-box;position:relative;max-height:92vh;overflow:auto;border-radius:16px;box-shadow:0 30px 60px rgba(36,31,26,.35)" onClick="{{ stopClick }}">
+      <div style="background:#b5622f;padding:26px 30px 22px">
+        <button onClick="{{ closePrivateBooking }}" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#fffdf8;transition:opacity .3s ease,transform .2s ease" style-hover="opacity:.7;transform:scale(1.05)">×</button>
+        <div style="font-size:11px;letter-spacing:3px;color:rgba(255,253,248,.75);margin-bottom:10px">{{ t.heroLabel }}</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;color:#fffdf8">{{ t.bookPrivateBtn }}</div>
+      </div>
+      <div style="padding:28px 24px">
+      <sc-if value="{{ privateBookingSent }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:30px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:10px">{{ t.thanksTitle }}</div>
+          <p style="font-size:14px;color:rgba(36,31,26,.7)">{{ t.thanksDesc }}</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ notPrivateBookingSent }}" hint-placeholder-val="{{ true }}">
+        <p style="font-size:13px;color:rgba(36,31,26,.6);margin:0 0 22px">{{ t.privateBookDesc }}</p>
+        <form onSubmit="{{ submitPrivateBooking }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px">
+          <input name="name" required="" type="text" placeholder="{{ t.formName }}" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          <input name="email" required="" type="email" placeholder="{{ t.formEmail }}" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          <div style="grid-column:span 1;display:flex;gap:6px">
+            <select style="flex:none;width:84px;border:1px solid rgba(36,31,26,.2);padding:12px 4px;font-size:12px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+1ca">🇨🇦 +1</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+34">🇪🇸 +34</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+49">🇩🇪 +49</option>
+              <option value="+39">🇮🇹 +39</option>
+              <option value="+212">🇲🇦 +212</option>
+              <option value="+213">🇩🇿 +213</option>
+              <option value="+216">🇹🇳 +216</option>
+              <option value="+61">🇦🇺 +61</option>
+              <option value="+81">🇯🇵 +81</option>
+              <option value="+52">🇲🇽 +52</option>
+              <option value="+55">🇧🇷 +55</option>
+            </select>
+            <input name="phone" type="tel" placeholder="{{ t.formPhone }}" style="flex:1;min-width:0;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          </div>
+          <select name="guests" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+            <option value="">{{ t.formGuestsPlaceholder }}</option>
+            <option>2 – 4</option>
+            <option>5 – 8</option>
+            <option>9 – 15</option>
+            <option>16+</option>
+          </select>
+          <select name="eventType" style="grid-column:1 / -1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+            <option value="">{{ t.formEventPlaceholder }}</option>
+            <option>{{ t.formEventDinner }}</option>
+            <option>{{ t.formEventBirthday }}</option>
+            <option>{{ t.formEventGirlsNight }}</option>
+            <option>{{ t.formEventDateNight }}</option>
+            <option>{{ t.formEventBridal }}</option>
+            <option>{{ t.formEventCorporate }}</option>
+            <option>{{ t.formEventOther }}</option>
+          </select>
+          <textarea name="message" placeholder="{{ t.formPrivateMsg }}" rows="3" style="grid-column:1 / -1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;resize:vertical"></textarea>
+          <button type="submit" style="grid-column:1 / -1;background:#b5622f;color:#fffdf8;border:none;padding:14px;font-size:13px;letter-spacing:1.5px;cursor:pointer;margin-top:6px;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#8a4a24;opacity:.9;transform:scale(1.05)">{{ t.formSend }}</button>
+        </form>
+      </sc-if>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TRANSLATIONS = {
+  en: {
+    navHome: 'HOME', navShop: 'SHOP', navCollections: 'COLLECTION', navCommissions: 'COMMISSIONS', navExperience: 'ART EXPERIENCE', navAbout: 'ABOUT', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    bookBtn: 'BOOK A CONSULTATION', bookPrivateBtn: 'BOOK A PRIVATE EXPERIENCE',
+    privateBookDesc: "Tell us about your event and we'll get back to you to plan every detail.",
+    formGuestsPlaceholder: 'Number of guests', formEventPlaceholder: 'Type of event',
+    formEventDinner: 'Private dinner', formEventBirthday: 'Birthday', formEventGirlsNight: "Girls' night", formEventDateNight: 'Date night', formEventBridal: 'Bridal celebration', formEventCorporate: 'Corporate gathering', formEventOther: 'Other',
+    formPrivateMsg: 'Tell us about your event',
+    heroLabel: 'LILY PASTEL ART EXPERIENCES', heroTitle: 'Leave with a painting. Come for the experience.', heroTagline: 'Create. Connect. Make something beautiful.',
+    introLabel: 'CREATE. CONNECT. MAKE SOMETHING BEAUTIFUL.', introQuote: 'No previous experience is required. Only the invitation to begin.',
+    introP1a: 'Art is more than something to behold. It is something to', introP1bold: 'feel, enter and remember',
+    introP2a: 'Lily Pastel Art Experiences are', introP2bold: 'intimate, thoughtfully curated gatherings', introP2b: 'where people come together through color, movement and self-expression.',
+    introP3: 'Guided by artist Lily Pastel, each experience offers a graceful pause from the everyday and an invitation to create something unmistakably your own.',
+    experienceLabel: 'THE EXPERIENCE',
+    step1Title: 'ARRIVE', step1DescA: 'Step into a beautifully composed space where', step1DescBold: 'every detail is prepared for you', step1DescB: ', from the canvas and palette to the atmosphere.',
+    step2Title: 'DISCOVER', step2Desc: 'Explore an original Lily Pastel concept shaped by color, emotion, texture and movement.',
+    step3Title: 'CREATE', step3Desc: 'With gentle guidance, build your painting layer by layer, allowing intuition and expression to lead the way.',
+    step4Title: 'CONNECT', step4Desc: 'Share an evening of conversation, music and creativity with the people who make the moment meaningful.',
+    step5Title: 'REVEAL', step5Desc: 'Step back and witness the unexpected beauty that has emerged beneath your hands.',
+    step6Title: 'TAKE IT HOME', step6Desc: 'Your finished painting becomes a lasting memory of an evening spent creating together.',
+    promptsLabel: 'THE LILY PASTEL INSPIRED PROMPTS', promptsTitle: 'Four artistic journeys. One completely personal creation.',
+    promptsP1a: 'Each Lily Pastel experience begins with an', promptsP1bold: 'Inspired Prompt', promptsP1b: ', an artistic idea designed to spark emotion, curiosity and imagination. Rather than copying a painting, you interpret the prompt in your own language of color, texture and movement.',
+    promptsP2: 'Everyone begins with the same inspiration. Everyone leaves with something completely different.',
+    prompt1Title: 'Elemental', prompt1Desc: 'What does nature feel like when translated into color? Explore the energy of earth, water, fire and air through movement, texture and layered color. Let the canvas become your own interpretation of an element, or the space between them.', prompt1Tags: 'POWERFUL · ORGANIC · LUMINOUS',
+    prompt2Title: 'Peace by Piece', prompt2Desc: 'What if beauty could emerge from the fragments? Begin with separate shapes, marks and layers. Slowly allow them to connect, overlap and transform into something whole. A meditation on imperfection, connection and becoming.', prompt2Tags: 'SERENE · EMOTIONAL · INTIMATE',
+    prompt3Title: 'Entropy', prompt3Desc: 'Begin with intention. Then let go. Start with structure, introduce disruption, and allow the painting to evolve beyond your original plan. Embrace accidents, movement and unexpected beauty.', prompt3Tags: 'EXPRESSIVE · BOLD · UNPREDICTABLE',
+    prompt4Title: 'The Unknown', prompt4Desc: "Don't decide what the painting should become. Discover it. Begin with a color, a gesture or a feeling, and let each layer reveal the next. There is no predetermined destination. The painting unfolds as you do.", prompt4Tags: 'MYSTERIOUS · INTUITIVE · LIBERATING',
+    gatherTitle: "Gather your people. I'll bring the art.",
+    gatherP1a: 'Created for those who want to', gatherP1bold: 'celebrate with intention',
+    gatherOccasions: "Private dinners · Birthdays · Girls' nights · Date nights · Bridal celebrations · Corporate gatherings · Community events · Special occasions",
+    gatherP2a: 'From', gatherP2bold1: 'intimate gatherings', gatherP2mid: 'to', gatherP2bold2: 'larger private events', gatherP2b: ', each experience is', gatherP2bold3: 'tailored to your occasion, setting and aesthetic',
+    gatherQuote: "Bring your people. Set the mood. We'll create the art around you.",
+    colorNightLabel: 'THE LILY PASTEL COLOR NIGHT', colorNightTitle: 'An evening devoted to color, creativity & connection.',
+    colorNightP1a: 'Our signature experience invites guests into a world of', colorNightP1bold: 'curated color and artistic discovery', colorNightP1b: ', inspired by the distinctive vision of Lily Pastel.',
+    colorNightSteps: 'Choose an Inspired Prompt. Discover your palette. Follow your intuition. Create something entirely your own.',
+    colorNightItem1: 'Beautifully prepared materials', colorNightItem2: 'An atmosphere designed to inspire', colorNightItem3: 'An artist-led creative experience', colorNightItem4: 'An original painting to take home',
+    colorNightBottomBold: 'No two paintings are ever the same.', colorNightBottomRest: 'That is where the magic begins.',
+    finalCtaTitle: 'Your next creative experience awaits', finalCtaSubtitle: 'Leave with a painting. Come for the experience.',
+    finalCtaDescA: 'Gather your favorite people for an evening of color, creativity and connection, where', finalCtaDescBold: 'something beautiful is made, shared and remembered',
+    footerRights: '© 2020 Lily Pastel Studio Art. All rights reserved.', footerLegal: 'Legal',
+    thanksTitle: 'Thank you!', thanksDesc: "We'll be in touch within one business day to confirm your consultation.",
+    bookTitle: 'Book a Consultation', bookDesc: "Tell us about your space, we'll follow up to schedule a call.",
+    formName: 'Full name', formEmail: 'Email', formPhone: 'Phone (optional)', formMsg: 'Commission or printing, tell us more', formSend: 'SEND REQUEST', formPaintingPlaceholder: 'Which painting? (optional)', formSizePlaceholder: 'Preferred size (optional)',
+  },
+  fr: {
+    navHome: 'ACCUEIL', navShop: 'BOUTIQUE', navCollections: 'COLLECTION', navCommissions: 'COMMANDES', navExperience: 'EXPÉRIENCE ARTISTIQUE', navAbout: 'À PROPOS', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    bookBtn: 'RÉSERVER', bookPrivateBtn: 'RÉSERVER UNE EXPÉRIENCE PRIVÉE',
+    privateBookDesc: 'Parlez-nous de votre événement, nous vous recontacterons pour planifier chaque détail.',
+    formGuestsPlaceholder: 'Nombre de personnes', formEventPlaceholder: "Type d'événement",
+    formEventDinner: 'Dîner privé', formEventBirthday: 'Anniversaire', formEventGirlsNight: 'Soirée entre amies', formEventDateNight: 'Soirée en amoureux', formEventBridal: 'Célébration de mariage', formEventCorporate: "Événement d'entreprise", formEventOther: 'Autre',
+    formPrivateMsg: 'Parlez-nous de votre événement',
+    heroLabel: 'EXPÉRIENCES ARTISTIQUES LILY PASTEL', heroTitle: 'Repartez avec une peinture. Venez pour l\u2019expérience.', heroTagline: 'Créer. Se connecter. Créer quelque chose de beau.',
+    introLabel: 'CRÉER. SE CONNECTER. CRÉER QUELQUE CHOSE DE BEAU.', introQuote: "Aucune expérience préalable n'est requise. Seule l'invitation à commencer compte.",
+    introP1a: "L'art est plus qu'un simple objet à contempler. C'est quelque chose à", introP1bold: 'ressentir, habiter et se rappeler',
+    introP2a: 'Les expériences Lily Pastel sont des', introP2bold: 'rencontres intimes et soigneusement pensées', introP2b: "où les gens se retrouvent autour de la couleur, du mouvement et de l'expression de soi.",
+    introP3: "Guidée par l'artiste Lily Pastel, chaque expérience offre une pause élégante loin du quotidien et une invitation à créer quelque chose d'unmistakablement vôtre.",
+    experienceLabel: "L'EXPÉRIENCE",
+    step1Title: 'ARRIVER', step1DescA: 'Entrez dans un espace magnifiquement composé où', step1DescBold: 'chaque détail est préparé pour vous', step1DescB: ", de la toile et de la palette jusqu'à l'ambiance.",
+    step2Title: 'DÉCOUVRIR', step2Desc: "Explorez un concept original Lily Pastel façonné par la couleur, l'émotion, la texture et le mouvement.",
+    step3Title: 'CRÉER', step3Desc: "Avec un accompagnement bienveillant, construisez votre peinture couche par couche, en laissant l'intuition et l'expression guider votre geste.",
+    step4Title: 'SE CONNECTER', step4Desc: 'Partagez une soirée de conversation, de musique et de créativité avec les personnes qui rendent ce moment mémorable.',
+    step5Title: 'RÉVÉLER', step5Desc: "Prenez du recul et découvrez la beauté inattendue qui a émergé sous vos mains.",
+    step6Title: 'REPARTIR AVEC', step6Desc: "Votre peinture achevée devient le souvenir durable d'une soirée passée à créer ensemble.",
+    promptsLabel: 'LES PROMPTS INSPIRÉS LILY PASTEL', promptsTitle: 'Quatre voyages artistiques. Une création entièrement personnelle.',
+    promptsP1a: 'Chaque expérience Lily Pastel commence par un', promptsP1bold: 'Prompt Inspiré', promptsP1b: ", une idée artistique conçue pour éveiller l'émotion, la curiosité et l'imagination. Plutôt que de copier une peinture, vous interprétez le prompt dans votre propre langage de couleur, de texture et de mouvement.",
+    promptsP2: "Tout le monde part de la même inspiration. Chacun repart avec quelque chose de totalement différent.",
+    prompt1Title: 'Élémental', prompt1Desc: "Que ressent-on de la nature une fois traduite en couleur ? Explorez l'énergie de la terre, de l'eau, du feu et de l'air à travers le mouvement, la texture et les couches de couleur. Laissez la toile devenir votre propre interprétation d'un élément, ou de l'espace entre eux.", prompt1Tags: 'PUISSANT · ORGANIQUE · LUMINEUX',
+    prompt2Title: 'Paix par Fragments', prompt2Desc: "Et si la beauté pouvait naître des fragments ? Commencez par des formes, des marques et des couches séparées. Laissez-les peu à peu se connecter, se superposer et se transformer en un tout. Une méditation sur l'imperfection, la connexion et le devenir.", prompt2Tags: 'SEREIN · ÉMOTIONNEL · INTIME',
+    prompt3Title: 'Entropie', prompt3Desc: "Commencez avec une intention. Puis lâchez prise. Partez d'une structure, introduisez une perturbation, et laissez la peinture évoluer au-delà de votre plan initial. Embrassez les accidents, le mouvement et la beauté inattendue.", prompt3Tags: 'EXPRESSIF · AUDACIEUX · IMPRÉVISIBLE',
+    prompt4Title: "L'Inconnu", prompt4Desc: "Ne décidez pas de ce que la peinture doit devenir. Découvrez-le. Commencez par une couleur, un geste ou une émotion, et laissez chaque couche révéler la suivante. Il n'y a pas de destination prédéterminée. La peinture se dévoile à mesure que vous avancez.", prompt4Tags: 'MYSTÉRIEUX · INTUITIF · LIBÉRATEUR',
+    gatherTitle: "Rassemblez vos proches. J'apporte l'art.",
+    gatherP1a: 'Conçu pour celles et ceux qui veulent', gatherP1bold: 'célébrer avec intention',
+    gatherOccasions: "Dîners privés · Anniversaires · Soirées entre amies · Soirées en amoureux · Célébrations de mariage · Événements d'entreprise · Rencontres communautaires · Occasions spéciales",
+    gatherP2a: 'Des', gatherP2bold1: 'rassemblements intimes', gatherP2mid: 'aux', gatherP2bold2: 'événements privés plus grands', gatherP2b: ', chaque expérience est', gatherP2bold3: 'adaptée à votre occasion, votre lieu et votre esthétique',
+    gatherQuote: "Rassemblez vos proches. Créez l'ambiance. Nous créerons l'art autour de vous.",
+    colorNightLabel: 'LA SOIRÉE COULEUR LILY PASTEL', colorNightTitle: 'Une soirée dédiée à la couleur, à la créativité et au lien.',
+    colorNightP1a: 'Notre expérience signature invite les invités dans un monde de', colorNightP1bold: 'couleur soignée et de découverte artistique', colorNightP1b: ", inspiré par la vision distinctive de Lily Pastel.",
+    colorNightSteps: "Choisissez un Prompt Inspiré. Découvrez votre palette. Suivez votre intuition. Créez quelque chose d'entièrement personnel.",
+    colorNightItem1: 'Matériel magnifiquement préparé', colorNightItem2: "Une ambiance pensée pour inspirer", colorNightItem3: 'Une expérience créative guidée par l\u2019artiste', colorNightItem4: 'Une peinture originale à emporter',
+    colorNightBottomBold: 'Aucune peinture n\u2019est jamais la même.', colorNightBottomRest: "C'est là que commence la magie.",
+    finalCtaTitle: 'Votre prochaine expérience créative vous attend', finalCtaSubtitle: "Repartez avec une peinture. Venez pour l'expérience.",
+    finalCtaDescA: 'Rassemblez vos proches pour une soirée de couleur, de créativité et de connexion, où', finalCtaDescBold: 'quelque chose de beau est créé, partagé et gardé en mémoire',
+    footerRights: '© 2020 Lily Pastel Studio Art. Tous droits réservés.', footerLegal: 'Mentions légales',
+    thanksTitle: 'Merci !', thanksDesc: 'Nous vous contacterons sous un jour ouvré pour confirmer votre consultation.',
+    bookTitle: 'Réserver une consultation', bookDesc: 'Parlez-nous de votre espace, nous vous recontacterons pour planifier un appel.',
+    formName: 'Nom complet', formEmail: 'Email', formPhone: 'Téléphone (optionnel)', formMsg: 'Commande ou impression, dites-nous en plus', formSend: 'ENVOYER LA DEMANDE', formPaintingPlaceholder: 'Quel tableau ? (optionnel)', formSizePlaceholder: 'Dimension souhaitée (optionnel)',
+  },
+  es: {
+    navHome: 'INICIO', navShop: 'TIENDA', navCollections: 'COLECCIÓN', navCommissions: 'ENCARGOS', navExperience: 'ART EXPERIENCE', navAbout: 'SOBRE MÍ', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACTO',
+    bookBtn: 'RESERVAR', bookPrivateBtn: 'RESERVAR UNA EXPERIENCIA PRIVADA',
+    privateBookDesc: 'Cuéntanos sobre tu evento y te contactaremos para planificar cada detalle.',
+    formGuestsPlaceholder: 'Número de invitados', formEventPlaceholder: 'Tipo de evento',
+    formEventDinner: 'Cena privada', formEventBirthday: 'Cumpleaños', formEventGirlsNight: 'Noche entre amigas', formEventDateNight: 'Cita', formEventBridal: 'Celebración nupcial', formEventCorporate: 'Evento corporativo', formEventOther: 'Otro',
+    formPrivateMsg: 'Cuéntanos sobre tu evento',
+    heroLabel: 'EXPERIENCIAS ARTÍSTICAS LILY PASTEL', heroTitle: 'Llévate una pintura. Ven por la experiencia.', heroTagline: 'Crear. Conectar. Hacer algo hermoso.',
+    introLabel: 'CREAR. CONECTAR. HACER ALGO HERMOSO.', introQuote: 'No se requiere experiencia previa. Solo la invitación a comenzar.',
+    introP1a: 'El arte es más que algo para contemplar. Es algo para', introP1bold: 'sentir, habitar y recordar',
+    introP2a: 'Las Experiencias Lily Pastel son', introP2bold: 'encuentros íntimos y cuidadosamente pensados', introP2b: 'donde las personas se reúnen a través del color, el movimiento y la expresión personal.',
+    introP3: 'Guiada por la artista Lily Pastel, cada experiencia ofrece una pausa elegante de lo cotidiano y una invitación a crear algo inconfundiblemente tuyo.',
+    experienceLabel: 'LA EXPERIENCIA',
+    step1Title: 'LLEGAR', step1DescA: 'Entra en un espacio bellamente compuesto donde', step1DescBold: 'cada detalle está preparado para ti', step1DescB: ', desde el lienzo y la paleta hasta el ambiente.',
+    step2Title: 'DESCUBRIR', step2Desc: 'Explora un concepto original de Lily Pastel moldeado por el color, la emoción, la textura y el movimiento.',
+    step3Title: 'CREAR', step3Desc: 'Con una guía suave, construye tu pintura capa por capa, dejando que la intuición y la expresión marquen el camino.',
+    step4Title: 'CONECTAR', step4Desc: 'Comparte una velada de conversación, música y creatividad con las personas que hacen que el momento importe.',
+    step5Title: 'REVELAR', step5Desc: 'Da un paso atrás y contempla la belleza inesperada que ha surgido bajo tus manos.',
+    step6Title: 'LLEVAR A CASA', step6Desc: 'Tu pintura terminada se convierte en un recuerdo duradero de una velada creando juntos.',
+    promptsLabel: 'LOS PROMPTS INSPIRADOS DE LILY PASTEL', promptsTitle: 'Cuatro caminos artísticos. Una creación completamente personal.',
+    promptsP1a: 'Cada experiencia Lily Pastel comienza con un', promptsP1bold: 'Prompt Inspirado', promptsP1b: ', una idea artística diseñada para despertar la emoción, la curiosidad y la imaginación. En lugar de copiar una pintura, interpretas el prompt en tu propio lenguaje de color, textura y movimiento.',
+    promptsP2: 'Todos parten de la misma inspiración. Todos se van con algo completamente distinto.',
+    prompt1Title: 'Elemental', prompt1Desc: '¿Qué se siente la naturaleza cuando se traduce en color? Explora la energía de la tierra, el agua, el fuego y el aire a través del movimiento, la textura y el color en capas. Deja que el lienzo se convierta en tu propia interpretación de un elemento, o del espacio entre ellos.', prompt1Tags: 'PODEROSO · ORGÁNICO · LUMINOSO',
+    prompt2Title: 'Paz por Fragmentos', prompt2Desc: '¿Y si la belleza pudiera surgir de los fragmentos? Comienza con formas, marcas y capas separadas. Deja que poco a poco se conecten, se superpongan y se transformen en un todo. Una meditación sobre la imperfección, la conexión y el devenir.', prompt2Tags: 'SERENO · EMOTIVO · ÍNTIMO',
+    prompt3Title: 'Entropía', prompt3Desc: 'Comienza con intención. Luego suelta el control. Parte de una estructura, introduce una disrupción y deja que la pintura evolucione más allá de tu plan original. Abraza los accidentes, el movimiento y la belleza inesperada.', prompt3Tags: 'EXPRESIVO · AUDAZ · IMPREDECIBLE',
+    prompt4Title: 'Lo Desconocido', prompt4Desc: 'No decidas en qué debe convertirse la pintura. Descúbrelo. Comienza con un color, un gesto o una sensación, y deja que cada capa revele la siguiente. No hay un destino predeterminado. La pintura se revela a medida que avanzas.', prompt4Tags: 'MISTERIOSO · INTUITIVO · LIBERADOR',
+    gatherTitle: 'Reúne a tu gente. Yo traigo el arte.',
+    gatherP1a: 'Creado para quienes quieren', gatherP1bold: 'celebrar con intención',
+    gatherOccasions: 'Cenas privadas · Cumpleaños · Noches entre amigas · Citas · Celebraciones nupciales · Eventos corporativos · Eventos comunitarios · Ocasiones especiales',
+    gatherP2a: 'Desde', gatherP2bold1: 'reuniones íntimas', gatherP2mid: 'hasta', gatherP2bold2: 'eventos privados más grandes', gatherP2b: ', cada experiencia se adapta a', gatherP2bold3: 'tu ocasión, lugar y estética',
+    gatherQuote: 'Reúne a tu gente. Crea el ambiente. Nosotros crearemos el arte a tu alrededor.',
+    colorNightLabel: 'LA NOCHE DEL COLOR LILY PASTEL', colorNightTitle: 'Una velada dedicada al color, la creatividad y la conexión.',
+    colorNightP1a: 'Nuestra experiencia insignia invita a los invitados a un mundo de', colorNightP1bold: 'color cuidado y descubrimiento artístico', colorNightP1b: ', inspirado en la visión distintiva de Lily Pastel.',
+    colorNightSteps: 'Elige un Prompt Inspirado. Descubre tu paleta. Sigue tu intuición. Crea algo completamente tuyo.',
+    colorNightItem1: 'Materiales bellamente preparados', colorNightItem2: 'Un ambiente pensado para inspirar', colorNightItem3: 'Una experiencia creativa guiada por la artista', colorNightItem4: 'Una pintura original para llevar a casa',
+    colorNightBottomBold: 'No hay dos pinturas iguales.', colorNightBottomRest: 'Ahí es donde comienza la magia.',
+    finalCtaTitle: 'Tu próxima experiencia creativa te espera', finalCtaSubtitle: 'Llévate una pintura. Ven por la experiencia.',
+    finalCtaDescA: 'Reúne a tus personas favoritas para una velada de color, creatividad y conexión, donde', finalCtaDescBold: 'algo hermoso se crea, se comparte y se recuerda',
+    footerRights: '© 2020 Lily Pastel Studio Art. Todos los derechos reservados.', footerLegal: 'Legal',
+    thanksTitle: '¡Gracias!', thanksDesc: 'Nos pondremos en contacto en un día hábil para confirmar tu consulta.',
+    bookTitle: 'Reservar una consulta', bookDesc: 'Cuéntanos sobre tu espacio, te contactaremos para agendar una llamada.',
+    formName: 'Nombre completo', formEmail: 'Email', formPhone: 'Teléfono (opcional)', formMsg: 'Encargo o impresión, cuéntanos más', formSend: 'ENVIAR SOLICITUD', formPaintingPlaceholder: '¿Qué pintura? (opcional)', formSizePlaceholder: 'Tamaño preferido (opcional)',
+  },
+};
+
+class Component extends DCLogic {
+  state = { isMenuOpen: false, isBookingOpen: false, isPrivateBookingOpen: false, isDesktop: true, bookingSent: false, privateBookingSent: false, dark: false, lang: 'fr', scrolled: false };
+  componentDidMount() {
+    this.onScroll = () => this.setState(s => (window.scrollY > 200) !== s.scrolled ? { scrolled: window.scrollY > 200 } : null);
+    window.addEventListener('scroll', this.onScroll);
+    this.mq = window.matchMedia('(min-width:1200px)');
+    this.setState({ isDesktop: this.mq.matches });
+    if (localStorage.getItem('lp-theme') === 'dark') this.setState({ dark: true });
+    const savedLang = localStorage.getItem('lp-lang');
+    if (savedLang && TRANSLATIONS[savedLang]) this.setState({ lang: savedLang });
+    this.onMq = e => this.setState({ isDesktop: e.matches, isMenuOpen: false });
+    this.mq.addEventListener('change', this.onMq);
+  }
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this.onMq);
+    window.removeEventListener('scroll', this.onScroll);
+  }
+  toggleMenu = () => this.setState(s => ({ isMenuOpen: !s.isMenuOpen }));
+  toggleDark = () => this.setState(s => { const v = !s.dark; localStorage.setItem('lp-theme', v ? 'dark' : 'light'); return { dark: v }; });
+  onLangChange = e => { const v = e.target.value; localStorage.setItem('lp-lang', v); this.setState({ lang: v }); };
+  scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  openBooking = () => this.setState({ isBookingOpen: true, isMenuOpen: false, bookingSent: false });
+  closeBooking = () => this.setState({ isBookingOpen: false });
+  openPrivateBooking = () => this.setState({ isPrivateBookingOpen: true, isMenuOpen: false, privateBookingSent: false });
+  closePrivateBooking = () => this.setState({ isPrivateBookingOpen: false });
+  submitPrivateBooking = e => {
+    e.preventDefault();
+    const f = e.target;
+    const get = n => (f[n] && f[n].value) || '';
+    const body = `Name: ${get('name')}\nEmail: ${get('email')}\nPhone: ${get('phone') || 'N/A'}\nGuests: ${get('guests') || 'N/A'}\nEvent type: ${get('eventType') || 'N/A'}\n\n${get('message')}`;
+    window.location.href = `mailto:lilypasteldesign@gmail.com?subject=${encodeURIComponent('Private Experience Request')}&body=${encodeURIComponent(body)}`;
+    this.setState({ privateBookingSent: true });
+  };
+  stopClick = e => e.stopPropagation();
+  submitBooking = e => {
+    e.preventDefault();
+    const f = e.target;
+    const get = n => (f[n] && f[n].value) || '';
+    const body = `Name: ${get('name')}\nEmail: ${get('email')}\nPhone: ${get('phone') || 'N/A'}\nPainting: ${get('painting') || 'N/A'}\nSize: ${get('size') || 'N/A'}\n\n${get('message')}`;
+    window.location.href = `mailto:lilypasteldesign@gmail.com?subject=${encodeURIComponent('Booking Request')}&body=${encodeURIComponent(body)}`;
+    this.setState({ bookingSent: true });
+  };
+  renderVals() {
+    const navGap = '16px';
+    const navFontSize = '11.5px';
+    return {
+      t: TRANSLATIONS[this.state.lang],
+      navGap, navFontSize,
+      lang: this.state.lang,
+      langLabel: this.state.lang.toUpperCase(),
+      scrollToTop: this.scrollToTop,
+      onLangChange: this.onLangChange,
+      dark: this.state.dark,
+      notDark: !this.state.dark,
+      toggleDark: this.toggleDark,
+      themeAttr: this.state.dark ? 'dark' : 'light',
+      isMenuOpen: this.state.isMenuOpen,
+      isBookingOpen: this.state.isBookingOpen,
+      bookingSent: this.state.bookingSent,
+      notBookingSent: !this.state.bookingSent,
+      isPrivateBookingOpen: this.state.isPrivateBookingOpen,
+      privateBookingSent: this.state.privateBookingSent,
+      notPrivateBookingSent: !this.state.privateBookingSent,
+      openPrivateBooking: this.openPrivateBooking,
+      closePrivateBooking: this.closePrivateBooking,
+      submitPrivateBooking: this.submitPrivateBooking,
+      toggleMenu: this.toggleMenu,
+      openBooking: this.openBooking,
+      closeBooking: this.closeBooking,
+      stopClick: this.stopClick,
+      submitBooking: this.submitBooking,
+      navDisplay: this.state.isDesktop ? 'flex' : 'none',
+      burgerDisplay: this.state.isDesktop ? 'none' : 'flex',
+      floatingCtaDisplay: this.state.scrolled ? 'inline-block' : 'none',
+    };
+  }
+}
+</script>
+</body>
+</html>

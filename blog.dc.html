@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f6f1ea;font-family:'Jost',sans-serif;color:#241f1a}
+a{color:#b5622f;text-decoration:none}
+a:hover{color:#8a4a24}
+[data-lp-theme="dark"]{filter:invert(1) hue-rotate(180deg)}
+[data-lp-theme="dark"] img,[data-lp-theme="dark"] video,[data-lp-theme="dark"] iframe{filter:invert(1) hue-rotate(180deg)}
+@media (max-width:640px){#site-header-inner{padding:12px 16px}#site-logo-img{height:40px !important;width:40px !important}#site-logo-text span{font-size:14px !important}#site-logo-sub{font-size:6.5px !important;letter-spacing:2px !important}#site-header-controls{gap:6px !important}}
+</style>
+</helmet>
+<div style="background:#f6f1ea;min-height:100vh" data-lp-theme="{{ themeAttr }}">
+
+
+<header style="position:sticky;top:0;z-index:50;background:#f6f1eaee;backdrop-filter:blur(6px);border-bottom:1px solid rgba(36,31,26,.1)">
+  <div id="site-header-inner" style="max-width:1320px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.dc.html" style="display:flex;align-items:center;gap:10px">
+      <img id="site-logo-img" src="assets/logo-lily-pastel.jpeg" alt="Lily Pastel" style="height:58px;width:58px;object-fit:cover">
+      <div id="site-logo-text" style="display:flex;align-items:baseline;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div id="site-logo-sub" style="display:flex;gap:6px;width:100%;font-size:8.5px;letter-spacing:3.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </a>
+    <nav style="display:{{ navDisplay }};align-items:center;gap:{{ navGap }};font-size:{{ navFontSize }};letter-spacing:0.4px">
+      <a href="index.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navHome }}</a>
+      <a href="portfolio.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navCollections }}</a>
+      <a href="shop.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navShop }}</a>
+      <a href="commissions.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navCommissions }}</a>
+      <a href="experience.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navExperience }}</a>
+      <a href="blog.dc.html" style="color:#b5622f;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navBlog }}</a>
+      <a href="about.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navAbout }}</a>
+      <a href="contact.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navContact }}</a>
+    </nav>
+    <div id="site-header-controls" style="display:flex;align-items:center;gap:14px">
+      <div style="position:relative;width:26px;height:26px;border:1px solid rgba(36,31,26,.25);border-radius:50%;display:flex;align-items:center;justify-content:center">
+        <select onChange="{{ onLangChange }}" value="{{ lang }}" style="position:absolute;inset:0;opacity:0;cursor:pointer;appearance:none;-webkit-appearance:none">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+        </select>
+        <span style="font-size:9px;letter-spacing:.3px;color:#241f1a;pointer-events:none">{{ langLabel }}</span>
+      </div>
+      <button onClick="{{ toggleDark }}" aria-label="Toggle dark mode" style="display:flex;background:none;border:1px solid rgba(36,31,26,.25);border-radius:50%;width:26px;height:26px;color:#241f1a;cursor:pointer;align-items:center;justify-content:center;padding:0;transition:border-color .2s ease,transform .2s ease,opacity .2s ease" style-hover="border-color:#241f1a;transform:scale(1.05);opacity:.85">
+        <sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg></sc-if>
+        <sc-if value="{{ notDark }}" hint-placeholder-val="{{ true }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></sc-if>
+      </button>
+      <button onClick="{{ openBooking }}" style="display:{{ navDisplay }};background:#7c8560;color:#fffdf8;border:none;padding:11px 20px;font-size:12px;letter-spacing:1.5px;cursor:pointer;transition:background .2s,transform .2s ease,opacity .2s ease" style-hover="background:#b9c19a;transform:scale(1.05);opacity:.85"="background:#6b7452;transform:scale(1.06);opacity:.9">{{ t.bookBtn }}</button>
+
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="display:{{ burgerDisplay }};flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;transition:opacity .3s ease,transform .2s ease" style-hover="opacity:.55;transform:scale(1.05)">
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+        <span style="width:24px;height:2px;background:#241f1a"></span>
+      </button>
+    </div>
+  </div>
+  <sc-if value="{{ isMenuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;padding:10px 40px 26px;gap:18px;font-size:14px;letter-spacing:1px;border-top:1px solid rgba(36,31,26,.1)">
+      <a href="index.dc.html">{{ t.navHome }}</a>
+      <a href="portfolio.dc.html">{{ t.navCollections }}</a>
+      <a href="shop.dc.html">{{ t.navShop }}</a>
+      <a href="commissions.dc.html">{{ t.navCommissions }}</a>
+      <a href="experience.dc.html">{{ t.navExperience }}</a>
+      <a href="blog.dc.html">{{ t.navBlog }}</a>
+      <a href="about.dc.html">{{ t.navAbout }}</a>
+      <a href="faq.dc.html">{{ t.navFaq }}</a>
+      <a href="contact.dc.html">{{ t.navContact }}</a>
+      <button onClick="{{ openBooking }}" style="background:#7c8560;color:#fffdf8;border:none;padding:13px;font-size:12px;letter-spacing:1.5px;cursor:pointer;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#b9c19a;opacity:.88;transform:scale(1.05)">{{ t.bookBtn }}</button>
+    </div>
+  </sc-if>
+</header>
+
+<section style="max-width:1100px;margin:0 auto;padding:70px 40px 20px;text-align:center">
+  <div style="font-size:12px;letter-spacing:3px;color:#b5622f;margin-bottom:14px">{{ t.blLabel }}</div>
+  <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(28px,6vw,38px);margin:0 0 16px">{{ t.blTitle }}</h1>
+  <p style="font-size:15px;color:rgba(36,31,26,.65);max-width:560px;margin:0 auto">{{ t.blDesc }}</p>
+</section>
+
+<section style="max-width:1160px;margin:0 auto;padding:40px 40px 90px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px">
+  <sc-for list="{{ articleCards }}" as="card" hint-placeholder-count="0">
+    <a href="javascript:void(0)" data-i="{{ card.i }}" onClick="{{ openArticle }}" style="display:block;color:#241f1a;cursor:pointer">
+      <img src="{{ card.img }}" alt="{{ card.alt }}" style="width:100%;aspect-ratio:4/3;object-fit:cover;object-position:{{ card.pos }};margin-bottom:16px">
+      <div style="font-size:11px;letter-spacing:1.5px;color:#b5622f;margin-bottom:8px">{{ card.tag }}</div>
+      <div style="font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px">{{ card.title }}</div>
+      <p style="font-size:13.5px;color:rgba(36,31,26,.62);line-height:1.6;margin:0">{{ card.excerpt }}</p>
+    </a>
+  </sc-for>
+</section>
+
+<footer style="background:#f6f1eaee;backdrop-filter:blur(6px);color:rgba(36,31,26,.75);padding:40px 40px 26px">
+  <div style="max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11.5px;border-top:1px solid rgba(36,31,26,.15);padding-top:24px">
+    <span>{{ t.footerRights }}</span>
+    <div style="display:flex;gap:20px">
+      <a href="faq.dc.html" style="color:rgba(36,31,26,.75)">{{ t.navFaq }}</a>
+      <a href="contact.dc.html" style="color:rgba(36,31,26,.75)">{{ t.navContact }}</a>
+      <a href="legal.dc.html" style="color:rgba(36,31,26,.75)">{{ t.footerLegal }}</a>
+    </div>
+  </div>
+</footer>
+</div>
+
+<sc-if value="{{ isArticleOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-lp-theme="{{ themeAttr }}" style="position:fixed;inset:0;background:rgba(36,31,26,.6);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px;overflow-y:auto" onClick="{{ closeArticle }}">
+    <div style="background:#fffdf8;max-width:640px;width:100%;max-height:88vh;overflow-y:auto;position:relative" onClick="{{ stopClick }}">
+      <button onClick="{{ closeArticle }}" style="position:absolute;top:14px;right:16px;background:#fffdf8;border-radius:50%;width:32px;height:32px;border:none;font-size:20px;cursor:pointer;color:#241f1a;z-index:2;transition:color .3s ease,opacity .3s ease,transform .2s ease" style-hover="color:#b5622f;opacity:.7;transform:scale(1.05)">×</button>
+      <img src="{{ currentArticle.img }}" alt="{{ currentArticle.alt }}" style="width:100%;aspect-ratio:16/9;object-fit:cover;object-position:{{ currentArticle.pos }}">
+      <div style="padding:34px 40px 44px">
+        <div style="font-size:11px;letter-spacing:1.5px;color:#b5622f;margin-bottom:10px">{{ currentArticle.tag }}</div>
+        <div style="font-family:'Playfair Display',serif;font-size:26px;margin-bottom:18px;line-height:1.25">{{ currentArticle.title }}</div>
+        <sc-for list="{{ currentArticle.paragraphs }}" as="para" hint-placeholder-count="3">
+          <p style="font-size:14.5px;color:rgba(36,31,26,.75);line-height:1.75;margin:0 0 16px">{{ para }}</p>
+        </sc-for>
+        <p style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13.5px;color:rgba(36,31,26,.55);text-align:right;margin:24px 0 0">- {{ t.editorialTeam }} -</p>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isBookingOpen }}" hint-placeholder-val="{{ false }}">
+  <div data-lp-theme="{{ themeAttr }}" style="position:fixed;inset:0;background:rgba(36,31,26,.6);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px" onClick="{{ closeBooking }}">
+    <div style="background:#fffdf8;max-width:440px;width:100%;box-sizing:border-box;position:relative;max-height:92vh;overflow:auto;border-radius:16px;overflow:hidden;box-shadow:0 30px 60px rgba(36,31,26,.35)" onClick="{{ stopClick }}">
+      <div style="background:#7c8560;padding:26px 30px 22px">
+        <button onClick="{{ closeBooking }}" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#fffdf8;transition:opacity .3s ease,transform .2s ease" style-hover="opacity:.7;transform:scale(1.05)">×</button>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;color:#fffdf8">{{ t.bookTitle }}</div>
+      </div>
+      <div style="padding:28px 24px">
+      <sc-if value="{{ bookingSent }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:30px 0">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:10px">{{ t.thanksTitle }}</div>
+          <p style="font-size:14px;color:rgba(36,31,26,.7)">{{ t.thanksDesc }}</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ notBookingSent }}" hint-placeholder-val="{{ true }}">
+        <p style="font-size:13px;color:rgba(36,31,26,.6);margin:0 0 22px">{{ t.bookDesc }}</p>
+        <form onSubmit="{{ submitBooking }}" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px">
+          <input name="name" required="" type="text" placeholder="{{ t.formName }}" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          <input name="email" required="" type="email" placeholder="Email" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          <div style="grid-column:span 1;display:flex;gap:6px">
+            <select style="flex:none;width:84px;border:1px solid rgba(36,31,26,.2);padding:12px 4px;font-size:12px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+              <option value="+1">🇺🇸 +1</option>
+              <option value="+1ca">🇨🇦 +1</option>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+34">🇪🇸 +34</option>
+              <option value="+44">🇬🇧 +44</option>
+              <option value="+49">🇩🇪 +49</option>
+              <option value="+39">🇮🇹 +39</option>
+              <option value="+212">🇲🇦 +212</option>
+              <option value="+213">🇩🇿 +213</option>
+              <option value="+216">🇹🇳 +216</option>
+              <option value="+61">🇦🇺 +61</option>
+              <option value="+81">🇯🇵 +81</option>
+              <option value="+52">🇲🇽 +52</option>
+              <option value="+55">🇧🇷 +55</option>
+            </select>
+            <input name="phone" type="tel" placeholder="{{ t.formPhone }}" style="flex:1;min-width:0;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif">
+          </div>
+          <select name="painting" style="grid-column:span 1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+            <option value="">{{ t.formPaintingPlaceholder }}</option>
+            <option>Peace by Piece</option>
+            <option>Aurora</option>
+            <option>Kissed by the Sun</option>
+            <option>Eclectric</option>
+            <option>Rooted</option>
+            <option>Under Her Eye</option>
+            <option>Oh Gold</option>
+            <option>Elemental</option>
+          </select>
+          <select name="size" style="grid-column:1 / -1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;color:#241f1a;background:#fffdf8">
+            <option value="">{{ t.formSizePlaceholder }}</option>
+            <option>16 × 20 in</option>
+            <option>24 × 30 in</option>
+            <option>36 × 48 in</option>
+            <option>40 × 60 in</option>
+            <option>48 × 72 in</option>
+          </select>
+          <textarea name="message" placeholder="{{ t.formMsg }}" rows="3" style="grid-column:1 / -1;border:1px solid rgba(36,31,26,.2);padding:12px;font-size:13px;font-family:'Jost',sans-serif;resize:vertical"></textarea>
+          <button type="submit" style="grid-column:1 / -1;background:#7c8560;color:#fffdf8;border:none;padding:14px;font-size:13px;letter-spacing:1.5px;cursor:pointer;margin-top:6px;transition:background .3s ease,opacity .3s ease,transform .2s ease" style-hover="background:#b9c19a;opacity:.88;transform:scale(1.05)">{{ t.formSend }}</button>
+        </form>
+      </sc-if>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TRANSLATIONS = {
+  en: {
+    navHome: 'HOME', navShop: 'SHOP', navCollections: 'COLLECTION', navCommissions: 'COMMISSIONS', navExperience: 'ART EXPERIENCE', navAbout: 'ABOUT', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    bookBtn: 'BOOK A CONSULTATION',
+    thanksTitle: 'Thank you!', thanksDesc: "We'll be in touch within one business day to confirm your consultation.",
+    bookTitle: 'Book a Consultation', bookDesc: "Tell us about your space, we'll follow up to schedule a call.",
+    formName: 'Full name', formEmail: 'Email', formPhone: 'Phone (optional)', formMsg: 'Tell us about your space or project', formSend: 'SEND REQUEST', formPaintingPlaceholder: 'Which painting? (optional)', formSizePlaceholder: 'Preferred size (optional)',
+    blLabel: 'JOURNAL', blTitle: 'Notes from the Studio', blDesc: 'Stories on process, materials and the spaces our work has found a home in.', editorialTeam: 'Editorial Team',
+    footerRights: '© 2020 Lily Pastel Studio Art. All rights reserved.', footerLegal: 'Legal',
+    cardTags: ['PROCESS · AUG 2026','DESIGN TIPS · JUL 2026','PRINTING · JUN 2026','COMMISSIONS · MAY 2026','CARE GUIDE · APR 2026','PALETTE · MAR 2026'],
+    cardTitles: ['Why We Still Apply Gold Leaf by Hand','How to Choose Art for a Living Room','Canvas, Paper or Acrylic, Which Should You Choose?','Inside a Commission: From Moodboard to Wall','Caring for a Textured Painting','Deep Green & Gold: An Emerging Favorite'],
+    cardExcerpts: ['Inside the slow, layered process that gives each painting its texture and light.','Three rules of scale, palette and placement we use with every client.','A quick guide to matching print surface to your room and lighting.',"A West Hollywood client's living room, from first sketch to final install.",'Simple habits to keep gold leaf and impasto looking their best for years.','Why this rich, moody palette keeps showing up in client requests this year.'],
+  },
+  fr: {
+    navHome: 'ACCUEIL', navShop: 'BOUTIQUE', navCollections: 'COLLECTION', navCommissions: 'COMMANDES', navExperience: 'EXPÉRIENCE', navAbout: 'À PROPOS', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    bookBtn: 'RÉSERVER',
+    thanksTitle: 'Merci !', thanksDesc: 'Nous vous contacterons sous un jour ouvré pour confirmer votre consultation.',
+    bookTitle: 'Réserver une consultation', bookDesc: 'Parlez-nous de votre espace, nous vous recontacterons pour planifier un appel.',
+    formName: 'Nom complet', formEmail: 'Email', formPhone: 'Téléphone (optionnel)', formMsg: 'Parlez-nous de votre espace ou projet', formSend: 'ENVOYER LA DEMANDE', formPaintingPlaceholder: 'Quel tableau ? (optionnel)', formSizePlaceholder: 'Dimension souhaitée (optionnel)',
+    blLabel: 'JOURNAL', blTitle: "Notes de l'atelier", blDesc: 'Histoires sur notre processus, nos matériaux et les espaces où nos œuvres ont trouvé leur place.', editorialTeam: 'Équipe éditoriale',
+    footerRights: '© 2020 Lily Pastel Studio Art. Tous droits réservés.', footerLegal: 'Mentions légales',
+    cardTags: ['PROCESS · AOÛT 2026','CONSEILS DÉCO · JUIL 2026','IMPRESSION · JUIN 2026','COMMANDES · MAI 2026','GUIDE D\u2019ENTRETIEN · AVR 2026','PALETTE · MARS 2026'],
+    cardTitles: ["Pourquoi nous appliquons encore la feuille d\u2019or à la main",'Comment choisir une œuvre pour un salon','Toile, papier ou acrylique : lequel choisir ?','Dans les coulisses d\u2019une commande : du moodboard au mur','Entretenir une peinture texturée','Vert profond et or : une tendance montante'],
+    cardExcerpts: ["Plongée dans le processus lent et minutieux qui donne à chaque peinture sa texture et sa lumière.",'Trois règles d\u2019échelle, de palette et de placement que nous utilisons avec chaque client.','Un guide rapide pour associer la surface d\u2019impression à votre pièce et à sa lumière.','Le salon d\u2019une cliente de West Hollywood, de la première esquisse à l\u2019installation finale.','Des gestes simples pour que la feuille d\u2019or et l\u2019empâtement restent beaux pendant des années.','Pourquoi cette palette riche et intense revient sans cesse dans les demandes de nos clients cette année.'],
+  },
+  es: {
+    navHome: 'INICIO', navShop: 'TIENDA', navCollections: 'COLECCIÓN', navCommissions: 'ENCARGOS', navExperience: 'ART EXPERIENCE', navAbout: 'SOBRE MÍ', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACTO',
+    bookBtn: 'RESERVAR',
+    thanksTitle: '¡Gracias!', thanksDesc: 'Nos pondremos en contacto en un día hábil para confirmar tu consulta.',
+    bookTitle: 'Reservar una consulta', bookDesc: 'Cuéntanos sobre tu espacio, te contactaremos para agendar una llamada.',
+    formName: 'Nombre completo', formEmail: 'Email', formPhone: 'Teléfono (opcional)', formMsg: 'Cuéntanos sobre tu espacio o proyecto', formSend: 'ENVIAR SOLICITUD', formPaintingPlaceholder: '¿Qué pintura? (opcional)', formSizePlaceholder: 'Tamaño preferido (opcional)',
+    blLabel: 'DIARIO', blTitle: 'Notas del estudio', blDesc: 'Historias sobre nuestro proceso, materiales y los espacios donde nuestras obras han encontrado su lugar.', editorialTeam: 'Equipo editorial',
+    footerRights: '© 2020 Lily Pastel Studio Art. Todos los derechos reservados.', footerLegal: 'Legal',
+    cardTags: ['PROCESO · AGO 2026','CONSEJOS DE DISEÑO · JUL 2026','IMPRESIÓN · JUN 2026','ENCARGOS · MAY 2026','GUÍA DE CUIDADO · ABR 2026','PALETA · MAR 2026'],
+    cardTitles: ['Por qué seguimos aplicando pan de oro a mano','Cómo elegir arte para una sala de estar','Lienzo, papel o acrílico, ¿cuál elegir?','Dentro de un encargo: del moodboard a la pared','Cuidado de una pintura texturizada','Verde profundo y oro: una tendencia emergente'],
+    cardExcerpts: ['Un vistazo al proceso lento y en capas que le da a cada pintura su textura y luz.','Tres reglas de escala, paleta y ubicación que usamos con cada cliente.','Una guía rápida para combinar la superficie de impresión con tu habitación y su luz.','La sala de estar de una clienta de West Hollywood, desde el primer boceto hasta la instalación final.','Hábitos simples para que el pan de oro y el empaste luzcan bien durante años.','Por qué esta paleta rica e intensa sigue apareciendo en las solicitudes de los clientes este año.'],
+  },
+};
+
+class Component extends DCLogic {
+  state = { isMenuOpen: false, isBookingOpen: false, isDesktop: true, bookingSent: false, isArticleOpen: false, articleIndex: 0, dark: false, lang: 'fr' };
+  articles = [
+    { img: 'assets/art-gilded-hush.jpg', alt: 'Working with gold leaf', pos: '50% 50%', tag: 'PROCESS · AUG 2026', title: 'Why We Still Apply Gold Leaf by Hand', paragraphs: [
+      "The studio smells faintly of rabbit-skin glue on the mornings we gild. It's an old-fashioned smell for an old-fashioned step, one most painters skip, or fake with metallic paint. We don't, because paint can't do what real leaf does: catch a room's light and throw it back differently at 9am than at dusk.",
+      "Each sheet is thinner than tissue, laid by hand with a soft brush and a held breath, one stray gust and it crumbles into gold dust. A single canvas can take a full sheet of leaf before the texture underneath is built up in plaster and sand.",
+      "It's slow, occasionally maddening work. But when a client stands in front of a finished piece and watches it shift as they move, that's the whole reason we haven't found a shortcut worth taking."
+    ] },
+    { img: 'assets/lifestyle-02-triptych.jpg', alt: 'Choosing art for a living room', pos: '50% 50%', tag: 'DESIGN TIPS · JUL 2026', title: 'How to Choose Art for a Living Room', paragraphs: [
+      "Most living rooms fail their art before the art even arrives, the piece is too small for the wall, too matched to the sofa, too polite to notice. We start every consultation by measuring the wall, not the sofa.",
+      "Scale first: a painting should occupy roughly two-thirds of the furniture it sits above. Palette second: pull one color from the room, not all of them, a single thread is enough to make a piece feel considered rather than coordinated.",
+      "Placement last, and the one rule people break most: hang at eye level for the room's main gathering point, not for whoever is tallest in the house. Get those three right and the piece looks like it always belonged there."
+    ] },
+    { img: 'assets/art-sand-language.jpg', alt: 'Canvas vs paper prints', pos: '50% 50%', tag: 'PRINTING · JUN 2026', title: 'Canvas, Paper or Acrylic, Which Should You Choose?', paragraphs: [
+      "We get this question in almost every studio visit: which surface is 'best'? The honest answer is that each one is best for a different kind of light and a different kind of room.",
+      "Canvas absorbs light rather than bouncing it, ideal for a sunlit room where a glossier surface would glare. Fine-art paper, framed under glass, holds fine detail with an almost matte quietness that suits smaller, closer-viewed spaces like a hallway or reading nook.",
+      "Acrylic face-mount is the boldest option: it adds real depth and a glossy pop that reads well from across a large room, but it demands even lighting to avoid reflections. We ask to see a photo of your wall before we recommend one, the room decides, not the trend."
+    ] },
+    { img: 'assets/lifestyle-07-floral-office.jpg', alt: 'A commission story', pos: '50% 50%', tag: 'COMMISSIONS · MAY 2026', title: 'Inside a Commission: From Moodboard to Wall', paragraphs: [
+      "A West Hollywood client came to us with three photos on her phone: a rug she loved, a sunset from a trip to Joshua Tree, and a screenshot of a color she couldn't name. That's usually how it starts, fragments, not a brief.",
+      "We built a moodboard around a warm, dusty palette and proposed two textures: a smooth gradient wash, or a heavier impasto with visible brushwork. She chose the impasto, wanting something the light would catch differently through the day.",
+      "Six weeks later the piece went up above her console table. She told us the room finally felt finished, which is the only review that matters to us."
+    ] },
+    { img: 'assets/art-warm-horizon.jpg', alt: 'Caring for textured paintings', pos: '50% 35%', tag: 'CARE GUIDE · APR 2026', title: 'Caring for a Textured Painting', paragraphs: [
+      "Textured, gold-leafed pieces ask for a little more care than a flat print, but far less than people assume. The biggest enemy isn't dust, it's direct sun, which can dull gold leaf and dry out plaster texture over years.",
+      "Dust gently with a dry, soft brush, moving in the direction of the texture rather than across it, a vacuum brush attachment on the lowest setting works well for deep grooves. Never use household cleaners or a damp cloth on gold leaf; moisture is the one thing that will lift it.",
+      "Once a year, step back and look at the piece from across the room. If the surface still catches the light the way it did on day one, you're doing it right."
+    ] },
+    { img: 'assets/art-emerald-whisper.jpg', alt: 'Color trends', pos: '50% 28%', tag: 'PALETTE · MAR 2026', title: 'Deep Green & Gold: An Emerging Favorite', paragraphs: [
+      "A few years ago almost every commission request leaned neutral, sand, bone, warm white. This year, more than half of our clients are asking for something moodier: deep emerald paired with warm gold.",
+      "We think it's a reaction to how much beige interiors leaned into minimalism, people are ready for a room to feel a little more like a jewel box again. Emerald reads as both grounded and rich, and gold leaf keeps it from feeling heavy.",
+      "It's not a passing trend we're chasing lightly, we've started building it into our standard palette because the requests keep coming, and because, honestly, it's some of the most satisfying work we've made all year."
+    ] },
+  ];
+  openArticle = e => this.setState({ isArticleOpen: true, articleIndex: parseInt(e.currentTarget.dataset.i, 10) });
+  closeArticle = () => this.setState({ isArticleOpen: false });
+  componentDidMount() {
+    this.mq = window.matchMedia('(min-width:1200px)');
+    this.setState({ isDesktop: this.mq.matches });
+    if (localStorage.getItem('lp-theme') === 'dark') this.setState({ dark: true });
+    const savedLang = localStorage.getItem('lp-lang');
+    if (savedLang && TRANSLATIONS[savedLang]) this.setState({ lang: savedLang });
+    this.onMq = e => this.setState({ isDesktop: e.matches, isMenuOpen: false });
+    this.mq.addEventListener('change', this.onMq);
+  }
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this.onMq);
+  }
+  toggleMenu = () => this.setState(s => ({ isMenuOpen: !s.isMenuOpen }));
+  toggleDark = () => this.setState(s => { const v = !s.dark; localStorage.setItem('lp-theme', v ? 'dark' : 'light'); return { dark: v }; });
+  onLangChange = e => { const v = e.target.value; localStorage.setItem('lp-lang', v); this.setState({ lang: v }); };
+  scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  openBooking = () => this.setState({ isBookingOpen: true, isMenuOpen: false, bookingSent: false });
+  closeBooking = () => this.setState({ isBookingOpen: false });
+  stopClick = e => e.stopPropagation();
+  submitBooking = e => {
+    e.preventDefault();
+    const f = e.target;
+    const get = n => (f[n] && f[n].value) || '';
+    const body = `Name: ${get('name')}\nEmail: ${get('email')}\nPhone: ${get('phone') || 'N/A'}\nPainting: ${get('painting') || 'N/A'}\nSize: ${get('size') || 'N/A'}\n\n${get('message')}`;
+    window.location.href = `mailto:lilypasteldesign@gmail.com?subject=${encodeURIComponent('Booking Request')}&body=${encodeURIComponent(body)}`;
+    this.setState({ bookingSent: true });
+  };
+  renderVals() {
+    const navGap = '16px';
+    const navFontSize = '11.5px';
+    return {
+      t: TRANSLATIONS[this.state.lang],
+      navGap, navFontSize,
+      lang: this.state.lang,
+      langLabel: this.state.lang.toUpperCase(),
+      scrollToTop: this.scrollToTop,
+      onLangChange: this.onLangChange,
+      dark: this.state.dark,
+      notDark: !this.state.dark,
+      toggleDark: this.toggleDark,
+      themeAttr: this.state.dark ? 'dark' : 'light',
+      isMenuOpen: this.state.isMenuOpen,
+      isBookingOpen: this.state.isBookingOpen,
+      bookingSent: this.state.bookingSent,
+      notBookingSent: !this.state.bookingSent,
+      toggleMenu: this.toggleMenu,
+      openBooking: this.openBooking,
+      closeBooking: this.closeBooking,
+      stopClick: this.stopClick,
+      submitBooking: this.submitBooking,
+      navDisplay: this.state.isDesktop ? 'flex' : 'none',
+      burgerDisplay: this.state.isDesktop ? 'none' : 'flex',
+      isArticleOpen: this.state.isArticleOpen,
+      articleCards: this.articles.map((a, i) => ({ i, img: a.img, alt: a.alt, pos: a.pos, tag: TRANSLATIONS[this.state.lang].cardTags[i], title: TRANSLATIONS[this.state.lang].cardTitles[i], excerpt: TRANSLATIONS[this.state.lang].cardExcerpts[i] })),
+      currentArticle: { ...this.articles[this.state.articleIndex], tag: TRANSLATIONS[this.state.lang].cardTags[this.state.articleIndex], title: TRANSLATIONS[this.state.lang].cardTitles[this.state.articleIndex] },
+      openArticle: this.openArticle,
+      closeArticle: this.closeArticle,
+    };
+  }
+}
+</script>
+</body>
+</html>

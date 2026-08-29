@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#f6f1ea;font-family:'Jost',sans-serif;color:#241f1a}
+a{color:#b5622f;text-decoration:none}
+a:hover{color:#8a4a24}
+[data-lp-theme="dark"]{filter:invert(1) hue-rotate(180deg)}
+[data-lp-theme="dark"] img,[data-lp-theme="dark"] video,[data-lp-theme="dark"] iframe{filter:invert(1) hue-rotate(180deg)}
+@media (max-width:640px){#site-header-inner{padding:12px 16px}#site-logo-img{height:40px !important;width:40px !important}#site-logo-text span{font-size:14px !important}#site-logo-sub{font-size:6.5px !important;letter-spacing:2px !important}#site-header-controls{gap:6px !important}}
+</style>
+</helmet>
+<div style="background:#f6f1ea;min-height:100vh" data-lp-theme="{{ themeAttr }}">
+
+
+<header style="position:sticky;top:0;z-index:50;background:#f6f1eaee;backdrop-filter:blur(6px);border-bottom:1px solid rgba(36,31,26,.1)">
+  <div id="site-header-inner" style="max-width:1320px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;justify-content:space-between">
+    <a href="index.dc.html" style="display:flex;align-items:center;gap:10px">
+      <img id="site-logo-img" src="assets/logo-lily-pastel.jpeg" alt="Lily Pastel" style="height:58px;width:58px;object-fit:cover">
+      <div id="site-logo-text" style="display:flex;align-items:baseline;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:19px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div id="site-logo-sub" style="display:flex;gap:6px;width:100%;font-size:8.5px;letter-spacing:3.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </a>
+    <nav style="display:{{ navDisplay }};align-items:center;gap:{{ navGap }};font-size:{{ navFontSize }};letter-spacing:0.4px">
+      <a href="index.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navHome }}</a>
+      <a href="portfolio.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navCollections }}</a>
+      <a href="shop.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navShop }}</a>
+      <a href="commissions.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navCommissions }}</a>
+      <a href="experience.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navExperience }}</a>
+      <a href="blog.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navBlog }}</a>
+      <a href="about.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navAbout }}</a>
+      <a href="contact.dc.html" style="color:#241f1a;display:inline-block;transition:transform .25s ease,opacity .25s ease" style-hover="transform:scale(1.1);opacity:.6">{{ t.navContact }}</a>
+    </nav>
+    <div id="site-header-controls" style="display:flex;align-items:center;gap:8px">
+      <div style="position:relative;width:26px;height:26px;border:1px solid rgba(36,31,26,.25);border-radius:50%;display:flex;align-items:center;justify-content:center">
+        <select onChange="{{ onLangChange }}" value="{{ lang }}" style="position:absolute;inset:0;opacity:0;cursor:pointer;appearance:none;-webkit-appearance:none">
+          <option value="fr">FR</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+        </select>
+        <span style="font-size:9px;letter-spacing:.3px;color:#241f1a;pointer-events:none">{{ langLabel }}</span>
+      </div>
+      <button onClick="{{ toggleDark }}" aria-label="Toggle dark mode" style="display:flex;background:none;border:1px solid rgba(36,31,26,.25);border-radius:50%;width:26px;height:26px;color:#241f1a;cursor:pointer;align-items:center;justify-content:center;padding:0;transition:border-color .2s ease,transform .2s ease,opacity .2s ease" style-hover="border-color:#241f1a;transform:scale(1.05);opacity:.85">
+        <sc-if value="{{ dark }}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg></sc-if>
+        <sc-if value="{{ notDark }}" hint-placeholder-val="{{ true }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></sc-if>
+      </button>
+    </div>
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="display:{{ burgerDisplay }};flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;transition:opacity .3s ease,transform .2s ease" style-hover="opacity:.55;transform:scale(1.05)">
+      <span style="width:24px;height:2px;background:#241f1a"></span>
+      <span style="width:24px;height:2px;background:#241f1a"></span>
+      <span style="width:24px;height:2px;background:#241f1a"></span>
+    </button>
+  </div>
+  <sc-if value="{{ isMenuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;padding:10px 40px 26px;gap:18px;font-size:14px;letter-spacing:1px;border-top:1px solid rgba(36,31,26,.1)">
+      <a href="index.dc.html">{{ t.navHome }}</a>
+      <a href="portfolio.dc.html">{{ t.navCollections }}</a>
+      <a href="shop.dc.html">{{ t.navShop }}</a>
+      <a href="commissions.dc.html">{{ t.navCommissions }}</a>
+      <a href="experience.dc.html">{{ t.navExperience }}</a>
+      <a href="blog.dc.html">{{ t.navBlog }}</a>
+      <a href="about.dc.html">{{ t.navAbout }}</a>
+      <a href="faq.dc.html">{{ t.navFaq }}</a>
+      <a href="contact.dc.html">{{ t.navContact }}</a>
+    </div>
+  </sc-if>
+</header>
+
+<section style="max-width:820px;margin:0 auto;padding:70px 40px 100px">
+  <div style="text-align:center;margin-bottom:50px">
+    <div style="font-size:12px;letter-spacing:3px;color:#b5622f;margin-bottom:14px">{{ t.legalLabel }}</div>
+    <h1 style="font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(26px,6vw,34px);margin:0">{{ t.legalTitle }}</h1>
+  </div>
+
+  <div style="margin-bottom:44px">
+    <h2 style="font-family:'Playfair Display',serif;font-size:20px;margin:0 0 14px">{{ t.noticeTitle }}</h2>
+    <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.68);margin:0 0 10px">{{ t.noticeP1 }}</p>
+    <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.68);margin:0">{{ t.noticeP2 }}</p>
+  </div>
+
+  <div style="margin-bottom:44px">
+    <h2 style="font-family:'Playfair Display',serif;font-size:20px;margin:0 0 14px">{{ t.termsTitle }}</h2>
+    <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.68);margin:0 0 10px">{{ t.termsP1 }}</p>
+    <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.68);margin:0">{{ t.termsP2 }}</p>
+  </div>
+
+  <div style="margin-bottom:44px">
+    <h2 style="font-family:'Playfair Display',serif;font-size:20px;margin:0 0 14px">{{ t.shippingTitle }}</h2>
+    <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.68);margin:0">{{ t.shippingP1 }}</p>
+  </div>
+
+  <div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:20px;margin:0 0 14px">{{ t.privacyTitle }}</h2>
+    <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.68);margin:0 0 10px">{{ t.privacyP1 }}</p>
+    <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.68);margin:0">{{ t.privacyP2 }}</p>
+  </div>
+</section>
+
+<footer style="background:#f6f1eaee;backdrop-filter:blur(6px);color:rgba(36,31,26,.75);padding:0 40px 26px">
+  <div style="max-width:1320px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:11.5px;border-top:1px solid rgba(36,31,26,.15);padding-top:24px">
+    <span>{{ t.footerRights }}</span>
+    <div style="display:flex;gap:20px">
+      <a href="faq.dc.html" style="color:rgba(36,31,26,.75)">{{ t.navFaq }}</a>
+      <a href="contact.dc.html" style="color:rgba(36,31,26,.75)">{{ t.navContact }}</a>
+    </div>
+  </div>
+</footer>
+<button onClick="{{ scrollToTop }}" aria-label="Back to top" style="position:fixed;bottom:24px;right:24px;width:46px;height:46px;border-radius:50%;background:#241f1a;color:#fffdf8;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(36,31,26,.25);z-index:40;transition:transform .2s ease,background .2s ease,opacity .2s ease" style-hover="transform:scale(1.08);background:#7c8560;opacity:.85">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+</button>
+
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const TRANSLATIONS = {
+  en: { navHome: 'HOME', navShop: 'SHOP', navCollections: 'COLLECTION', navCommissions: 'COMMISSIONS', navExperience: 'ART EXPERIENCE', navAbout: 'ABOUT', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    legalLabel: 'LEGAL', legalTitle: 'Legal Information',
+    noticeTitle: 'Legal Notice',
+    noticeP1: 'Lily Pastel Design Studio Art is a sole proprietorship operating from Venice, Los Angeles, California. For any legal inquiries, please contact lilypasteldesign@gmail.com.',
+    noticeP2: 'This website and all artwork images, logos and text are the property of Lily Pastel Design Studio Art unless otherwise noted, and may not be reproduced without written permission.',
+    termsTitle: 'Terms of Sale',
+    termsP1: 'All originals are sold as one-of-one works. Orders are confirmed only after a consultation and written quote. A 50% deposit is required to begin a commission, with the balance due before shipping or delivery.',
+    termsP2: 'Prints (canvas, fine-art paper, acrylic) are made to order and are non-refundable once production has begun, except in the case of a manufacturing defect.',
+    shippingTitle: 'Shipping & Returns',
+    shippingP1: 'Every piece ships fully insured. Damaged shipments must be reported within 48 hours of delivery with photos, and will be repaired, replaced or refunded at our discretion.',
+    privacyTitle: 'Privacy Policy',
+    privacyP1: 'We collect only the information you provide through our contact and consultation forms (name, email, phone and project details) to respond to your inquiry. We do not sell or share your data with third parties.',
+    privacyP2: 'You may request that we delete your information at any time by emailing lilypasteldesign@gmail.com.',
+    footerRights: '© 2020 Lily Pastel Studio Art. All rights reserved.',
+  },
+  fr: { navHome: 'ACCUEIL', navShop: 'BOUTIQUE', navCollections: 'COLLECTION', navCommissions: 'COMMANDES', navExperience: 'EXPÉRIENCE', navAbout: 'À PROPOS', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    legalLabel: 'MENTIONS LÉGALES', legalTitle: 'Informations légales',
+    noticeTitle: 'Mentions légales',
+    noticeP1: 'Lily Pastel Design Studio Art est une entreprise individuelle basée à Venice, Los Angeles, Californie. Pour toute question juridique, contactez lilypasteldesign@gmail.com.',
+    noticeP2: 'Ce site et toutes les images d\u2019œuvres, logos et textes sont la propriété de Lily Pastel Design Studio Art sauf indication contraire, et ne peuvent être reproduits sans autorisation écrite.',
+    termsTitle: 'Conditions de vente',
+    termsP1: "Tous les originaux sont vendus comme des œuvres uniques. Les commandes sont confirmées uniquement après une consultation et un devis écrit. Un acompte de 50% est requis pour démarrer une commande, le solde étant dû avant l'expédition ou la livraison.",
+    termsP2: "Les impressions (toile, papier d'art, acrylique) sont réalisées sur commande et ne sont pas remboursables une fois la production commencée, sauf en cas de défaut de fabrication.",
+    shippingTitle: 'Livraison et retours',
+    shippingP1: "Chaque œuvre est expédiée entièrement assurée. Les dommages doivent être signalés dans les 48 heures suivant la livraison avec photos, et seront réparés, remplacés ou remboursés à notre discrétion.",
+    privacyTitle: 'Politique de confidentialité',
+    privacyP1: "Nous ne collectons que les informations que vous fournissez via nos formulaires de contact et de consultation (nom, email, téléphone et détails du projet) pour répondre à votre demande. Nous ne vendons ni ne partageons vos données avec des tiers.",
+    privacyP2: 'Vous pouvez demander la suppression de vos informations à tout moment en écrivant à lilypasteldesign@gmail.com.',
+    footerRights: '© 2020 Lily Pastel Studio Art. Tous droits réservés.',
+  },
+  es: { navHome: 'INICIO', navShop: 'TIENDA', navCollections: 'COLECCIÓN', navCommissions: 'ENCARGOS', navExperience: 'ART EXPERIENCE', navAbout: 'SOBRE MÍ', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACTO',
+    legalLabel: 'LEGAL', legalTitle: 'Información legal',
+    noticeTitle: 'Aviso legal',
+    noticeP1: 'Lily Pastel Design Studio Art es una empresa individual con sede en Venice, Los Ángeles, California. Para consultas legales, contacte a lilypasteldesign@gmail.com.',
+    noticeP2: 'Este sitio web y todas las imágenes de obras, logotipos y textos son propiedad de Lily Pastel Design Studio Art salvo que se indique lo contrario, y no pueden reproducirse sin permiso escrito.',
+    termsTitle: 'Condiciones de venta',
+    termsP1: 'Todos los originales se venden como obras únicas. Los pedidos se confirman solo después de una consulta y una cotización por escrito. Se requiere un depósito del 50% para comenzar un encargo, con el saldo a pagar antes del envío o entrega.',
+    termsP2: 'Las impresiones (lienzo, papel de arte, acrílico) se hacen por encargo y no son reembolsables una vez iniciada la producción, salvo en caso de defecto de fabricación.',
+    shippingTitle: 'Envíos y devoluciones',
+    shippingP1: 'Cada obra se envía totalmente asegurada. Los envíos dañados deben reportarse dentro de las 48 horas posteriores a la entrega con fotos, y se repararán, reemplazarán o reembolsarán a nuestra discreción.',
+    privacyTitle: 'Política de privacidad',
+    privacyP1: 'Solo recopilamos la información que usted proporciona a través de nuestros formularios de contacto y consulta (nombre, email, teléfono y detalles del proyecto) para responder a su consulta. No vendemos ni compartimos sus datos con terceros.',
+    privacyP2: 'Puede solicitar la eliminación de su información en cualquier momento escribiendo a lilypasteldesign@gmail.com.',
+    footerRights: '© 2020 Lily Pastel Studio Art. Todos los derechos reservados.',
+  },
+};
+
+class Component extends DCLogic {
+  state = { isMenuOpen: false, isDesktop: true, dark: false, lang: 'fr' };
+  componentDidMount() {
+    this.mq = window.matchMedia('(min-width:1200px)');
+    this.setState({ isDesktop: this.mq.matches });
+    if (localStorage.getItem('lp-theme') === 'dark') this.setState({ dark: true });
+    const savedLang = localStorage.getItem('lp-lang');
+    if (savedLang && TRANSLATIONS[savedLang]) this.setState({ lang: savedLang });
+    this.onMq = e => this.setState({ isDesktop: e.matches, isMenuOpen: false });
+    this.mq.addEventListener('change', this.onMq);
+  }
+  componentWillUnmount() {
+    if (this.mq) this.mq.removeEventListener('change', this.onMq);
+  }
+  toggleMenu = () => this.setState(s => ({ isMenuOpen: !s.isMenuOpen }));
+  toggleDark = () => this.setState(s => { const v = !s.dark; localStorage.setItem('lp-theme', v ? 'dark' : 'light'); return { dark: v }; });
+  onLangChange = e => { const v = e.target.value; localStorage.setItem('lp-lang', v); this.setState({ lang: v }); };
+  scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  renderVals() {
+    const navGap = '16px';
+    const navFontSize = '11.5px';
+    return {
+      t: TRANSLATIONS[this.state.lang],
+      navGap, navFontSize,
+      lang: this.state.lang,
+      langLabel: this.state.lang.toUpperCase(),
+      scrollToTop: this.scrollToTop,
+      onLangChange: this.onLangChange,
+      dark: this.state.dark,
+      notDark: !this.state.dark,
+      toggleDark: this.toggleDark,
+      themeAttr: this.state.dark ? 'dark' : 'light',
+      isMenuOpen: this.state.isMenuOpen,
+      toggleMenu: this.toggleMenu,
+      navDisplay: this.state.isDesktop ? 'flex' : 'none',
+      burgerDisplay: this.state.isDesktop ? 'none' : 'flex',
+    };
+  }
+}
+</script>
+</body>
+</html>
