@@ -472,7 +472,7 @@ const TRANSLATIONS = {
 };
 
 class Component extends DCLogic {
-  state = { isMenuOpen: false, isBookingOpen: false, isDesktop: true, bookingSent: false, scrollY: 0, spaceSlideIndex: 0, emailCopied: false, phoneCopied: false, dark: false, lang: 'fr', emailValue: '', emailFocused: false };
+  state = { isMenuOpen: false, isBookingOpen: false, isDesktop: true, bookingSent: false, scrollY: 0, spaceSlideIndex: 0, emailCopied: false, phoneCopied: false, dark: false, lang: 'en', emailValue: '', emailFocused: false };
   copyEmail = () => {
     navigator.clipboard.writeText('lilypasteldesign@gmail.com');
     this.setState({ emailCopied: true });
