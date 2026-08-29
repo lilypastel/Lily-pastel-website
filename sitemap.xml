@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.lilypasteldesign.com/index.html</loc><priority>1.0</priority></url>
-  <url><loc>https://www.lilypasteldesign.com/shop.dc.html</loc><priority>0.9</priority></url>
-  <url><loc>https://www.lilypasteldesign.com/portfolio.dc.html</loc><priority>0.7</priority></url>
-  <url><loc>https://www.lilypasteldesign.com/commissions.dc.html</loc><priority>0.9</priority></url>
-  <url><loc>https://www.lilypasteldesign.com/about.dc.html</loc><priority>0.6</priority></url>
-  <url><loc>https://www.lilypasteldesign.com/blog.dc.html</loc><priority>0.5</priority></url>
-  <url><loc>https://www.lilypasteldesign.com/faq.dc.html</loc><priority>0.5</priority></url>
-  <url><loc>https://www.lilypasteldesign.com/contact.dc.html</loc><priority>0.8</priority></url>
-  <url><loc>https://www.lilypasteldesign.com/legal.dc.html</loc><priority>0.3</priority></url>
+  <url><loc>https://lilypastel.com/index.html</loc><priority>1.0</priority></url>
+  <url><loc>https://lilypastel.com/shop.dc.html</loc><priority>0.9</priority></url>
+  <url><loc>https://lilypastel.com/portfolio.dc.html</loc><priority>0.7</priority></url>
+  <url><loc>https://lilypastel.com/commissions.dc.html</loc><priority>0.9</priority></url>
+  <url><loc>https://lilypastel.com/about.dc.html</loc><priority>0.6</priority></url>
+  <url><loc>https://lilypastel.com/blog.dc.html</loc><priority>0.5</priority></url>
+  <url><loc>https://lilypastel.com/faq.dc.html</loc><priority>0.5</priority></url>
+  <url><loc>https://lilypastel.com/contact.dc.html</loc><priority>0.8</priority></url>
+  <url><loc>https://lilypastel.com/legal.dc.html</loc><priority>0.3</priority></url>
 </urlset>
