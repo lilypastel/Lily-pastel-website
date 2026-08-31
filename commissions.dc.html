@@ -92,7 +92,7 @@ a:hover{color:#8a4a24}
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px">
       <div style="background:#fffdf8;border:1px solid rgba(36,31,26,.1)">
         <div style="position:relative;overflow:hidden;aspect-ratio:4/5;background:#ece4d5">
-          <sc-for list="{{ rootedSlides }}" as="slide" hint-placeholder-count="1">
+          <sc-for list="{{ rootedSlidesData }}" as="slide" hint-placeholder-count="1">
             <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
               <img src="{{ slide.src }}" alt="Rooted" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
             </sc-if>
@@ -253,8 +253,8 @@ const TRANSLATIONS = {
   en: {
     navHome: 'HOME', navShop: 'SHOP', navCollections: 'COLLECTION', navCommissions: 'MURAL ART / PRINT', navExperience: 'ART EXPERIENCE', navAbout: 'ABOUT', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
     bookBtn: 'INQUIRE ABOUT A PRINT', printBtn: 'INQUIRE',
-    chooseLabel: 'MURAL ART / PRINT', chooseTitle: 'Bring Lily Pastel art to your space',
-    notSureTitle: 'Bring art to your space', notSureDesc: "Explore mural art created as high quality prints, made to bring Lily Pastel's work to your space.",
+    chooseLabel: 'MURAL ART / PRINT', chooseTitle: 'Murals & Prints',
+    notSureTitle: 'Transform your space with art', notSureDesc: "Lily Pastel creates original, vibrant artwork for large walls and unique spaces,bringing color, personality, and visual storytelling,into interiors and exterior environments.Each mural is thoughtfully designed around the characterof the space,its architecture, atmosphere and overall aesthetic.",
     footerRights: '© 2020 Lily Pastel Art Studio . All rights reserved.', footerLegal: 'Legal',
     thanksTitle: 'Thank you!', thanksDesc: "We'll be in touch within one business day to confirm your consultation.",
     bookTitle: 'Book a Consultation', bookDesc: "Tell us about your space, we'll follow up to schedule a call.",
@@ -265,7 +265,7 @@ const TRANSLATIONS = {
     bookBtn: 'DEMANDER UNE IMPRESSION', printBtn: 'COMMANDÉ',
     chooseLabel: 'IMPRESSIONS DISPONIBLES', chooseTitle: 'Impression d'art disponible',
     notSureTitle: 'Vous hésitez encore ?', notSureDesc: 'Réservez une consultation gratuite et nous vous aiderons à choisir la pièce, la taille et la surface.',
-    footerRights: '© 2020 Lily Pastel Studio Art. Tous droits réservés.', footerLegal: 'Mentions légales',
+    footerRights: '© 2020 Lily Pastel Art Studio . Tous droits réservés.', footerLegal: 'Mentions légales',
     thanksTitle: 'Merci !', thanksDesc: 'Nous vous contacterons sous un jour ouvré pour confirmer votre consultation.',
     bookTitle: 'Réserver une consultation', bookDesc: 'Parlez-nous de votre espace, nous vous recontacterons pour planifier un appel.',
     formName: 'Nom complet', formEmail: 'Email', formPhone: 'Téléphone (optionnel)', formMsg: 'Commande ou impression, dites-nous en plus', formSend: 'ENVOYER LA DEMANDE', formPaintingPlaceholder: 'Quel tableau ? (optionnel)', formSizePlaceholder: 'Dimension souhaitée (optionnel)',
@@ -275,7 +275,7 @@ const TRANSLATIONS = {
     bookBtn: 'RESERVAR', printBtn: 'ENCARGADO',
     chooseLabel: 'IMPRESIONES DISPONIBLES', chooseTitle: 'Impresiones de arte disponibles',
     notSureTitle: '¿No sabes qué opción elegir?', notSureDesc: 'Reserva una consulta gratuita y te ayudaremos a elegir la obra, el tamaño y la superficie.',
-    footerRights: '© 2020 Lily Pastel Studio Art. Todos los derechos reservados.', footerLegal: 'Legal',
+    footerRights: '© 2020 Lily Pastel  Art Studio. Todos los derechos reservados.', footerLegal: 'Legal',
     thanksTitle: '¡Gracias!', thanksDesc: 'Nos pondremos en contacto en un día hábil para confirmar tu consulta.',
     bookTitle: 'Reservar una consulta', bookDesc: 'Cuéntanos sobre tu espacio, te contactaremos para agendar una llamada.',
     formName: 'Nombre completo', formEmail: 'Email', formPhone: 'Teléfono (opcional)', formMsg: 'Encargo o impresión, cuéntanos más', formSend: 'ENVIAR SOLICITUD', formPaintingPlaceholder: '¿Qué pintura? (opcional)', formSizePlaceholder: 'Tamaño preferido (opcional)',
@@ -285,8 +285,15 @@ const TRANSLATIONS = {
 class Component extends DCLogic {
   state = { isMenuOpen: false, isBookingOpen: false, isDesktop: true, bookingSent: false, dark: false, lang: 'fr', rootedIndex: 0, eyeIndex: 0, goldIndex: 0, elementalIndex: 0 };
   rootedSlidesData = [
-    { src: 'assets/rooted-04.jpeg' }, { src: 'assets/rooted-01.jpeg' },
-  ];
+{ src: 'assets/murals/architectprint.png' },
+{ src: 'assets/murals/clinicprint.png' },
+{ src: 'assets/murals/fitnessprint.jpeg' },
+{ src: 'assets/murals/hotelreceptionprint.png' },
+{ src: 'assets/murals/lawfirmprint.png' },
+{ src: 'assets/murals/restaurantprint.png' },
+{ src: 'assets/murals/salonprint.png' },
+{ src: 'assets/murals/yogastudioprint.png' },
+];
   eyeSlidesData = [
     { src: 'assets/under-her-eye-01.jpeg' }, { src: 'assets/under-her-eye-02.png' },
   ];
