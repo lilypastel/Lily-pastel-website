@@ -16,14 +16,14 @@ a{color:#b5622f;text-decoration:none}
 a:hover{color:#8a4a24}
 [data-lp-theme="dark"]{filter:invert(1) hue-rotate(180deg)}
 [data-lp-theme="dark"] img,[data-lp-theme="dark"] video,[data-lp-theme="dark"] iframe{filter:invert(1) hue-rotate(180deg)}
-@media (max-width:640px){#site-header-inner{padding:12px 16px}#site-logo-img{height:40px !important;width:40px !important}#site-logo-text span{font-size:14px !important}#site-logo-sub{font-size:6.5px !important;letter-spacing:2px !important}#site-header-controls{gap:6px !important}}
+@media (:640px){#site-header-inner{padding:12px 16px}#site-logo-img{height:40px !important;width:40px !important}#site-logo-text span{font-size:14px !important}#site-logo-sub{font-size:6.5px !important;letter-spacing:2px !important}#site-header-controls{gap:6px !important}}
 </style>
 </helmet>
 <div style="background:#f6f1ea;min-height:100vh" data-lp-theme="{{ themeAttr }}">
 
 
 <header style="position:sticky;top:0;z-index:50;background:rgba(246,241,234,.85);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,253,248,.12)">
-  <div id="site-header-inner" style="max-width:1320px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;justify-content:space-between">
+  <div id="site-header-inner" style=":1320px;margin:0 auto;padding:16px 40px;display:flex;align-items:center;justify-content:space-between">
     <a href="index.dc.html" style="display:flex;align-items:center;gap:10px">
       <img id="site-logo-img" src="assets/logo-lily-pastel.jpeg" alt="Lily Pastel" style="height:58px;width:58px;object-fit:cover">
       <div id="site-logo-text" style="display:flex;align-items:baseline;line-height:1.05">
@@ -83,7 +83,7 @@ a:hover{color:#8a4a24}
 </header>
 
 <section style="padding:20px 40px 70px">
-  <div style="max-width:900px;margin:0 auto">
+  <div style="max-width:700px;margin:0 auto">
     <div style="position:relative;overflow:hidden;aspect-ratio:4/5;background:#ece4d5">
       <sc-for list="{{ rootedSlides }}" as="slide" hint-placeholder-count="1">
         <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
