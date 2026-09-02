@@ -25,6 +25,19 @@ a:hover{color:#8a4a24}
 [data-lp-theme="dark"]{filter:invert(1) hue-rotate(180deg)}
 [data-lp-theme="dark"] img,[data-lp-theme="dark"] video,[data-lp-theme="dark"] iframe,[data-lp-theme="dark"] image-slot{filter:invert(1) hue-rotate(180deg)}
 @media (max-width:640px){#site-header-inner{padding:12px 16px}#site-logo-img{height:40px !important;width:40px !important}#site-logo-link{gap:7px !important}#site-logo-text span{font-size:14px !important;letter-spacing:1.4px !important}#site-logo-sub{font-size:6px !important;letter-spacing:2.4px !important}#site-header-controls{gap:6px !important}#discover-grid{grid-template-columns:1fr !important}}
+@media (max-width: 767px) {
+  .hero-section {
+    height: 70vh !important;
+    min-height: 520px !important;
+    max-height: 650px !important;
+  }
+
+  #hero-img {
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+  }
+}
 </style>
 </helmet>
 <div style="background:#f6f1ea;min-height:100vh" data-lp-theme="{{ themeAttr }}">
@@ -90,7 +103,7 @@ a:hover{color:#8a4a24}
   </sc-if>
 </header>
 
-<section style="position:relative;height:92vh;min-height:640px;max-height:920px;overflow:hidden">
+<section class="hero-section" style="position:relative;height:92vh;min-height:640px;max-height:920px;overflow:hidden">
   <img id="hero-img" src="assets/lifestyle-06-goldwhisper-console.jpg" alt="Gold and pink abstract painting above a media console" style="width:100%;height:{{ heroImgHeight }};display:block;object-fit:cover;object-position:{{ heroObjectPosition }};transform:translateY({{ heroParallax }});will-change:transform">
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,31,26,.35) 0%,rgba(36,31,26,.15) 35%,rgba(36,31,26,.55) 100%)"></div>
   <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;animation:fadeUp .7s ease both">
