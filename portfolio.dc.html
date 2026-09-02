@@ -92,6 +92,25 @@ a:hover{color:#8a4a24}
 </section>
 
 <section style="max-width:1200px;margin:0 auto;padding:40px 40px 90px">
+ <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
+    <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
+     <img id="entropy-slide-1" src="assets/entropy1.png" alt="Entropy painting by Lily Pastel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity 1s ease">
+     <img id="entropy-slide-2" src="assets/entropy2.png" alt="Entropy painting by Lily Pastel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease">
+     <img id="entropy-slide-3" src="assets/entropy3.png" alt="Entropy painting by Lily Pastel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s ease">
+    </div>
+    <div style="flex:1">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">Entropy</h2>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px"><em>Entropy</em> explores the tension between order and dissolution—the moment when structure begins to fracture and transform. Layers of metallic copper, rose, pink, and deep charcoal converge in a richly textured surface, where dense fields of marks give way to open, weathered passages. The sweeping accumulation of color evokes both growth and erosion, suggesting a landscape in perpetual transformation.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px">The work embraces imperfection as a form of beauty. Scratches, fragments, raised textures, and reflective surfaces reveal traces of what lies beneath, creating a sense of time suspended within the material. <em>Entropy</em> becomes an abstract meditation on change: nothing remains fixed, and within every state of decay exists the possibility of something new emerging.</p>
+      <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div style="display:flex;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
     <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
       <sc-for list="{{ peaceSlides }}" as="slide" hint-placeholder-count="0">
@@ -269,22 +288,7 @@ a:hover{color:#8a4a24}
       </div>
     </div>
   </div>
-    <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
-    <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
-      <img src="assets/entropy.jpeg" alt="Entropy painting by Lily Pastel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-    </div>
-    <div style="flex:1">
-      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">Entropy</h2>
-      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px"><em>Entropy</em> explores the tension between order and dissolution—the moment when structure begins to fracture and transform. Layers of metallic copper, rose, pink, and deep charcoal converge in a richly textured surface, where dense fields of marks give way to open, weathered passages. The sweeping accumulation of color evokes both growth and erosion, suggesting a landscape in perpetual transformation.</p>
-      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px">The work embraces imperfection as a form of beauty. Scratches, fragments, raised textures, and reflective surfaces reveal traces of what lies beneath, creating a sense of time suspended within the material. <em>Entropy</em> becomes an abstract meditation on change: nothing remains fixed, and within every state of decay exists the possibility of something new emerging.</p>
-      <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
-        <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
-        <div style="display:flex;flex-direction:column">
-          <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a">PASTEL</span>
-          <div style="display:flex;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)"><span>STUDIO</span><span>ART</span></div>
-        </div>
-      </div>
-    </div>
+    
   </div>
 </section>
 
@@ -555,5 +559,24 @@ class Component extends DCLogic {
   }
 }
 </script>
+<script>
+let entropyIndex = 0;
+
+setInterval(() => {
+  const slides = [
+    document.getElementById('entropy-slide-1'),
+    document.getElementById('entropy-slide-2'),
+    document.getElementById('entropy-slide-3')
+  ];
+
+  if (slides.every(slide => slide)) {
+    slides.forEach((slide, i) => {
+      slide.style.opacity = i === entropyIndex ? '1' : '0';
+    });
+
+    entropyIndex = (entropyIndex + 1) % slides.length;
+  }
+}, 5000);
+</script>  
 </body>
 </html>
