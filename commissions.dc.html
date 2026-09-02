@@ -89,7 +89,7 @@ a:hover{color:#8a4a24}
 
 <section style="padding:20px 40px 70px">
   <div style="max-width:700px;margin:0 auto">
-    <div style="position:relative;overflow:hidden;aspect-ratio:4/5;background:#ece4d5">
+    <div style="position:relative;overflow:hidden;aspect-ratio:4/3;background:#ece4d5">
       <sc-for list="{{ rootedSlides }}" as="slide" hint-placeholder-count="1">
         <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
           <img src="{{ slide.src }}" alt="Lily Pastel mural and print artwork" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
