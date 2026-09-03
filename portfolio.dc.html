@@ -112,7 +112,14 @@ a:hover{color:#8a4a24}
     </div>
   </div>
   <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
-  <div style="flex:1">
+  <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
+  <sc-for list="{{ terraSlides }}" as="slide" hint-placeholder-count="0">
+    <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+      <img src="{{ slide.src }}" alt="Terra painting by Lily Pastel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+    </sc-if>
+  </sc-for>
+</div>
+    <div style="flex:1">
     <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">Terra</h2>
     <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Born from the quiet language of earth, <em>Terra</em> carries the feeling of something ancient remembered. Layers, lines, and softened forms rise from its surface like traces left behind by time.</p>
     <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px">It is a meditation on grounding—the space between what is shaped and what is simply allowed to be. <em>Terra</em> speaks softly of roots, memory, and the beauty found in stillness.</p>
@@ -571,6 +578,7 @@ class Component extends DCLogic {
       navDisplay: this.state.isDesktop ? 'flex' : 'none',
       burgerDisplay: this.state.isDesktop ? 'none' : 'flex',
       peaceSlides: this.peaceSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.peaceIndex ? 1 : 0 })),
+      terraSlides: this.terraSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.terraIndex ? 1 : 0 })),
       auroraSlides: this.auroraSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.auroraIndex ? 1 : 0 })),
       sunSlides: this.sunSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.sunIndex ? 1 : 0 })),
       eclecticSlides: this.eclecticSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.eclecticIndex ? 1 : 0 })),
