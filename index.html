@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&family=Petit+Formal+Script&display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#f6f1ea;font-family:'Jost',sans-serif;color:#241f1a}
-@media (max-width:680px){#hero-img{transform:none) !important}}
+@media (max-width:680px){#hero-img{transform:scale(1.15) !important}}
 a{color:#b5622f;text-decoration:none}
 a:hover{color:#8a4a24}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
@@ -110,7 +110,7 @@ a:hover{color:#8a4a24}
 </header>
 
 <section class="hero-section" style="position:relative;height:92vh;min-height:640px;max-height:920px;overflow:hidden">
-  <img id="hero-img" src="assets/lifestyle-06-goldwhisper-console.jpg" alt="Gold and pink abstract painting above a media console" style="width:100%;height:{{ heroImgHeight }};display:block;object-fit:position;object-position:{{ heroObjectPosition }};transform:translateY({{ heroParallax }});will-change:transform">
+  <img id="hero-img" src="assets/lifestyle-06-goldwhisper-console.jpg" alt="Gold and pink abstract painting above a media console" style="width:100%;height:{{ heroImgHeight }};display:block;object-fit:cover;object-position:{{ heroObjectPosition }};transform:translateY({{ heroParallax }});will-change:transform">
   <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,31,26,.35) 0%,rgba(36,31,26,.15) 35%,rgba(36,31,26,.55) 100%)"></div>
   <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px;animation:fadeUp .7s ease both">
     <div style="position:relative;display:inline-block;margin:0 0 8px">
@@ -619,7 +619,7 @@ class Component extends DCLogic {
       burgerDisplay: this.state.isDesktop ? 'none' : 'flex',
       showBestsellers: this.props.showBestsellers ?? true,
       heroImgHeight: this.state.isDesktop ? '165%' : '165%',
-      heroObjectPosition: this.state.isDesktop ? '50% 32%' : '50% 22%',
+      heroObjectPosition: this.state.isDesktop ? '50% 42%' : '50% 22%',
       heroParallax: '-' + Math.min(this.state.scrollY * (this.state.isDesktop ? 0.6 : 0.55), this.state.isDesktop ? 180 : 160) + 'px',
       spaceSlides: this.spaceSlidesData.map((s, i) => ({ ...s, opacity: i === this.state.spaceSlideIndex ? 1 : 0 })),
       collectionCardSlides: this.collectionSlidesData.map((s, i) => ({ ...s, opacity: i === (this.state.collectionSlideIndex || 0) ? 1 : 0 })),
