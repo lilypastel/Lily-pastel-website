@@ -198,19 +198,19 @@ a:hover{color:#8a4a24}
 <script type="text/x-dc" data-dc-script>
 const TRANSLATIONS = {
   en: {
-    navHome: 'HOME', navShop: 'SHOP', navCollections: 'COLLECTION', navCommissions: 'COMMISSIONS', navExperience: 'ART EXPERIENCE', navAbout: 'ABOUT', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    navHome: 'HOME', navShop: 'SHOP', navCollections: 'COLLECTION', navCommissions: 'MURAL ART/PRINT', navExperience: 'ART EXPERIENCE', navAbout: 'ABOUT', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
     bookBtn: 'BOOK A CONSULTATION',
     thanksTitle: 'Thank you!', thanksDesc: "We'll be in touch within one business day to confirm your consultation.",
     bookTitle: 'Book a Consultation', bookDesc: "Tell us about your space, we'll follow up to schedule a call.",
     formName: 'Full name', formEmail: 'Email', formPhone: 'Phone (optional)', formMsg: 'Tell us about your space or project', formSend: 'SEND REQUEST', formPaintingPlaceholder: 'Which painting? (optional)', formSizePlaceholder: 'Preferred size (optional)',
     blLabel: 'JOURNAL', blTitle: 'Notes from the Studio', blDesc: 'Stories on process, materials and the spaces our work has found a home in.', editorialTeam: 'Editorial Team',
     footerRights: '© 2020 Lily Pastel Studio Art. All rights reserved.', footerLegal: 'Legal',
-    cardTags: ['PROCESS · AUG 2026','DESIGN TIPS · JUL 2026','PRINTING · JUN 2026','COMMISSIONS · MAY 2026','CARE GUIDE · APR 2026','PALETTE · MAR 2026'],
+    cardTags: ['PROCESS · AUG 2026','DESIGN TIPS · JUL 2026','PRINTING · JUN 2026','MURAL ART/PRINT · MAY 2026','CARE GUIDE · APR 2026','PALETTE · MAR 2026'],
     cardTitles: ['Why We Still Apply Gold Leaf by Hand','How to Choose Art for a Living Room','Canvas, Paper or Acrylic, Which Should You Choose?','Inside a Commission: From Moodboard to Wall','Caring for a Textured Painting','Deep Green & Gold: An Emerging Favorite'],
     cardExcerpts: ['Inside the slow, layered process that gives each painting its texture and light.','Three rules of scale, palette and placement we use with every client.','A quick guide to matching print surface to your room and lighting.',"A West Hollywood client's living room, from first sketch to final install.",'Simple habits to keep gold leaf and impasto looking their best for years.','Why this rich, moody palette keeps showing up in client requests this year.'],
   },
   fr: {
-    navHome: 'ACCUEIL', navShop: 'BOUTIQUE', navCollections: 'COLLECTION', navCommissions: 'COMMANDES', navExperience: 'EXPÉRIENCE', navAbout: 'À PROPOS', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
+    navHome: 'ACCUEIL', navShop: 'BOUTIQUE', navCollections: 'COLLECTION', navCommissions: 'ART MURAL/PRINT', navExperience: 'EXPÉRIENCE', navAbout: 'À PROPOS', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACT',
     bookBtn: 'RÉSERVER',
     thanksTitle: 'Merci !', thanksDesc: 'Nous vous contacterons sous un jour ouvré pour confirmer votre consultation.',
     bookTitle: 'Réserver une consultation', bookDesc: 'Parlez-nous de votre espace, nous vous recontacterons pour planifier un appel.',
@@ -222,7 +222,7 @@ const TRANSLATIONS = {
     cardExcerpts: ["Plongée dans le processus lent et minutieux qui donne à chaque peinture sa texture et sa lumière.",'Trois règles d\u2019échelle, de palette et de placement que nous utilisons avec chaque client.','Un guide rapide pour associer la surface d\u2019impression à votre pièce et à sa lumière.','Le salon d\u2019une cliente de West Hollywood, de la première esquisse à l\u2019installation finale.','Des gestes simples pour que la feuille d\u2019or et l\u2019empâtement restent beaux pendant des années.','Pourquoi cette palette riche et intense revient sans cesse dans les demandes de nos clients cette année.'],
   },
   es: {
-    navHome: 'INICIO', navShop: 'TIENDA', navCollections: 'COLECCIÓN', navCommissions: 'ENCARGOS', navExperience: 'ART EXPERIENCE', navAbout: 'SOBRE MÍ', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACTO',
+    navHome: 'INICIO', navShop: 'TIENDA', navCollections: 'COLECCIÓN', navCommissions: 'ARTE MURAL/PRINT', navExperience: 'ART EXPERIENCE', navAbout: 'SOBRE MÍ', navBlog: 'BLOG', navFaq: 'FAQ', navContact: 'CONTACTO',
     bookBtn: 'RESERVAR',
     thanksTitle: '¡Gracias!', thanksDesc: 'Nos pondremos en contacto en un día hábil para confirmar tu consulta.',
     bookTitle: 'Reservar una consulta', bookDesc: 'Cuéntanos sobre tu espacio, te contactaremos para agendar una llamada.',
@@ -253,7 +253,7 @@ class Component extends DCLogic {
       "Canvas absorbs light rather than bouncing it, ideal for a sunlit room where a glossier surface would glare. Fine-art paper, framed under glass, holds fine detail with an almost matte quietness that suits smaller, closer-viewed spaces like a hallway or reading nook.",
       "Acrylic face-mount is the boldest option: it adds real depth and a glossy pop that reads well from across a large room, but it demands even lighting to avoid reflections. We ask to see a photo of your wall before we recommend one, the room decides, not the trend."
     ] },
-    { img: 'assets/lifestyle-07-floral-office.jpg', alt: 'A commission story', pos: '50% 50%', tag: 'COMMISSIONS · MAY 2026', title: 'Inside a Commission: From Moodboard to Wall', paragraphs: [
+    { img: 'assets/lifestyle-07-floral-office.jpg', alt: 'A commission story', pos: '50% 50%', tag: 'MURAL ART · MAY 2026', title: 'Inside a Commission: From Moodboard to Wall', paragraphs: [
       "A West Hollywood client came to us with three photos on her phone: a rug she loved, a sunset from a trip to Joshua Tree, and a screenshot of a color she couldn't name. That's usually how it starts, fragments, not a brief.",
       "We built a moodboard around a warm, dusty palette and proposed two textures: a smooth gradient wash, or a heavier impasto with visible brushwork. She chose the impasto, wanting something the light would catch differently through the day.",
       "Six weeks later the piece went up above her console table. She told us the room finally felt finished, which is the only review that matters to us."
