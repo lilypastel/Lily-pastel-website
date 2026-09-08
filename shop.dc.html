@@ -91,7 +91,18 @@ a:hover{color:#8a4a24}
 
 <section style="max-width:1320px;margin:0 auto;padding:36px 40px 90px">
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px">
-
+<div style="background:#fffdf8;border:1px solid rgba(36,31,26,.1)">
+  <div style="overflow:hidden">
+    <img src="assets/zenithbench.png" alt="Zenith" style="width:100%;aspect-ratio:4/5;object-fit:cover">
+  </div>
+  <div style="padding:18px">
+    <div style="font-family:'Playfair Display',serif;font-size:16px;margin-bottom:4px">Zenith</div>
+    <div style="font-size:11.5px;color:rgba(36,31,26,.55);margin-bottom:10px">Original Painting</div>
+    <div style="display:flex;justify-content:flex-end;align-items:center">
+      <button onclick="{{ inquireZenith }}" style="background:#fffdf8;color:#241f1a;border:1px solid rgba(36,31,26,.25);padding:9px 16px;font-size:11px;letter-spacing:1px">INQUIRE</button>
+    </div>
+  </div>
+</div>
     <div style="background:#fffdf8;border:1px solid rgba(36,31,26,.1)">
       <div style="overflow:hidden"><img src="assets/peace-by-piece-01.jpeg" alt="Peace by Piece" style="width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform .4s" style-hover="transform:scale(1.05)"></div>
       <div style="padding:18px">
@@ -479,6 +490,7 @@ class Component extends DCLogic {
       onEmailBlur: this.onEmailBlur,
       emailBase: this.state.emailValue.split('@')[0] || '',
       showEmailSuggestions: this.state.emailFocused && this.state.emailValue.trim().length > 0 && !/@(gmail|hotmail)\.com$/i.test(this.state.emailValue),
+      inquireZenith: () => this.openBookingFor('Zenith'),
       inquirePeacebyPiece: () => this.openBookingFor('Peace by Piece'),
       inquireAurora: () => this.openBookingFor('Aurora'),
       inquireKissedbytheSun: () => this.openBookingFor('Kissed by the Sun'),
