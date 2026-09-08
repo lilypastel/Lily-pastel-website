@@ -116,7 +116,7 @@ a:hover{color:#8a4a24}
   <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
   <sc-for list="{{ terraSlides }}" as="slide" hint-placeholder-count="0">
     <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
-      <img src="{{ slide.src }}" alt="Terra painting by Lily Pastel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+      <img src="{{ slide.src }}" alt="Terra painting by Lily Pastel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
     </sc-if>
   </sc-for>
 </div>
@@ -134,6 +134,27 @@ a:hover{color:#8a4a24}
   </div>
 
 </div>
+    <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
+    <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
+      <sc-for list="{{ zenithSlides }}" as="slide" hint-placeholder-count="0">
+        <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ slide.src }}" alt="Zenith painting by Lily Pastel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+        </sc-if>
+      </sc-for>
+    </div>
+    <div style="flex:1">
+      <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">Zenith</h2>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">A meeting of deep blue and luminous gold, <em>Zenith</em> captures the quiet grandeur of reaching one’s highest point. Rich cobalt stretches into infinity, while fractured gold emerges like celestial light breaking through the unknown. The piece speaks to <strong>ambition, elevation, and the moment when darkness gives way to possibility</strong>.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px"><em>Zenith</em> invites you to pause at that threshold between earth and infinity.</p>
+      <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
+        <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+          <div style="display:flex;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)"><span>Art</span><span>Studio</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
     <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
       <sc-for list="{{ peaceSlides }}" as="slide" hint-placeholder-count="0">
@@ -441,7 +462,7 @@ const TRANSLATIONS = {
 };
 
 class Component extends DCLogic {
-  state = { isMenuOpen: false, isBookingOpen: false, isDesktop: true, bookingSent: false, dark: false, lang: 'fr',terraIndex: 0, peaceIndex: 0, auroraIndex: 0, sunIndex: 0, eclecticIndex: 0, rootedIndex: 0, eyeIndex: 0, goldIndex: 0, elementalIndex: 0 };
+  state = { isMenuOpen: false, isBookingOpen: false, isDesktop: true, bookingSent: false, dark: false, lang: 'fr',terraIndex: 0, zenithIndex: 0, peaceIndex: 0, auroraIndex: 0, sunIndex: 0, eclecticIndex: 0, rootedIndex: 0, eyeIndex: 0, goldIndex: 0, elementalIndex: 0 };
   peaceSlidesData = [
     { src: 'assets/peace-by-piece-01.jpeg' },
     { src: 'assets/peace-by-piece-02.png' },
@@ -452,6 +473,13 @@ class Component extends DCLogic {
     { src: 'assets/terra1.png' },
     { src: 'assets/terra2.jpeg' },
     { src: 'assets/terra3.png' },
+  ];
+    zenithSlidesData = [
+    { src: 'assets/zenith.fig.png' },
+    { src: 'assets/zenithfigside.png' },
+    { src: 'assets/zenithrestaurant.png' },
+    { src: 'assets/zenithLR.png' },
+    { src: 'assets/zenithbench.png' },
   ];
   auroraSlidesData = [
     { src: 'assets/aurora-01.jpeg' },
@@ -494,6 +522,9 @@ class Component extends DCLogic {
   componentDidMount() {
     this.terraInterval = setInterval(() => {
     this.setState(s => ({ terraIndex: (s.terraIndex + 1) % this.terraSlidesData.length }));
+}, 2800);
+  this.zenithInterval = setInterval(() => {
+  this.setState(s => ({ zenithIndex: (s.zenithIndex + 1) % this.zenithSlidesData.length }));
 }, 2800);
     this.peaceInterval = setInterval(() => {
       this.setState(s => ({ peaceIndex: (s.peaceIndex + 1) % this.peaceSlidesData.length }));
@@ -580,6 +611,7 @@ class Component extends DCLogic {
       burgerDisplay: this.state.isDesktop ? 'none' : 'flex',
       peaceSlides: this.peaceSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.peaceIndex ? 1 : 0 })),
       terraSlides: this.terraSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.terraIndex ? 1 : 0 })),
+      zenithSlides: this.zenithSlidesData.map((s, i) => ({src: s.src,opacity: i === this.state.zenithIndex ? 1 : 0})),
       auroraSlides: this.auroraSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.auroraIndex ? 1 : 0 })),
       sunSlides: this.sunSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.sunIndex ? 1 : 0 })),
       eclecticSlides: this.eclecticSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.eclecticIndex ? 1 : 0 })),
