@@ -145,7 +145,7 @@ a:hover{color:#8a4a24}
     <div style="flex:1">
       <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">zenith</h2>
       <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">A meeting of deep blue and luminous gold, <em></em> captures the quiet grandeur of reaching one’s highest point. Rich cobalt stretches into infinity, while fractured gold emerges like celestial light breaking through the unknown. The piece speaks to <strong>ambition, elevation, and the moment when darkness gives way to possibility</strong>.</p>
-      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px"><em></em> invites you to pause at that threshold between earth and infinity.</p>
+      <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px"><em></em> Zenith invites you to pause at that threshold between earth and infinity.</p>
       <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
         <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
         <div style="display:flex;flex-direction:column">
@@ -155,7 +155,27 @@ a:hover{color:#8a4a24}
       </div>
     </div>
   </div>
-  
+  <div style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center;margin-bottom:70px;">
+  <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efefed;transition:transform .5s ease;">
+    <sc-for list="{{ syntropySlides }}" as="slide" hint-placeholder-count="0">
+      <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+        <img src="{{ slide.src }}" alt="Syntropy painting by Lily Pastel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .5s ease;">
+      </sc-if>
+    </sc-for>
+  </div>
+  <div style="flex:1;">
+    <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a;">Syntropy</h2>
+ <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px;"> SYNTROPY explores the forces that draw seemingly distant elements together, creating harmony, meaning and something greater than their individual parts.
+    </p>
+ <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px;">
+      A reflection on the invisible threads that bring us together and make us whole. </p>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)">
+      <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;">PASTEL</span>
+      <span>Art</span>
+    </div>
+  </div>
+
+</div>
   <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
     <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
       <sc-for list="{{ peaceSlides }}" as="slide" hint-placeholder-count="0">
