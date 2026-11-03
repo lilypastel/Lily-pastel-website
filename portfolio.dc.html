@@ -155,6 +155,7 @@ a:hover{color:#8a4a24}
       </div>
     </div>
   </div>
+  
   <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
     <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
       <sc-for list="{{ peaceSlides }}" as="slide" hint-placeholder-count="0">
@@ -481,6 +482,12 @@ class Component extends DCLogic {
     { src: 'assets/zenithLR.png' },
     { src: 'assets/zenithbench.png' },
   ];
+  syntropySlidesData = [
+  { src: 'assets/syntropy1.jpeg' },
+  { src: 'assets/syntropy2.jpeg' },
+  { src: 'assets/syntropy3.jpeg' },
+  { src: 'assets/syntropy4.jpeg' },
+];
   auroraSlidesData = [
     { src: 'assets/aurora-01.jpeg' },
     { src: 'assets/aurora-02.png' },
@@ -526,6 +533,9 @@ class Component extends DCLogic {
   this.zenithInterval = setInterval(() => {
   this.setState(s => ({ zenithIndex: (s.zenithIndex + 1) % this.zenithSlidesData.length }));
 }, 2800);
+  this.syntropyInterval = setInterval(() => {
+    this.setState(s => ({ syntropyIndex: (s.syntropyIndex + 1) % this.syntropySlidesData.length }));
+}, 2800);
     this.peaceInterval = setInterval(() => {
       this.setState(s => ({ peaceIndex: (s.peaceIndex + 1) % this.peaceSlidesData.length }));
     }, 2800);
@@ -560,6 +570,7 @@ class Component extends DCLogic {
   }
   componentWillUnmount() {
     if (this.mq) this.mq.removeEventListener('change', this.onMq);
+    clearInterval(this.syntropyInterval);
     clearInterval(this.peaceInterval);
     clearInterval(this.auroraInterval);
     clearInterval(this.sunInterval);
@@ -609,9 +620,10 @@ class Component extends DCLogic {
       submitBooking: this.submitBooking,
       navDisplay: this.state.isDesktop ? 'flex' : 'none',
       burgerDisplay: this.state.isDesktop ? 'none' : 'flex',
-      peaceSlides: this.peaceSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.peaceIndex ? 1 : 0 })),
       terraSlides: this.terraSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.terraIndex ? 1 : 0 })),
       zenithSlides: this.zenithSlidesData.map((s, i) => ({src: s.src,opacity: i === this.state.zenithIndex ? 1 : 0})),
+      syntropySlides: this.syntropySlidesData.map((s, i) => ({src: s.src,opacity: i === this.state.syntropyIndex ? 1 : 0})),
+      peaceSlides: this.peaceSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.peaceIndex ? 1 : 0 })),
       auroraSlides: this.auroraSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.auroraIndex ? 1 : 0 })),
       sunSlides: this.sunSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.sunIndex ? 1 : 0 })),
       eclecticSlides: this.eclecticSlidesData.map((s, i) => ({ src: s.src, opacity: i === this.state.eclecticIndex ? 1 : 0 })),
