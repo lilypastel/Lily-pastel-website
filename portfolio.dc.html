@@ -155,27 +155,32 @@ a:hover{color:#8a4a24}
       </div>
     </div>
   </div>
-  <div style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center;margin-bottom:70px;">
-  <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efefed;transition:transform .5s ease;">
-    <sc-for list="{{ syntropySlides }}" as="slide" hint-placeholder-count="0">
-      <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
-        <img src="{{ slide.src }}" alt="Syntropy painting by Lily Pastel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .5s ease;">
-      </sc-if>
-    </sc-for>
-  </div>
-  <div style="flex:1;">
-    <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a;">Syntropy</h2>
- <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px;"> SYNTROPY explores the forces that draw seemingly distant elements together, creating harmony, meaning and something greater than their individual parts.
-    </p>
- <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px;">
-      A reflection on the invisible threads that bring us together and make us whole. </p>
-    <div style="display:flex;align-items:baseline;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)">
-      <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;">PASTEL</span>
-      <span>Art</span>
+    </div>
+  <div class="pf-row" style="display:flex;flex-direction:row-reverse;gap:48px;align-items:center;margin-bottom:70px">
+  <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8">
+  <sc-for list="{{ syntropySlides }}" as="slide" hint-placeholder-count="0">
+    <sc-if value="{{ slide.src }}" hint-placeholder-val="{{ false }}">
+      <img src="{{ slide.src }}" alt="Syntropy painting by Lily Pastel" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity 1.2s ease;opacity:{{ slide.opacity }}">
+    </sc-if>
+  </sc-for>
+</div>
+    <div style="flex:1">
+    <h2 style="font-family:'Playfair Display',serif;font-weight:500;font-size:26px;margin:0 0 16px;color:#241f1a">Syntropy</h2>
+    <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px"><em>The art of finding harmony within.</em></p>
+    <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px"><em>Syntropy</em> explores the invisible connections that bring life into balance. Through a vibrant interplay of turquoise, layered colors, and luminous copper, the artwork evokes the richness of human emotions and the beauty of interconnectedness.</p>
+    <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 16px">Each color and texture represents a different element of our existence — the people we encounter, the memories we carry, and the experiences that quietly shape who we become. Individually distinct, these elements come together to create something greater than themselves.</p>
+    <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px">The contrast between the fluid colors and the intricate copper details reflects the delicate relationship between individuality and belonging, reminding us that harmony does not require everything to be the same.</p>
+    <p style="font-size:14px;line-height:1.8;color:rgba(36,31,26,.72);margin:0 0 20px"><strong><em>Syntropy</em> is a reflection on the beauty of connection — to ourselves, to others, and to the world around us. It celebrates the moments when seemingly separate pieces find their place within a greater whole.</strong></p>
+    <div style="display:flex;align-items:baseline;justify-content:flex-end;line-height:1.05">
+      <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a;margin-right:0.3em">LILY</span>
+      <div style="display:flex;flex-direction:column">
+        <span style="font-family:'Playfair Display',serif;font-size:15px;letter-spacing:2px;color:#241f1a">PASTEL</span>
+        <div style="display:flex;justify-content:space-between;width:100%;font-size:7px;letter-spacing:2.5px;color:rgba(36,31,26,.55)"><span>Art</span><span>Studio</span></div>
+      </div>
     </div>
   </div>
-
 </div>
+
   <div class="pf-row" style="display:flex;gap:48px;align-items:center;margin-bottom:70px">
     <div class="pf-row-img" style="position:relative;aspect-ratio:4/5;overflow:hidden;flex:0.85;background:#efe6d8;transition:transform .5s ease" style-hover="transform:scale(1.02)">
       <sc-for list="{{ peaceSlides }}" as="slide" hint-placeholder-count="0">
